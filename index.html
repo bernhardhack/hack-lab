@@ -1,1 +1,100 @@
-Hello space!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HACK-LAB.SPACE // Distributed Mission Control</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-6 md:p-12">
+  <div class="max-w-5xl mx-auto space-y-8">
+    
+    <!-- Header -->
+    <header class="border-b border-slate-800 pb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-emerald-400">
+          HACK-LAB<span class="text-slate-500">.SPACE</span>
+        </h1>
+        <p class="text-slate-400 text-sm mt-1">
+          Async R&D Lab • Vienna Station ↔ Nairobi Field Team
+        </p>
+      </div>
+      <div class="flex gap-3">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          ● Vienna: Online
+        </span>
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+          ● Nairobi: Online
+        </span>
+      </div>
+    </header>
+
+    <!-- Lab Hardware Matrix -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Robotics</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Prime + Exp</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Fabrication</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">Bambu 3D Lab</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Vision / AI</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">HuskyLens AI</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Software</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">Python & Games</div>
+      </div>
+    </section>
+
+    <!-- Mission Board -->
+    <main class="space-y-6">
+      <h2 class="text-xl font-bold text-slate-300 tracking-wide uppercase text-sm border-l-2 border-emerald-400 pl-3">
+        Active Sprints & Missions
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Mission 01 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800/50">MISSION 01</span>
+            <span class="text-xs text-slate-500">Target: Emma's Birthday</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-100 mb-2">Hybrid Physical Game Controller</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            Design a custom 3D-printed housing holding SPIKE sensors to operate as a steering controller for Emma's software game engine.
+          </p>
+          <div class="flex gap-2">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">3D Print</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Scratch / Python</span>
+          </div>
+        </div>
+
+        <!-- Mission 02 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MISSION 02</span>
+            <span class="text-xs text-slate-500">Target: End of September</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-100 mb-2">AI Camera & Vision Telemetry</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            Mount the HuskyLens AI sensor to an all-terrain rover to recognize physical cards and trigger digital events inside Emma's game.
+          </p>
+          <div class="flex gap-2">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">AI Vision</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Robotics</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono">
+      HACK-LAB.SPACE • BUILT FOR ASYNC CO-CREATION ACROSS DISTANCE
+    </footer>
+
+  </div>
+</body>
+</html>
