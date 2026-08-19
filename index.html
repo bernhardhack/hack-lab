@@ -29,164 +29,92 @@
       </div>
     </header>
 
-    <!-- Tab navigation -->
-    <nav class="flex gap-2 border-b border-slate-800" role="tablist" aria-label="Sections">
-      <button id="tab-missions" role="tab" aria-selected="true" aria-controls="panel-missions"
-        class="tab-btn px-4 py-2 text-sm font-semibold rounded-t-lg border-b-2 border-emerald-400 text-emerald-400 bg-slate-900/50">
-        Mission Board
-      </button>
-      <button id="tab-course" role="tab" aria-selected="false" aria-controls="panel-course"
-        class="tab-btn px-4 py-2 text-sm font-semibold rounded-t-lg border-b-2 border-transparent text-slate-400 hover:text-slate-200">
-        AI Course
-      </button>
-    </nav>
-
-    <!-- PANEL: Mission Board -->
-    <div id="panel-missions" role="tabpanel" aria-labelledby="tab-missions" class="space-y-8">
-
-      <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-          <div class="text-xs text-slate-500 uppercase font-semibold">Robotics</div>
-          <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Prime + Exp</div>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-          <div class="text-xs text-slate-500 uppercase font-semibold">Fabrication</div>
-          <div class="text-lg font-bold text-slate-200 mt-1">Bambu 3D Lab</div>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-          <div class="text-xs text-slate-500 uppercase font-semibold">Vision / AI</div>
-          <div class="text-lg font-bold text-slate-200 mt-1">HuskyLens AI</div>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-          <div class="text-xs text-slate-500 uppercase font-semibold">Software</div>
-          <div class="text-lg font-bold text-slate-200 mt-1">Python &amp; Games</div>
-        </div>
-      </section>
-
-      <main class="space-y-6">
-        <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3">
-          Active Sprints &amp; Missions
-        </h2>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
-            <div class="flex justify-between items-start mb-4">
-              <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800/50">MISSION 01</span>
-              <span class="text-xs text-slate-500">Target: Emma's Birthday</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-100 mb-2">Hybrid Physical Game Controller</h3>
-            <p class="text-slate-400 text-sm mb-4">
-              Design a custom 3D-printed housing holding SPIKE sensors to operate as a steering controller for Emma's software game engine.
-            </p>
-            <div class="flex gap-2">
-              <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">3D Print</span>
-              <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Scratch / Python</span>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
-            <div class="flex justify-between items-start mb-4">
-              <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MISSION 02</span>
-              <span class="text-xs text-slate-500">Target: End of September</span>
-            </div>
-            <h3 class="text-lg font-bold text-slate-100 mb-2">AI Camera &amp; Vision Telemetry</h3>
-            <p class="text-slate-400 text-sm mb-4">
-              Mount the HuskyLens AI sensor to an all-terrain rover to recognize physical cards and trigger digital events inside Emma's game.
-            </p>
-            <div class="flex gap-2">
-              <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">AI Vision</span>
-              <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Robotics</span>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-
-    <!-- PANEL: AI Course -->
-    <div id="panel-course" role="tabpanel" aria-labelledby="tab-course" class="space-y-6 hidden">
-
-      <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
-        <p class="text-amber-300/90 text-sm">
-          <span class="font-semibold">Draft content.</span>
-          These four modules come from the lab design sessions, not from the KI-Camp course material. Swap in the real curriculum before showing this to the crew.
-        </p>
+    <!-- Lab Hardware Matrix -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Robotics</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Prime + Exp</div>
       </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Fabrication</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">Bambu 3D Lab</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Vision / AI</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">HuskyLens AI</div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
+        <div class="text-xs text-slate-500 uppercase font-semibold">Software</div>
+        <div class="text-lg font-bold text-slate-200 mt-1">Python &amp; Games</div>
+      </div>
+    </section>
 
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-cyan-400 pl-3">
-        AI Literacy Track
+    <!-- Mission Board -->
+    <main class="space-y-6">
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3">
+        Active Sprints &amp; Missions
       </h2>
-      <p class="text-slate-400 text-sm max-w-2xl">
-        Four modules, in order. Everything here runs on an iPad — no printer, no robot, no waiting on anyone. That is deliberate: this track keeps moving on the weeks when the hardware doesn't.
-      </p>
 
       <div class="grid md:grid-cols-2 gap-6">
-
+        <!-- Mission 01 -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
           <div class="flex justify-between items-start mb-4">
-            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MODULE 01</span>
-            <span class="text-xs text-slate-500">iPad only</span>
+            <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800/50">MISSION 01</span>
+            <span class="text-xs text-slate-500">Target: Emma's Birthday</span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">Teach the Machine</h3>
-          <p class="text-slate-400 text-sm mb-3">
-            Train an image classifier in the browser on something from the game — a hand sign, a token, a card. Then collect a second set of photos in different light and watch it fall apart.
+          <h3 class="text-lg font-bold text-slate-100 mb-2">Hybrid Physical Game Controller</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            Design a custom 3D-printed housing holding SPIKE sensors to operate as a steering controller for Emma's software game engine.
           </p>
-          <p class="text-slate-500 text-xs mb-4"><span class="text-slate-400 font-semibold">The point:</span> a model is only as good as what it was shown.</p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Teachable Machine</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Training data</span>
+          <div class="flex gap-2">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">3D Print</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Scratch / Python</span>
           </div>
         </div>
 
+        <!-- Mission 02 -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
           <div class="flex justify-between items-start mb-4">
-            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MODULE 02</span>
-            <span class="text-xs text-slate-500">Needs Module 01</span>
+            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MISSION 02</span>
+            <span class="text-xs text-slate-500">Target: End of September</span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">Break It</h3>
-          <p class="text-slate-400 text-sm mb-3">
-            Your job is to fool the classifier you just built. Wrong angles, shadows, a drawing of the thing instead of the thing. Every successful attack goes in the log.
+          <h3 class="text-lg font-bold text-slate-100 mb-2">AI Camera &amp; Vision Telemetry</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            Mount the HuskyLens AI sensor to an all-terrain rover to recognize physical cards and trigger digital events inside Emma's game.
           </p>
-          <p class="text-slate-500 text-xs mb-4"><span class="text-slate-400 font-semibold">The point:</span> confident and correct are not the same thing.</p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Adversarial</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Mission log</span>
+          <div class="flex gap-2">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">AI Vision</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Robotics</span>
           </div>
         </div>
-
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
-          <div class="flex justify-between items-start mb-4">
-            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MODULE 03</span>
-            <span class="text-xs text-slate-500">Needs Dad's uplink</span>
-          </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">The Oracle</h3>
-          <p class="text-slate-400 text-sm mb-3">
-            A character in the game, run by a language model, where the system prompt <em>is</em> the character sheet. Emma writes the voice and what it must never reveal. Jacob writes the world rules it has to respect.
-          </p>
-          <p class="text-slate-500 text-xs mb-4"><span class="text-slate-400 font-semibold">The point:</span> you shape a model by what you tell it it is.</p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Prompting</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Power budget</span>
-          </div>
-        </div>
-
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
-          <div class="flex justify-between items-start mb-4">
-            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MODULE 04</span>
-            <span class="text-xs text-slate-500">Needs SPIKE</span>
-          </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">Ground Truth</h3>
-          <p class="text-slate-400 text-sm mb-3">
-            Before the rover drives, write down what you think each sensor will report. Then drive it and compare. The gap between the prediction and the log is the whole mission.
-          </p>
-          <p class="text-slate-500 text-xs mb-4"><span class="text-slate-400 font-semibold">The point:</span> sensors don't perceive. They measure.</p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Sensors</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Prediction log</span>
-          </div>
-        </div>
-
       </div>
-    </div>
+    </main>
+
+    <!-- Training -->
+    <section class="space-y-6">
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-violet-400 pl-3">
+        Training
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener"
+           class="group block bg-slate-900 border border-violet-800/40 rounded-2xl p-6 hover:border-violet-600 transition">
+          <div class="flex justify-between items-start mb-4">
+            <span class="text-xs font-mono bg-violet-950 text-violet-300 px-2 py-1 rounded border border-violet-800/50">AI COURSE</span>
+            <span class="text-xs text-slate-500 group-hover:text-violet-300 transition">Open ↗</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-100 mb-2">KI-Camp</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            The AI literacy course. Runs in the browser on any iPad, installs to the home screen, and works in German, English and Spanish.
+          </p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Trilingual</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Installable</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">No hardware needed</span>
+          </div>
+        </a>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono">
@@ -194,36 +122,5 @@
     </footer>
 
   </div>
-
-<script>
-(function () {
-  var tabs = [
-    { btn: 'tab-missions', panel: 'panel-missions', hash: '#missions' },
-    { btn: 'tab-course',   panel: 'panel-course',   hash: '#course' }
-  ];
-  var on  = ['border-emerald-400','text-emerald-400','bg-slate-900/50'];
-  var off = ['border-transparent','text-slate-400','hover:text-slate-200'];
-
-  function select(i, push) {
-    tabs.forEach(function (t, j) {
-      var b = document.getElementById(t.btn);
-      var p = document.getElementById(t.panel);
-      var active = i === j;
-      p.classList.toggle('hidden', !active);
-      b.setAttribute('aria-selected', active ? 'true' : 'false');
-      on.forEach(function (c) { b.classList.toggle(c, active); });
-      off.forEach(function (c) { b.classList.toggle(c, !active); });
-    });
-    if (push) history.replaceState(null, '', tabs[i].hash);
-  }
-
-  tabs.forEach(function (t, i) {
-    document.getElementById(t.btn).addEventListener('click', function () { select(i, true); });
-  });
-
-  var start = tabs.findIndex(function (t) { return t.hash === location.hash; });
-  select(start > -1 ? start : 0, false);
-})();
-</script>
 </body>
 </html>
