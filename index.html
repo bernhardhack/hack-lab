@@ -15,101 +15,93 @@
         <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-emerald-400">
           HACK-LAB<span class="text-slate-500">.SPACE</span>
         </h1>
-        <p class="text-slate-400 text-sm mt-1">
-          Async R&amp;D Lab • Vienna Station ↔ Nairobi Field Team
-        </p>
+        <p class="text-slate-400 text-sm mt-1" data-i18n="tagline"></p>
       </div>
-      <div class="flex gap-3">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          ● Vienna: Online
-        </span>
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-          ● Nairobi: Online
-        </span>
+
+      <div class="flex flex-col items-start md:items-end gap-3">
+        <div class="flex gap-1" role="group" aria-label="Language">
+          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">EN</button>
+          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">DE</button>
+          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">IT</button>
+        </div>
+        <div class="flex gap-3">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" data-i18n="statusVienna"></span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" data-i18n="statusNairobi"></span>
+        </div>
       </div>
     </header>
 
-    <!-- Lab Hardware Matrix -->
+    <!-- Hardware matrix -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold">Robotics</div>
+        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwRobotics"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Prime + Exp</div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold">Fabrication</div>
+        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwFab"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">Bambu 3D Lab</div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold">AI / Vision</div>
+        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwAI"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">iPad + Browser ML</div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold">Software</div>
-        <div class="text-lg font-bold text-slate-200 mt-1">Python &amp; Games</div>
+        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwSoftware"></div>
+        <div class="text-lg font-bold text-slate-200 mt-1" data-i18n="hwSoftwareVal"></div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold">Drawing</div>
+        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwDrawing"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Pen Plotter</div>
       </div>
     </section>
 
-    <!-- Mission Board -->
+    <!-- Missions -->
     <main class="space-y-6">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3">
-        Active Sprints &amp; Missions
-      </h2>
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3" data-i18n="missionsHead"></h2>
 
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Mission 00 -->
         <div class="bg-slate-900 border border-amber-800/40 rounded-2xl p-6 hover:border-amber-600/60 transition md:col-span-2">
-          <div class="flex justify-between items-start mb-4">
-            <span class="text-xs font-mono bg-amber-950 text-amber-400 px-2 py-1 rounded border border-amber-800/50">MISSION 00 &middot; FIRST BUILD</span>
-            <span class="text-xs text-slate-500">Both crew required</span>
+          <div class="flex justify-between items-start mb-4 gap-3">
+            <span class="text-xs font-mono bg-amber-950 text-amber-400 px-2 py-1 rounded border border-amber-800/50" data-i18n="m0Badge"></span>
+            <span class="text-xs text-slate-500 text-right" data-i18n="m0Target"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">Build the Plotter</h3>
-          <p class="text-slate-400 text-sm mb-4">
-            A SPIKE gantry that holds a pen and draws what it is told. Two axes, a belt, and a pen-lift that has to be designed, printed, tested and almost certainly reprinted. Chief Engineer owns the mechanism. Chief Mission Designer owns what it draws and what counts as good output. Neither of you can finish this one alone.
-          </p>
-          <p class="text-slate-500 text-xs mb-4">
-            Expect 1&ndash;2&nbsp;mm of wobble. That is what a LEGO gantry does, and it is fine for maps, quest cards and zines. Log the drift instead of fighting it.
-          </p>
+          <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m0Title"></h3>
+          <p class="text-slate-400 text-sm mb-4" data-i18n="m0Body"></p>
+          <p class="text-slate-500 text-xs mb-4" data-i18n="m0Note"></p>
           <div class="flex gap-2 flex-wrap">
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">SPIKE</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">3D Print</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Pens</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Full loop</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tag3d"></span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagPens"></span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagLoop"></span>
           </div>
         </div>
 
         <!-- Mission 01 -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
-          <div class="flex justify-between items-start mb-4">
+          <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800/50">MISSION 01</span>
-            <span class="text-xs text-slate-500">Target: Emma's Birthday</span>
+            <span class="text-xs text-slate-500 text-right" data-i18n="m1Target"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">Hybrid Physical Game Controller</h3>
-          <p class="text-slate-400 text-sm mb-4">
-            Design a custom 3D-printed housing holding SPIKE sensors to operate as a steering controller for Emma's software game engine.
-          </p>
-          <div class="flex gap-2">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">3D Print</span>
+          <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m1Title"></h3>
+          <p class="text-slate-400 text-sm mb-4" data-i18n="m1Body"></p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tag3d"></span>
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Scratch / Python</span>
           </div>
         </div>
 
         <!-- Mission 02 -->
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
-          <div class="flex justify-between items-start mb-4">
+          <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MISSION 02</span>
-            <span class="text-xs text-slate-500">Target: End of September</span>
+            <span class="text-xs text-slate-500 text-right" data-i18n="m2Target"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">Teach the Machine, Then Break It</h3>
-          <p class="text-slate-400 text-sm mb-4">
-            Train an image classifier in the browser on something from the game. Then collect a second set of photos in different light and watch it fall apart. Every successful way of fooling it goes in the log.
-          </p>
-          <div class="flex gap-2">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">iPad only</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">AI Literacy</span>
+          <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m2Title"></h3>
+          <p class="text-slate-400 text-sm mb-4" data-i18n="m2Body"></p>
+          <div class="flex gap-2 flex-wrap">
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagIpad"></span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagAI"></span>
           </div>
         </div>
       </div>
@@ -117,35 +109,121 @@
 
     <!-- Training -->
     <section class="space-y-6">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-violet-400 pl-3">
-        Training
-      </h2>
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-violet-400 pl-3" data-i18n="trainingHead"></h2>
 
       <div class="grid md:grid-cols-2 gap-6">
         <a href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener"
            class="group block bg-slate-900 border border-violet-800/40 rounded-2xl p-6 hover:border-violet-600 transition">
-          <div class="flex justify-between items-start mb-4">
-            <span class="text-xs font-mono bg-violet-950 text-violet-300 px-2 py-1 rounded border border-violet-800/50">AI COURSE</span>
-            <span class="text-xs text-slate-500 group-hover:text-violet-300 transition">Open ↗</span>
+          <div class="flex justify-between items-start mb-4 gap-3">
+            <span class="text-xs font-mono bg-violet-950 text-violet-300 px-2 py-1 rounded border border-violet-800/50" data-i18n="courseBadge"></span>
+            <span class="text-xs text-slate-500 group-hover:text-violet-300 transition" data-i18n="courseOpen"></span>
           </div>
           <h3 class="text-lg font-bold text-slate-100 mb-2">KI-Camp</h3>
-          <p class="text-slate-400 text-sm mb-4">
-            The AI literacy course. Runs in the browser on any iPad, installs to the home screen, and works in German, English and Spanish.
-          </p>
+          <p class="text-slate-400 text-sm mb-4" data-i18n="courseBody"></p>
           <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Trilingual</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Installable</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">No hardware needed</span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagTri"></span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagInstall"></span>
+            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagNoHw"></span>
           </div>
         </a>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono">
-      HACK-LAB.SPACE • BUILT FOR ASYNC CO-CREATION ACROSS DISTANCE
-    </footer>
-
+    <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono" data-i18n="footer"></footer>
   </div>
+
+<script>
+const I18N = {
+  en: {
+    tagline: "Async R&D Lab \u2022 Vienna Station \u2194 Nairobi Field Team",
+    statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
+    hwRobotics: "Robotics", hwFab: "Fabrication", hwAI: "AI / Vision",
+    hwSoftware: "Software", hwSoftwareVal: "Python & Games", hwDrawing: "Drawing",
+    missionsHead: "Active Sprints & Missions",
+    m0Badge: "MISSION 00 \u00B7 FIRST BUILD", m0Target: "Both crew required",
+    m0Title: "Build the Plotter",
+    m0Body: "A SPIKE gantry that holds a pen and draws what it is told. Two axes, a belt, and a pen-lift that has to be designed, printed, tested and almost certainly reprinted. Chief Engineer owns the mechanism. Chief Mission Designer owns what it draws and what counts as good output. Neither of you can finish this one alone.",
+    m0Note: "Expect 1\u20132 mm of wobble. That is what a LEGO gantry does, and it is fine for maps, quest cards and zines. Log the drift instead of fighting it.",
+    m1Target: "Target: Emma's Birthday", m1Title: "Hybrid Physical Game Controller",
+    m1Body: "Design a custom 3D-printed housing holding SPIKE sensors to operate as a steering controller for Emma's software game engine.",
+    m2Target: "Target: End of September", m2Title: "Teach the Machine, Then Break It",
+    m2Body: "Train an image classifier in the browser on something from the game. Then collect a second set of photos in different light and watch it fall apart. Every successful way of fooling it goes in the log.",
+    trainingHead: "Training", courseBadge: "AI COURSE", courseOpen: "Open \u2197",
+    courseBody: "The AI literacy course. Runs in the browser on any iPad, installs to the home screen, and comes in three languages.",
+    tag3d: "3D Print", tagPens: "Pens", tagLoop: "Full loop", tagIpad: "iPad only",
+    tagAI: "AI Literacy", tagTri: "Trilingual", tagInstall: "Installable", tagNoHw: "No hardware needed",
+    footer: "HACK-LAB.SPACE \u2022 BUILT FOR CO-CREATION ACROSS DISTANCE"
+  },
+  de: {
+    tagline: "Asynchrones F&E-Labor \u2022 Station Wien \u2194 Feldteam Nairobi",
+    statusVienna: "\u25CF Wien: Online", statusNairobi: "\u25CF Nairobi: Online",
+    hwRobotics: "Robotik", hwFab: "Fertigung", hwAI: "KI / Vision",
+    hwSoftware: "Software", hwSoftwareVal: "Python & Spiele", hwDrawing: "Zeichnen",
+    missionsHead: "Aktive Sprints & Missionen",
+    m0Badge: "MISSION 00 \u00B7 ERSTER BAU", m0Target: "Beide Crew-Mitglieder n\u00F6tig",
+    m0Title: "Den Plotter bauen",
+    m0Body: "Ein SPIKE-Portal, das einen Stift h\u00E4lt und zeichnet, was man ihm sagt. Zwei Achsen, ein Riemen und eine Stifthebung, die entworfen, gedruckt, getestet und ziemlich sicher noch einmal gedruckt werden muss. Der Chief Engineer verantwortet die Mechanik. Die Chief Mission Designer entscheidet, was gezeichnet wird und was als gutes Ergebnis z\u00E4hlt. Alleine schafft das keiner von euch beiden.",
+    m0Note: "Rechnet mit 1\u20132 mm Ungenauigkeit. So ist ein LEGO-Portal nun mal, und f\u00FCr Karten, Questkarten und Zines reicht das v\u00F6llig. Protokolliert die Abweichung, statt sie zu bek\u00E4mpfen.",
+    m1Target: "Ziel: Emmas Geburtstag", m1Title: "Hybrider physischer Game-Controller",
+    m1Body: "Ein eigenes 3D-gedrucktes Geh\u00E4use mit SPIKE-Sensoren entwerfen, das als Lenk-Controller f\u00FCr Emmas Spiel-Engine dient.",
+    m2Target: "Ziel: Ende September", m2Title: "Bring der Maschine etwas bei \u2013 und brich es",
+    m2Body: "Trainiert im Browser einen Bildklassifikator auf etwas aus dem Spiel. Sammelt dann einen zweiten Satz Fotos bei anderem Licht und schaut zu, wie er auseinanderf\u00E4llt. Jede erfolgreiche T\u00E4uschung kommt ins Logbuch.",
+    trainingHead: "Training", courseBadge: "KI-KURS", courseOpen: "\u00D6ffnen \u2197",
+    courseBody: "Der KI-Kurs. L\u00E4uft im Browser auf jedem iPad, l\u00E4sst sich auf den Homescreen legen und gibt es in drei Sprachen.",
+    tag3d: "3D-Druck", tagPens: "Stifte", tagLoop: "Ganze Schleife", tagIpad: "Nur iPad",
+    tagAI: "KI-Kompetenz", tagTri: "Dreisprachig", tagInstall: "Installierbar", tagNoHw: "Keine Hardware n\u00F6tig",
+    footer: "HACK-LAB.SPACE \u2022 GEBAUT F\u00DCR GEMEINSAMES BAUEN \u00DCBER DISTANZ"
+  },
+  it: {
+    tagline: "Laboratorio R&S asincrono \u2022 Stazione Vienna \u2194 Squadra sul campo Nairobi",
+    statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
+    hwRobotics: "Robotica", hwFab: "Fabbricazione", hwAI: "IA / Visione",
+    hwSoftware: "Software", hwSoftwareVal: "Python e giochi", hwDrawing: "Disegno",
+    missionsHead: "Sprint e missioni attive",
+    m0Badge: "MISSIONE 00 \u00B7 PRIMA COSTRUZIONE", m0Target: "Servono entrambi",
+    m0Title: "Costruire il plotter",
+    m0Body: "Un portale SPIKE che tiene una penna e disegna quello che gli dici. Due assi, una cinghia e un sollevamento penna da progettare, stampare, provare e quasi sicuramente ristampare. Il Chief Engineer si occupa del meccanismo. La Chief Mission Designer decide cosa disegna e cosa conta come buon risultato. Da soli non lo finite.",
+    m0Note: "Aspettatevi 1\u20132 mm di imprecisione. Un portale LEGO fa cos\u00EC, e per mappe, carte missione e fanzine va benissimo. Registrate lo scarto invece di combatterlo.",
+    m1Target: "Obiettivo: compleanno di Emma", m1Title: "Controller di gioco fisico ibrido",
+    m1Body: "Progettare una scocca stampata in 3D con sensori SPIKE che funzioni da controller di guida per il motore di gioco di Emma.",
+    m2Target: "Obiettivo: fine settembre", m2Title: "Insegna alla macchina, poi rompila",
+    m2Body: "Allenate nel browser un classificatore di immagini su qualcosa del gioco. Poi raccogliete un secondo set di foto con luce diversa e guardatelo crollare. Ogni inganno riuscito va nel registro.",
+    trainingHead: "Formazione", courseBadge: "CORSO IA", courseOpen: "Apri \u2197",
+    courseBody: "Il corso di alfabetizzazione IA. Gira nel browser su qualsiasi iPad, si installa nella schermata home ed \u00E8 disponibile in tre lingue.",
+    tag3d: "Stampa 3D", tagPens: "Penne", tagLoop: "Ciclo completo", tagIpad: "Solo iPad",
+    tagAI: "Alfabetizzazione IA", tagTri: "Trilingue", tagInstall: "Installabile", tagNoHw: "Nessun hardware",
+    footer: "HACK-LAB.SPACE \u2022 FATTO PER CREARE INSIEME A DISTANZA"
+  }
+};
+
+(function () {
+  var ON  = ["bg-slate-800", "text-emerald-400", "border-emerald-500/40"];
+  var OFF = ["text-slate-400", "border-slate-700"];
+
+  function apply(lang) {
+    var d = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = d[el.getAttribute("data-i18n")];
+      if (v) el.textContent = v;
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      var active = b.getAttribute("data-lang") === lang;
+      ON.forEach(function (c) { b.classList.toggle(c, active); });
+      OFF.forEach(function (c) { b.classList.toggle(c, !active); });
+    });
+    try { localStorage.setItem("hl-lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (b) {
+    b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
+  });
+
+  var saved = null;
+  try { saved = localStorage.getItem("hl-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+  apply(saved || (I18N[nav] ? nav : "en"));
+})();
+</script>
 </body>
 </html>
