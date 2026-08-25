@@ -80,7 +80,7 @@
         <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-[#047857]">
           HACK-LAB<span class="text-[#5E6B75]">.SPACE</span>
         </h1>
-        <p class="text-[#33414C] text-base mt-1" data-i18n="tagline"></p>
+        <p class="readable-part text-[#33414C] text-base mt-1" data-i18n="tagline"></p>
       </div>
 
       <div class="flex flex-col items-start md:items-end gap-3">
@@ -460,7 +460,7 @@ const I18N = {
 
   document.getElementById("readAll").addEventListener("click", function () {
     stopAll();
-    queue = Array.prototype.slice.call(document.querySelectorAll(".readable"));
+    queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable"));
     qi = 0;
     runQueue();
   });
