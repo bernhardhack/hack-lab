@@ -85,7 +85,7 @@
 
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Mission 00 -->
-        <div class="readable relative bg-slate-900 border border-amber-800/40 rounded-2xl p-6 hover:border-amber-600/60 transition md:col-span-2">
+        <a href="./plotter.html" class="readable relative block bg-slate-900 border border-amber-800/40 rounded-2xl p-6 hover:border-amber-600/60 transition md:col-span-2">
           <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-amber-950 text-amber-400 px-2 py-1 rounded border border-amber-800/50" data-i18n="m0Badge"></span>
             <span class="text-xs text-slate-500 text-right" data-i18n="m0Target"></span>
@@ -99,7 +99,8 @@
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagPens"></span>
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagLoop"></span>
           </div>
-        </div>
+          <div class="mt-4 text-xs font-mono text-amber-400" data-i18n="m0Open"></div>
+        </a>
 
         <!-- Mission 01 -->
         <div class="readable relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
@@ -160,6 +161,7 @@
 const I18N = {
   en: {
     "readAloud": "\u25B6 Read aloud", "readStop": "\u25A0 Stop", "readSlow": "Slower",
+    "m0Open": "Open project \u2197",
     tagline: "Async R&D Lab \u2022 Vienna Station \u2194 Nairobi Field Team",
     statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotics", hwFab: "Fabrication", hwAI: "AI / Vision",
@@ -181,6 +183,7 @@ const I18N = {
   },
   de: {
     "readAloud": "\u25B6 Vorlesen", "readStop": "\u25A0 Stopp", "readSlow": "Langsamer",
+    "m0Open": "Projekt \u00F6ffnen \u2197",
     tagline: "Asynchrones F&E-Labor \u2022 Station Wien \u2194 Feldteam Nairobi",
     statusVienna: "\u25CF Wien: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotik", hwFab: "Fertigung", hwAI: "KI / Vision",
@@ -202,6 +205,7 @@ const I18N = {
   },
   it: {
     "readAloud": "\u25B6 Leggi ad alta voce", "readStop": "\u25A0 Stop", "readSlow": "Pi\u00F9 lento",
+    "m0Open": "Apri il progetto \u2197",
     tagline: "Laboratorio R&S asincrono \u2022 Stazione Vienna \u2194 Squadra sul campo Nairobi",
     statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotica", hwFab: "Fabbricazione", hwAI: "IA / Visione",
