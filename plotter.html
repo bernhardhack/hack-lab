@@ -73,8 +73,8 @@
     <header class="border-b border-[#DDD4C0] pb-6">
       <a href="./" class="text-xs text-[#5E6B75] hover:text-[#047857] transition font-mono">&larr; HACK-LAB.SPACE</a>
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-3">
-        <div>
-          <div class="text-xs font-mono text-[#B45309] mb-1">MISSION 00</div>
+        <div class="readable-part">
+          <div class="text-xs font-mono text-[#B45309] mb-1">Mission 00</div>
           <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-[#1F2933]" data-i18n="title"></h1>
           <p class="text-[#46545F] text-sm mt-2 max-w-xl" data-i18n="sub"></p>
           <p class="text-[#046148] text-sm mt-3 max-w-xl border-l-2 border-[#047857] pl-3" data-i18n="why"></p>
@@ -161,27 +161,27 @@
       <div class="grid md:grid-cols-2 gap-4">
 
         <a href="https://rebrickable.com/mocs/MOC-139219/mareklew/spike-prime-plotter-xy-no-pen-lift/" target="_blank" rel="noopener"
-           class="block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
+           class="readable-part block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
           <div class="text-xs font-mono text-[#0E7490] mb-1">rebrickable.com &nearr;</div>
           <h3 class="font-bold text-[#1F2933] text-sm mb-1">SPIKE Prime Plotter (XY) &mdash; mareklew</h3>
           <p class="text-[#33414C] text-base" data-i18n="res1"></p>
         </a>
 
         <a href="https://www.qikeasy.com/plotter/" target="_blank" rel="noopener"
-           class="block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
+           class="readable-part block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
           <div class="text-xs font-mono text-[#0E7490] mb-1">qikeasy.com &nearr;</div>
           <h3 class="font-bold text-[#1F2933] text-sm mb-1">SPIKE Prime XY Plotter with pen lift</h3>
           <p class="text-[#33414C] text-base" data-i18n="res2"></p>
         </a>
 
         <a href="https://education.lego.com/en-au/lessons/prime-kickstart-a-business/track-your-packages/" target="_blank" rel="noopener"
-           class="block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
+           class="readable-part block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
           <div class="text-xs font-mono text-[#0E7490] mb-1">education.lego.com &nearr;</div>
           <h3 class="font-bold text-[#1F2933] text-sm mb-1">Track Your Packages &rarr; Plotter</h3>
           <p class="text-[#33414C] text-base" data-i18n="res3"></p>
         </a>
 
-        <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
+        <div class="readable-part bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
           <div class="text-xs font-mono text-[#5E6B75] mb-1" data-i18n="res4Tag"></div>
           <h3 class="font-bold text-[#1F2933] text-sm mb-1" data-i18n="res4Title"></h3>
           <p class="text-[#33414C] text-base" data-i18n="res4"></p>
@@ -192,7 +192,7 @@
     <!-- Build log -->
     <section class="space-y-4">
       <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#CFC4AC] pl-3" data-i18n="logHead"></h2>
-      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6">
+      <div class="readable-part bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6">
         <p class="text-[#46545F] text-base" data-i18n="logEmpty"></p>
       </div>
     </section>
@@ -424,7 +424,7 @@ it: {
     card.appendChild(b);
   });
   document.getElementById("readAll").addEventListener("click", function () {
-    stopAll(); queue = Array.prototype.slice.call(document.querySelectorAll(".readable")); qi = 0; run();
+    stopAll(); queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable")); qi = 0; run();
   });
   document.getElementById("readStop").addEventListener("click", stopAll);
   document.querySelectorAll(".lang-btn").forEach(function (b) { b.addEventListener("click", stopAll); });
