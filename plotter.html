@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission 00 · Build the Plotter // HACK-LAB.SPACE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tts-word { border-radius: 3px; }
+    .tts-word.on { background: #34d399; color: #05221a; }
+    .readable.tts-active { outline: 2px solid #34d399; outline-offset: 4px; }
+    .speak-btn { position:absolute; top:10px; right:10px; width:30px; height:30px;
+      border-radius:8px; background:#0f172a; border:1px solid #334155; color:#94a3b8;
+      display:flex; align-items:center; justify-content:center; font-size:14px;
+      line-height:1; cursor:pointer; z-index:5; }
+    .speak-btn:hover, .speak-btn.playing { color:#34d399; border-color:#34d399; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-6 md:p-12">
+  <div class="max-w-4xl mx-auto space-y-8">
+
+    <header class="border-b border-slate-800 pb-6">
+      <a href="./" class="text-xs text-slate-500 hover:text-emerald-400 transition font-mono">&larr; HACK-LAB.SPACE</a>
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-3">
+        <div>
+          <div class="text-xs font-mono text-amber-400 mb-1">MISSION 00</div>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100" data-i18n="title"></h1>
+          <p class="text-slate-400 text-sm mt-2 max-w-xl" data-i18n="sub"></p>
+        </div>
+        <div class="flex gap-1" role="group" aria-label="Language">
+          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">EN</button>
+          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">DE</button>
+          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">IT</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/20 transition" data-i18n="readAloud"></button>
+      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-i18n="readStop"></button>
+      <label class="flex items-center gap-2 text-xs text-slate-400 ml-1 cursor-pointer">
+        <input id="readSlow" type="checkbox" class="accent-emerald-400"><span data-i18n="readSlow"></span>
+      </label>
+    </div>
+
+    <!-- Who leads what -->
+    <section class="grid md:grid-cols-2 gap-4">
+      <div class="readable relative bg-slate-900 border border-orange-800/40 rounded-2xl p-5">
+        <div class="text-xs font-mono text-orange-400 mb-2" data-i18n="jacobRole"></div>
+        <p class="text-slate-300 text-sm" data-i18n="jacobBody"></p>
+      </div>
+      <div class="readable relative bg-slate-900 border border-violet-800/40 rounded-2xl p-5">
+        <div class="text-xs font-mono text-violet-400 mb-2" data-i18n="emmaRole"></div>
+        <p class="text-slate-300 text-sm" data-i18n="emmaBody"></p>
+      </div>
+    </section>
+
+    <!-- Honest constraints -->
+    <section class="readable relative bg-amber-500/5 border border-amber-500/25 rounded-2xl p-6">
+      <h2 class="text-sm font-bold uppercase tracking-wide text-amber-400 mb-3" data-i18n="knowHead"></h2>
+      <ul class="space-y-2 text-sm text-slate-300 list-disc pl-5">
+        <li data-i18n="know1"></li>
+        <li data-i18n="know2"></li>
+        <li data-i18n="know3"></li>
+        <li data-i18n="know4"></li>
+      </ul>
+    </section>
+
+    <!-- Stages -->
+    <section class="space-y-4">
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3" data-i18n="stagesHead"></h2>
+      <p class="text-slate-500 text-xs" data-i18n="stagesNote"></p>
+
+      <div class="space-y-3">
+        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s1Tag"></div>
+          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s1Title"></h3>
+          <p class="text-slate-400 text-sm" data-i18n="s1Body"></p>
+        </div>
+        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s2Tag"></div>
+          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s2Title"></h3>
+          <p class="text-slate-400 text-sm" data-i18n="s2Body"></p>
+        </div>
+        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s3Tag"></div>
+          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s3Title"></h3>
+          <p class="text-slate-400 text-sm" data-i18n="s3Body"></p>
+        </div>
+        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s4Tag"></div>
+          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s4Title"></h3>
+          <p class="text-slate-400 text-sm" data-i18n="s4Body"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="space-y-4">
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-cyan-400 pl-3" data-i18n="resHead"></h2>
+      <div class="grid md:grid-cols-2 gap-4">
+
+        <a href="https://rebrickable.com/mocs/MOC-139219/mareklew/spike-prime-plotter-xy-no-pen-lift/" target="_blank" rel="noopener"
+           class="block bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-600 transition">
+          <div class="text-xs font-mono text-cyan-400 mb-1">rebrickable.com &nearr;</div>
+          <h3 class="font-bold text-slate-100 text-sm mb-1">SPIKE Prime Plotter (XY) &mdash; mareklew</h3>
+          <p class="text-slate-400 text-xs" data-i18n="res1"></p>
+        </a>
+
+        <a href="https://www.qikeasy.com/plotter/" target="_blank" rel="noopener"
+           class="block bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-600 transition">
+          <div class="text-xs font-mono text-cyan-400 mb-1">qikeasy.com &nearr;</div>
+          <h3 class="font-bold text-slate-100 text-sm mb-1">SPIKE Prime XY Plotter with pen lift</h3>
+          <p class="text-slate-400 text-xs" data-i18n="res2"></p>
+        </a>
+
+        <a href="https://education.lego.com/en-au/lessons/prime-kickstart-a-business/track-your-packages/" target="_blank" rel="noopener"
+           class="block bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-600 transition">
+          <div class="text-xs font-mono text-cyan-400 mb-1">education.lego.com &nearr;</div>
+          <h3 class="font-bold text-slate-100 text-sm mb-1">Track Your Packages &rarr; Plotter</h3>
+          <p class="text-slate-400 text-xs" data-i18n="res3"></p>
+        </a>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <div class="text-xs font-mono text-slate-500 mb-1" data-i18n="res4Tag"></div>
+          <h3 class="font-bold text-slate-100 text-sm mb-1" data-i18n="res4Title"></h3>
+          <p class="text-slate-400 text-xs" data-i18n="res4"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Build log -->
+    <section class="space-y-4">
+      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-slate-600 pl-3" data-i18n="logHead"></h2>
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+        <p class="text-slate-500 text-sm" data-i18n="logEmpty"></p>
+      </div>
+    </section>
+
+    <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono">
+      <a href="./" class="hover:text-emerald-400 transition">HACK-LAB.SPACE</a>
+    </footer>
+  </div>
+
+<script>
+const I18N = {
+en: {
+  readAloud:"\u25B6 Read aloud", readStop:"\u25A0 Stop", readSlow:"Slower",
+  title:"Build the Plotter",
+  sub:"A SPIKE gantry that holds a pen and draws what it is told. The first thing the lab makes, and the machine everything else feeds.",
+  jacobRole:"CHIEF ENGINEER \u00B7 JACOB",
+  jacobBody:"The mechanism. Two axes, belt tension, the frame that stops it flexing, and the pen holder. You decide what it takes to make a line straight.",
+  emmaRole:"CHIEF MISSION DESIGNER \u00B7 EMMA",
+  emmaBody:"What it draws and what counts as good. You set the test drawing, you decide when the output is worth keeping, and you name what comes off it.",
+  knowHead:"Know this before you start",
+  know1:"The standard build draws about 64\u00D764\u202Fmm. That is a quest card, not a map. Bigger comes later, or not at all.",
+  know2:"LEGO flexes. Expect 1\u20132\u202Fmm of wobble and lines that are not quite straight. That is the machine being honest, not you failing.",
+  know3:"Most builds have no pen lift, so the pen never leaves the paper and every shape is one continuous line. Adding a lift is the real engineering problem here.",
+  know4:"A 3D printed pen holder gives noticeably better results than a LEGO one. That is the first part worth printing.",
+  stagesHead:"Stages",
+  stagesNote:"Not a schedule. Do them in order, take as long as it takes, and log what happened.",
+  s1Tag:"STAGE 1", s1Title:"Make it move",
+  s1Body:"Two motors, two axes, no pen. Get the carriage travelling smoothly in X and Y and returning to the same starting corner every time. If it does not repeat, nothing after this will work.",
+  s2Tag:"STAGE 2", s2Title:"Make it draw",
+  s2Body:"Add a pen holder and draw a square. Then draw it ten times without touching anything and look at how far the ten squares drift apart. Photograph the result and log the number.",
+  s3Tag:"STAGE 3", s3Title:"Make it lift",
+  s3Body:"A third motor that raises and lowers the pen. This is the part that turns one continuous scribble into separate shapes, and it is the part you will design, print, test and print again.",
+  s4Tag:"STAGE 4", s4Title:"Make it repeat",
+  s4Body:"Same file, run in Nairobi and in Vienna. Two sheets, side by side. They will not match. The difference between them is the first thing that goes on both shelves.",
+  resHead:"Resources",
+  res1:"72 pages of step-by-step instructions, fully LEGO, no pen lift. Draws about 64\u00D764\u202Fmm on index cards. Long build, needs patience. The author notes a printed pen holder beats the LEGO one.",
+  res2:"A full XY plotter with a working pen lift on port C. Needs an adapter we do not have, so treat it as a reference for how the axes and the lift are laid out, not as a build to copy.",
+  res3:"Free official LEGO lesson. Swap the tracer needle for a pen holder. The gentlest way in if the big build looks daunting.",
+  res4Tag:"IN THE BOX", res4Title:"What you already have",
+  res4:"SPIKE Prime plus Expansion, the Bambu printer, fine-liners and gel pens, paper roll and card stock, calipers for measuring what you print.",
+  logHead:"Build log",
+  logEmpty:"Nothing logged yet. First entry goes here \u2014 a photo, a date, and what broke."
+},
+de: {
+  readAloud:"\u25B6 Vorlesen", readStop:"\u25A0 Stopp", readSlow:"Langsamer",
+  title:"Den Plotter bauen",
+  sub:"Ein SPIKE-Portal, das einen Stift h\u00E4lt und zeichnet, was man ihm sagt. Das Erste, was das Labor baut, und die Maschine, f\u00FCr die alles andere gedacht ist.",
+  jacobRole:"CHIEF ENGINEER \u00B7 JACOB",
+  jacobBody:"Die Mechanik. Zwei Achsen, Riemenspannung, ein Rahmen, der nicht nachgibt, und der Stifthalter. Du entscheidest, was es braucht, damit eine Linie gerade wird.",
+  emmaRole:"CHIEF MISSION DESIGNER \u00B7 EMMA",
+  emmaBody:"Was gezeichnet wird und was gut genug ist. Du legst die Testzeichnung fest, du entscheidest, wann ein Ergebnis es wert ist, aufgehoben zu werden, und du gibst ihm einen Namen.",
+  knowHead:"Das solltet ihr vorher wissen",
+  know1:"Der Standardbau zeichnet etwa 64\u00D764\u202Fmm. Das ist eine Questkarte, keine Landkarte. Gr\u00F6\u00DFer kommt sp\u00E4ter \u2013 oder gar nicht.",
+  know2:"LEGO gibt nach. Rechnet mit 1\u20132\u202Fmm Abweichung und Linien, die nicht ganz gerade sind. Das ist die Maschine, die ehrlich ist, nicht ihr, die versagt.",
+  know3:"Die meisten Bauten haben keine Stifthebung. Der Stift verl\u00E4sst das Papier nie, jede Form ist eine durchgehende Linie. Eine Hebung einzubauen ist hier die eigentliche Ingenieursaufgabe.",
+  know4:"Ein 3D-gedruckter Stifthalter liefert deutlich bessere Ergebnisse als einer aus LEGO. Das ist das erste Teil, das sich zu drucken lohnt.",
+  stagesHead:"Etappen",
+  stagesNote:"Kein Zeitplan. Der Reihe nach, so lange es dauert, und schreibt auf, was passiert ist.",
+  s1Tag:"ETAPPE 1", s1Title:"Bring es zum Fahren",
+  s1Body:"Zwei Motoren, zwei Achsen, kein Stift. Der Schlitten soll sauber in X und Y fahren und jedes Mal in dieselbe Startecke zur\u00FCckkommen. Wenn das nicht reproduzierbar ist, funktioniert danach nichts.",
+  s2Tag:"ETAPPE 2", s2Title:"Bring es zum Zeichnen",
+  s2Body:"Stifthalter dran und ein Quadrat zeichnen. Dann zehnmal dasselbe, ohne etwas anzufassen, und schauen, wie weit die zehn Quadrate auseinanderdriften. Fotografieren und die Zahl ins Logbuch.",
+  s3Tag:"ETAPPE 3", s3Title:"Bring es zum Heben",
+  s3Body:"Ein dritter Motor, der den Stift hebt und senkt. Das macht aus einem durchgehenden Gekritzel einzelne Formen \u2013 und das ist das Teil, das ihr entwerfen, drucken, testen und noch einmal drucken werdet.",
+  s4Tag:"ETAPPE 4", s4Title:"Bring es zum Wiederholen",
+  s4Body:"Dieselbe Datei, einmal in Nairobi und einmal in Wien. Zwei Bl\u00E4tter nebeneinander. Sie werden nicht gleich sein. Genau dieser Unterschied ist das Erste, was auf beide Regale kommt.",
+  resHead:"Ressourcen",
+  res1:"72 Seiten Schritt-f\u00FCr-Schritt-Anleitung, komplett aus LEGO, ohne Stifthebung. Zeichnet etwa 64\u00D764\u202Fmm auf Karteikarten. Langer Bau, braucht Geduld. Der Autor merkt an: ein gedruckter Stifthalter ist besser als der aus LEGO.",
+  res2:"Ein vollst\u00E4ndiger XY-Plotter mit funktionierender Stifthebung an Port C. Braucht einen Adapter, den wir nicht haben \u2013 also als Referenz f\u00FCr den Aufbau lesen, nicht zum Nachbauen.",
+  res3:"Kostenlose offizielle LEGO-Lektion. Statt der Nadel einen Stifthalter einsetzen. Der sanfteste Einstieg, falls der gro\u00DFe Bau zu viel wirkt.",
+  res4Tag:"IN DER KISTE", res4Title:"Was ihr schon habt",
+  res4:"SPIKE Prime samt Erweiterung, den Bambu-Drucker, Fineliner und Gelstifte, Papierrolle und Karton, Messschieber zum Nachmessen.",
+  logHead:"Baulogbuch",
+  logEmpty:"Noch nichts eingetragen. Der erste Eintrag kommt hierher \u2013 ein Foto, ein Datum und was kaputtgegangen ist."
+},
+it: {
+  readAloud:"\u25B6 Leggi ad alta voce", readStop:"\u25A0 Stop", readSlow:"Pi\u00F9 lento",
+  title:"Costruire il plotter",
+  sub:"Un portale SPIKE che tiene una penna e disegna quello che gli dici. La prima cosa che il laboratorio costruisce, e la macchina a cui serve tutto il resto.",
+  jacobRole:"CHIEF ENGINEER \u00B7 JACOB",
+  jacobBody:"Il meccanismo. Due assi, la tensione della cinghia, un telaio che non si piega e il portapenna. Decidi tu cosa serve perch\u00E9 una linea venga dritta.",
+  emmaRole:"CHIEF MISSION DESIGNER \u00B7 EMMA",
+  emmaBody:"Cosa disegna e cosa conta come buono. Scegli tu il disegno di prova, decidi quando un risultato vale la pena di essere tenuto e gli dai un nome.",
+  knowHead:"Da sapere prima di iniziare",
+  know1:"La versione standard disegna circa 64\u00D764\u202Fmm. \u00C8 una carta missione, non una mappa. Pi\u00F9 grande viene dopo, o mai.",
+  know2:"Il LEGO si flette. Aspettatevi 1\u20132\u202Fmm di scarto e linee non perfettamente dritte. \u00C8 la macchina che \u00E8 sincera, non voi che sbagliate.",
+  know3:"Quasi nessuna versione ha il sollevamento penna: la penna non lascia mai il foglio e ogni forma \u00E8 una linea continua. Aggiungere il sollevamento \u00E8 il vero problema di ingegneria.",
+  know4:"Un portapenna stampato in 3D d\u00E0 risultati molto migliori di uno in LEGO. \u00C8 il primo pezzo che vale la pena stampare.",
+  stagesHead:"Tappe",
+  stagesNote:"Non \u00E8 un calendario. In ordine, con tutto il tempo che serve, e scrivete cosa \u00E8 successo.",
+  s1Tag:"TAPPA 1", s1Title:"Farlo muovere",
+  s1Body:"Due motori, due assi, niente penna. Il carrello deve scorrere bene in X e in Y e tornare ogni volta nello stesso angolo di partenza. Se non si ripete, niente di quello che viene dopo funziona.",
+  s2Tag:"TAPPA 2", s2Title:"Farlo disegnare",
+  s2Body:"Montate il portapenna e disegnate un quadrato. Poi dieci volte lo stesso, senza toccare nulla, e guardate quanto i dieci quadrati si allontanano. Fotografate e scrivete il numero nel registro.",
+  s3Tag:"TAPPA 3", s3Title:"Farlo sollevare",
+  s3Body:"Un terzo motore che alza e abbassa la penna. \u00C8 quello che trasforma uno scarabocchio continuo in forme separate, ed \u00E8 il pezzo che progetterete, stamperete, proverete e ristamperete.",
+  s4Tag:"TAPPA 4", s4Title:"Farlo ripetere",
+  s4Body:"Stesso file, una volta a Nairobi e una a Vienna. Due fogli, uno accanto all'altro. Non saranno uguali. Proprio quella differenza \u00E8 la prima cosa che va su entrambi gli scaffali.",
+  resHead:"Risorse",
+  res1:"72 pagine di istruzioni passo passo, tutto in LEGO, senza sollevamento penna. Disegna circa 64\u00D764\u202Fmm su schede. Costruzione lunga, serve pazienza. L'autore nota che un portapenna stampato \u00E8 meglio di quello in LEGO.",
+  res2:"Un plotter XY completo con sollevamento penna funzionante sulla porta C. Serve un adattatore che non abbiamo: leggetelo come riferimento su come sono disposti gli assi, non come progetto da copiare.",
+  res3:"Lezione ufficiale LEGO, gratuita. Sostituite l'ago con un portapenna. Il modo pi\u00F9 dolce per iniziare se la costruzione grande sembra troppo.",
+  res4Tag:"NELLA SCATOLA", res4Title:"Quello che avete gi\u00E0",
+  res4:"SPIKE Prime con l'espansione, la stampante Bambu, fineliner e penne gel, rotolo di carta e cartoncino, calibro per misurare quello che stampate.",
+  logHead:"Registro di costruzione",
+  logEmpty:"Ancora niente. La prima voce va qui \u2014 una foto, una data e cosa si \u00E8 rotto."
+}
+};
+
+(function () {
+  var ON = ["bg-slate-800","text-emerald-400","border-emerald-500/40"];
+  var OFF = ["text-slate-400","border-slate-700"];
+  function apply(lang) {
+    var d = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = d[el.getAttribute("data-i18n")];
+      if (v) el.textContent = v;
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      var a = b.getAttribute("data-lang") === lang;
+      ON.forEach(function (c) { b.classList.toggle(c, a); });
+      OFF.forEach(function (c) { b.classList.toggle(c, !a); });
+    });
+    try { localStorage.setItem("hl-lang", lang); } catch (e) {}
+  }
+  document.querySelectorAll(".lang-btn").forEach(function (b) {
+    b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
+  });
+  var saved = null; try { saved = localStorage.getItem("hl-lang"); } catch (e) {}
+  var nav = (navigator.language || "en").slice(0,2).toLowerCase();
+  apply(saved || (I18N[nav] ? nav : "en"));
+})();
+
+/* Read-aloud. Word highlighting needs the `boundary` event, which iOS Safari
+   does not fire; there we fall back to highlighting the whole block. */
+(function () {
+  var synth = window.speechSynthesis;
+  if (!synth) { var b = document.getElementById("readAll"); if (b) b.parentElement.style.display = "none"; return; }
+  var LANGMAP = { en:"en-GB", de:"de-DE", it:"it-IT" };
+  var queue = [], qi = 0, current = null, wordSpans = [];
+
+  function pickVoice(tag) {
+    var vs = synth.getVoices() || [], two = tag.slice(0,2);
+    return vs.filter(function (v) { return v.lang && v.lang.toLowerCase().indexOf(two) === 0; })[0] || null;
+  }
+  function unwrap(el) {
+    el.querySelectorAll("[data-tts-src]").forEach(function (n) {
+      n.textContent = n.getAttribute("data-tts-src"); n.removeAttribute("data-tts-src");
+    });
+  }
+  function wrapWords(el) {
+    var spans = [], off = 0;
+    el.querySelectorAll("h2,h3,p,li,span,div").forEach(function (n) {
+      if (n.children.length) return;
+      var t = n.textContent; if (!t || !t.trim()) return;
+      n.setAttribute("data-tts-src", t);
+      var html = "", re = /\S+\s*/g, m;
+      while ((m = re.exec(t)) !== null) {
+        html += '<span class="tts-word" data-s="' + (off + m.index) + '">' +
+                m[0].replace(/&/g,"&amp;").replace(/</g,"&lt;") + "</span>";
+      }
+      n.innerHTML = html; off += t.length + 1;
+      Array.prototype.push.apply(spans, n.querySelectorAll(".tts-word"));
+    });
+    return spans;
+  }
+  function textOf(el) {
+    var out = [];
+    el.querySelectorAll("h2,h3,p,li,span,div").forEach(function (n) {
+      if (n.children.length) return;
+      var t = n.textContent && n.textContent.trim(); if (t) out.push(t);
+    });
+    return out.join(". ");
+  }
+  function clearBtns() {
+    document.querySelectorAll(".speak-btn.playing").forEach(function (b) {
+      b.classList.remove("playing"); b.textContent = "\u25B6";
+    });
+  }
+  function speak(el, btn, done) {
+    var tag = LANGMAP[document.documentElement.lang] || "en-GB";
+    var text = textOf(el); if (!text) { done && done(); return; }
+    current = el; el.classList.add("tts-active"); wordSpans = wrapWords(el);
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = tag; var v = pickVoice(tag); if (v) u.voice = v;
+    u.rate = document.getElementById("readSlow").checked ? 0.72 : 0.95;
+    u.onboundary = function (e) {
+      if (e.name && e.name !== "word") return;
+      var i = e.charIndex || 0, best = null;
+      for (var k = 0; k < wordSpans.length; k++) {
+        if (+wordSpans[k].getAttribute("data-s") <= i) best = wordSpans[k]; else break;
+      }
+      wordSpans.forEach(function (s) { s.classList.remove("on"); });
+      if (best) best.classList.add("on");
+    };
+    u.onend = function () {
+      unwrap(el); el.classList.remove("tts-active");
+      if (btn) { btn.classList.remove("playing"); btn.textContent = "\u25B6"; }
+      done && done();
+    };
+    u.onerror = u.onend;
+    if (btn) { btn.classList.add("playing"); btn.textContent = "\u25A0"; }
+    el.scrollIntoView({ behavior:"smooth", block:"center" });
+    synth.speak(u);
+  }
+  function stopAll() {
+    queue = []; qi = 0; synth.cancel();
+    if (current) { unwrap(current); current.classList.remove("tts-active"); }
+    clearBtns(); current = null;
+  }
+  function run() { if (qi >= queue.length) { current = null; return; } speak(queue[qi++], null, run); }
+
+  document.querySelectorAll(".readable").forEach(function (card) {
+    var b = document.createElement("button");
+    b.className = "speak-btn"; b.type = "button"; b.textContent = "\u25B6";
+    b.setAttribute("aria-label", "Read aloud");
+    b.addEventListener("click", function (ev) {
+      ev.preventDefault(); ev.stopPropagation();
+      var was = b.classList.contains("playing");
+      stopAll(); if (!was) speak(card, b, null);
+    });
+    card.appendChild(b);
+  });
+  document.getElementById("readAll").addEventListener("click", function () {
+    stopAll(); queue = Array.prototype.slice.call(document.querySelectorAll(".readable")); qi = 0; run();
+  });
+  document.getElementById("readStop").addEventListener("click", stopAll);
+  document.querySelectorAll(".lang-btn").forEach(function (b) { b.addEventListener("click", stopAll); });
+  window.addEventListener("pagehide", stopAll);
+  if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () { synth.getVoices(); };
+})();
+</script>
+</body>
+</html>
