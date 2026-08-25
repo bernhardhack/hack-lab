@@ -14,6 +14,29 @@
       display:flex; align-items:center; justify-content:center; font-size:14px;
       line-height:1; cursor:pointer; z-index:5; }
     .speak-btn:hover, .speak-btn.playing { color:#34d399; border-color:#34d399; }
+
+    /* --- Cream theme + reading aids --------------------------------------
+       Background is cream, not white: the British Dyslexia Association
+       advises against white, which can appear too dazzling.               */
+    body { background: #F6F1E6; }
+    .tts-word.on { background: #FDE68A !important; color: #1F2933 !important; }
+    .readable.tts-active { outline-color: #047857 !important; }
+    .speak-btn { background:#FFFDF7 !important; border-color:#CFC4AC !important; color:#46545F !important; }
+    .speak-btn:hover, .speak-btn.playing { color:#047857 !important; border-color:#047857 !important; }
+
+    /* Easy-read: Verdana ships on iPadOS and tests well in the research.
+       Spacing values follow the BDA style guide.                          */
+    html[data-read="easy"] body,
+    html[data-read="easy"] body * { font-family: Verdana, Geneva, sans-serif !important; }
+    html[data-read="easy"] p,
+    html[data-read="easy"] li,
+    html[data-read="easy"] h1,
+    html[data-read="easy"] h2,
+    html[data-read="easy"] h3 { letter-spacing: .06em; word-spacing: .16em; }
+    html[data-read="easy"] p, html[data-read="easy"] li { line-height: 1.9 !important; }
+
+    p, li { text-align: left; }
+    .hero { width:100%; border-radius:14px; border:1px solid #DDD4C0; display:block; }
   </style>
   <style id="a11y">
     /* Root scale: everything in Tailwind is rem-based, so this lifts the whole
@@ -44,55 +67,58 @@
     a.readable:active, a.card-link:active { border-color: #34d399 !important; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-6 md:p-12">
+<body class="bg-[#F6F1E6] text-[#1F2933] font-sans min-h-screen p-6 md:p-12">
   <div class="max-w-4xl mx-auto space-y-8">
 
-    <header class="border-b border-slate-800 pb-6">
-      <a href="./" class="text-xs text-slate-500 hover:text-emerald-400 transition font-mono">&larr; HACK-LAB.SPACE</a>
+    <header class="border-b border-[#DDD4C0] pb-6">
+      <a href="./" class="text-xs text-[#5E6B75] hover:text-[#047857] transition font-mono">&larr; HACK-LAB.SPACE</a>
       <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-3">
         <div>
-          <div class="text-xs font-mono text-amber-400 mb-1">MISSION 00</div>
-          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100" data-i18n="title"></h1>
-          <p class="text-slate-400 text-sm mt-2 max-w-xl" data-i18n="sub"></p>
-          <p class="text-emerald-300/90 text-sm mt-3 max-w-xl border-l-2 border-emerald-500/40 pl-3" data-i18n="why"></p>
+          <div class="text-xs font-mono text-[#B45309] mb-1">MISSION 00</div>
+          <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-[#1F2933]" data-i18n="title"></h1>
+          <p class="text-[#46545F] text-sm mt-2 max-w-xl" data-i18n="sub"></p>
+          <p class="text-[#046148] text-sm mt-3 max-w-xl border-l-2 border-[#047857] pl-3" data-i18n="why"></p>
         </div>
         <div class="flex gap-1" role="group" aria-label="Language">
-          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">EN</button>
-          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">DE</button>
-          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">IT</button>
+          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">EN</button>
+          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">DE</button>
+          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">IT</button>
         </div>
       </div>
     </header>
 
+    <img src="./plotter-hero.svg" alt="" class="hero">
+
     <div class="flex flex-wrap items-center gap-2">
-      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/20 transition" data-i18n="readAloud"></button>
-      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-i18n="readStop"></button>
-      <label class="flex items-center gap-2 text-xs text-slate-400 ml-1 cursor-pointer">
-        <input id="readSlow" type="checkbox" class="accent-emerald-400"><span data-i18n="readSlow"></span>
+      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#047857]/12 text-[#047857] border border-[#047857]/50 hover:bg-[#047857]/20 transition" data-i18n="readAloud"></button>
+      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC] hover:bg-[#E3DAC7] transition" data-i18n="readStop"></button>
+      <label class="flex items-center gap-2 text-xs text-[#46545F] ml-1 cursor-pointer">
+        <input id="readSlow" type="checkbox" class="accent-[#047857]"><span data-i18n="readSlow"></span>
       </label>
-      <div class="flex items-center gap-1 ml-auto" role="group" aria-label="Text size">
-        <button class="size-btn px-3 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="m">A</button>
-        <button class="size-btn px-3 rounded-lg text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="l">A+</button>
-        <button class="size-btn px-3 rounded-lg text-base font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="xl">A++</button>
+            <button id="easyRead" class="px-4 rounded-lg text-sm font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-i18n="easyRead"></button>
+<div class="flex items-center gap-1 ml-auto" role="group" aria-label="Text size">
+        <button class="size-btn px-3 rounded-lg text-xs font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="m">A</button>
+        <button class="size-btn px-3 rounded-lg text-sm font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="l">A+</button>
+        <button class="size-btn px-3 rounded-lg text-base font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="xl">A++</button>
       </div>
     </div>
 
     <!-- Who leads what -->
     <section class="grid md:grid-cols-2 gap-4">
-      <div class="readable relative bg-slate-900 border border-orange-800/40 rounded-2xl p-5">
-        <div class="text-xs font-mono text-orange-400 mb-2" data-i18n="jacobRole"></div>
-        <p class="text-slate-300 text-base" data-i18n="jacobBody"></p>
+      <div class="readable relative bg-[#FFFDF7] border border-[#C2410C]/45 rounded-2xl p-5">
+        <div class="text-xs font-mono text-[#C2410C] mb-2" data-i18n="jacobRole"></div>
+        <p class="text-[#33414C] text-base" data-i18n="jacobBody"></p>
       </div>
-      <div class="readable relative bg-slate-900 border border-violet-800/40 rounded-2xl p-5">
-        <div class="text-xs font-mono text-violet-400 mb-2" data-i18n="emmaRole"></div>
-        <p class="text-slate-300 text-base" data-i18n="emmaBody"></p>
+      <div class="readable relative bg-[#FFFDF7] border border-[#6D28D9]/45 rounded-2xl p-5">
+        <div class="text-xs font-mono text-[#6D28D9] mb-2" data-i18n="emmaRole"></div>
+        <p class="text-[#33414C] text-base" data-i18n="emmaBody"></p>
       </div>
     </section>
 
     <!-- Honest constraints -->
-    <section class="readable relative bg-amber-500/5 border border-amber-500/25 rounded-2xl p-6">
-      <h2 class="text-sm font-bold uppercase tracking-wide text-amber-400 mb-3" data-i18n="knowHead"></h2>
-      <ul class="space-y-2 text-sm text-slate-300 list-disc pl-5">
+    <section class="readable relative bg-[#B45309]/8 border border-[#B45309]/40 rounded-2xl p-6">
+      <h2 class="text-sm font-bold tracking-wide text-[#B45309] mb-3" data-i18n="knowHead"></h2>
+      <ul class="space-y-2 text-sm text-[#33414C] list-disc pl-5">
         <li data-i18n="know1"></li>
         <li data-i18n="know2"></li>
         <li data-i18n="know3"></li>
@@ -102,77 +128,77 @@
 
     <!-- Stages -->
     <section class="space-y-4">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3" data-i18n="stagesHead"></h2>
-      <p class="text-slate-400 text-sm" data-i18n="stagesNote"></p>
+      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#047857] pl-3" data-i18n="stagesHead"></h2>
+      <p class="text-[#46545F] text-sm" data-i18n="stagesNote"></p>
 
       <div class="space-y-3">
-        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s1Tag"></div>
-          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s1Title"></h3>
-          <p class="text-slate-400 text-sm" data-i18n="s1Body"></p>
+        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
+          <div class="text-xs font-mono text-[#047857] mb-1" data-i18n="s1Tag"></div>
+          <h3 class="font-bold text-[#1F2933] mb-1" data-i18n="s1Title"></h3>
+          <p class="text-[#46545F] text-sm" data-i18n="s1Body"></p>
         </div>
-        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s2Tag"></div>
-          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s2Title"></h3>
-          <p class="text-slate-400 text-sm" data-i18n="s2Body"></p>
+        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
+          <div class="text-xs font-mono text-[#047857] mb-1" data-i18n="s2Tag"></div>
+          <h3 class="font-bold text-[#1F2933] mb-1" data-i18n="s2Title"></h3>
+          <p class="text-[#46545F] text-sm" data-i18n="s2Body"></p>
         </div>
-        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s3Tag"></div>
-          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s3Title"></h3>
-          <p class="text-slate-400 text-sm" data-i18n="s3Body"></p>
+        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
+          <div class="text-xs font-mono text-[#047857] mb-1" data-i18n="s3Tag"></div>
+          <h3 class="font-bold text-[#1F2933] mb-1" data-i18n="s3Title"></h3>
+          <p class="text-[#46545F] text-sm" data-i18n="s3Body"></p>
         </div>
-        <div class="readable relative bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <div class="text-xs font-mono text-emerald-400 mb-1" data-i18n="s4Tag"></div>
-          <h3 class="font-bold text-slate-100 mb-1" data-i18n="s4Title"></h3>
-          <p class="text-slate-400 text-sm" data-i18n="s4Body"></p>
+        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
+          <div class="text-xs font-mono text-[#047857] mb-1" data-i18n="s4Tag"></div>
+          <h3 class="font-bold text-[#1F2933] mb-1" data-i18n="s4Title"></h3>
+          <p class="text-[#46545F] text-sm" data-i18n="s4Body"></p>
         </div>
       </div>
     </section>
 
     <!-- Resources -->
     <section class="space-y-4">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-cyan-400 pl-3" data-i18n="resHead"></h2>
+      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#0E7490] pl-3" data-i18n="resHead"></h2>
       <div class="grid md:grid-cols-2 gap-4">
 
         <a href="https://rebrickable.com/mocs/MOC-139219/mareklew/spike-prime-plotter-xy-no-pen-lift/" target="_blank" rel="noopener"
-           class="block bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-600 transition">
-          <div class="text-xs font-mono text-cyan-400 mb-1">rebrickable.com &nearr;</div>
-          <h3 class="font-bold text-slate-100 text-sm mb-1">SPIKE Prime Plotter (XY) &mdash; mareklew</h3>
-          <p class="text-slate-300 text-base" data-i18n="res1"></p>
+           class="block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
+          <div class="text-xs font-mono text-[#0E7490] mb-1">rebrickable.com &nearr;</div>
+          <h3 class="font-bold text-[#1F2933] text-sm mb-1">SPIKE Prime Plotter (XY) &mdash; mareklew</h3>
+          <p class="text-[#33414C] text-base" data-i18n="res1"></p>
         </a>
 
         <a href="https://www.qikeasy.com/plotter/" target="_blank" rel="noopener"
-           class="block bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-600 transition">
-          <div class="text-xs font-mono text-cyan-400 mb-1">qikeasy.com &nearr;</div>
-          <h3 class="font-bold text-slate-100 text-sm mb-1">SPIKE Prime XY Plotter with pen lift</h3>
-          <p class="text-slate-300 text-base" data-i18n="res2"></p>
+           class="block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
+          <div class="text-xs font-mono text-[#0E7490] mb-1">qikeasy.com &nearr;</div>
+          <h3 class="font-bold text-[#1F2933] text-sm mb-1">SPIKE Prime XY Plotter with pen lift</h3>
+          <p class="text-[#33414C] text-base" data-i18n="res2"></p>
         </a>
 
         <a href="https://education.lego.com/en-au/lessons/prime-kickstart-a-business/track-your-packages/" target="_blank" rel="noopener"
-           class="block bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-600 transition">
-          <div class="text-xs font-mono text-cyan-400 mb-1">education.lego.com &nearr;</div>
-          <h3 class="font-bold text-slate-100 text-sm mb-1">Track Your Packages &rarr; Plotter</h3>
-          <p class="text-slate-300 text-base" data-i18n="res3"></p>
+           class="block bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5 hover:border-[#0E7490] transition">
+          <div class="text-xs font-mono text-[#0E7490] mb-1">education.lego.com &nearr;</div>
+          <h3 class="font-bold text-[#1F2933] text-sm mb-1">Track Your Packages &rarr; Plotter</h3>
+          <p class="text-[#33414C] text-base" data-i18n="res3"></p>
         </a>
 
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-          <div class="text-xs font-mono text-slate-500 mb-1" data-i18n="res4Tag"></div>
-          <h3 class="font-bold text-slate-100 text-sm mb-1" data-i18n="res4Title"></h3>
-          <p class="text-slate-300 text-base" data-i18n="res4"></p>
+        <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-5">
+          <div class="text-xs font-mono text-[#5E6B75] mb-1" data-i18n="res4Tag"></div>
+          <h3 class="font-bold text-[#1F2933] text-sm mb-1" data-i18n="res4Title"></h3>
+          <p class="text-[#33414C] text-base" data-i18n="res4"></p>
         </div>
       </div>
     </section>
 
     <!-- Build log -->
     <section class="space-y-4">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-slate-600 pl-3" data-i18n="logHead"></h2>
-      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-        <p class="text-slate-400 text-base" data-i18n="logEmpty"></p>
+      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#CFC4AC] pl-3" data-i18n="logHead"></h2>
+      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6">
+        <p class="text-[#46545F] text-base" data-i18n="logEmpty"></p>
       </div>
     </section>
 
-    <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono">
-      <a href="./" class="hover:text-emerald-400 transition">HACK-LAB.SPACE</a>
+    <footer class="border-t border-[#DDD4C0] pt-6 text-center text-[#5E6B75] text-xs font-mono">
+      <a href="./" class="hover:text-[#047857] transition">HACK-LAB.SPACE</a>
     </footer>
   </div>
 
@@ -181,11 +207,12 @@ const I18N = {
 en: {
   readAloud:"\u25B6 Read aloud", readStop:"\u25A0 Stop", readSlow:"Slower",
   why:"This is the machine that makes Emma's game real. Design one quest card, and the plotter draws the whole deck in metallic ink while you get on with something else. Every pen and every sheet of paper in the box is ammunition for it.",
+  easyRead:"Easy read",
   title:"Build the Plotter",
   sub:"A SPIKE gantry that holds a pen and draws what it is told. The first thing the lab makes, and the machine everything else feeds.",
-  jacobRole:"CHIEF ENGINEER \u00B7 JACOB",
+  jacobRole:"Chief Engineer \u00B7 Jacob",
   jacobBody:"The mechanism. Two axes, belt tension, the frame that stops it flexing, and the pen holder. You decide what it takes to make a line straight.",
-  emmaRole:"CHIEF MISSION DESIGNER \u00B7 EMMA",
+  emmaRole:"Chief Mission Designer \u00B7 Emma",
   emmaBody:"What it draws and what counts as good. You set the test drawing, you decide when the output is worth keeping, and you name what comes off it.",
   knowHead:"Know this before you start",
   know1:"The standard build draws about 64\u00D764\u202Fmm. That is a quest card, not a map. Bigger comes later, or not at all.",
@@ -194,19 +221,19 @@ en: {
   know4:"A 3D printed pen holder gives noticeably better results than a LEGO one. That is the first part worth printing.",
   stagesHead:"Stages",
   stagesNote:"Not a schedule. Do them in order, take as long as it takes, and log what happened.",
-  s1Tag:"STAGE 1", s1Title:"Make it move",
+  s1Tag:"Stage 1", s1Title:"Make it move",
   s1Body:"Two motors, two axes, no pen. Get the carriage travelling smoothly in X and Y and returning to the same starting corner every time. If it does not repeat, nothing after this will work.",
-  s2Tag:"STAGE 2", s2Title:"Make it draw",
+  s2Tag:"Stage 2", s2Title:"Make it draw",
   s2Body:"Add a pen holder and draw a square. Then draw it ten times without touching anything and look at how far the ten squares drift apart. Photograph the result and log the number.",
-  s3Tag:"STAGE 3", s3Title:"Make it lift",
+  s3Tag:"Stage 3", s3Title:"Make it lift",
   s3Body:"A third motor that raises and lowers the pen. This is the part that turns one continuous scribble into separate shapes, and it is the part you will design, print, test and print again.",
-  s4Tag:"STAGE 4", s4Title:"Make it repeat",
+  s4Tag:"Stage 4", s4Title:"Make it repeat",
   s4Body:"Same file, run in Nairobi and in Vienna. Two sheets, side by side. They will not match. The difference between them is the first thing that goes on both shelves.",
   resHead:"Resources",
   res1:"72 pages of step-by-step instructions, fully LEGO, no pen lift. Draws about 64\u00D764\u202Fmm on index cards. Long build, needs patience. The author notes a printed pen holder beats the LEGO one.",
   res2:"A full XY plotter with a working pen lift on port C. Needs an adapter we do not have, so treat it as a reference for how the axes and the lift are laid out, not as a build to copy.",
   res3:"Free official LEGO lesson. Swap the tracer needle for a pen holder. The gentlest way in if the big build looks daunting.",
-  res4Tag:"IN THE BOX", res4Title:"What you already have",
+  res4Tag:"In the box", res4Title:"What you already have",
   res4:"SPIKE Prime plus Expansion, the Bambu printer, fine-liners and gel pens, paper roll and card stock, calipers for measuring what you print.",
   logHead:"Build log",
   logEmpty:"Nothing logged yet. First entry goes here \u2014 a photo, a date, and what broke."
@@ -214,11 +241,12 @@ en: {
 de: {
   readAloud:"\u25B6 Vorlesen", readStop:"\u25A0 Stopp", readSlow:"Langsamer",
   why:"Das ist die Maschine, die Emmas Spiel echt macht. Eine Questkarte entwerfen \u2013 und der Plotter zeichnet das ganze Deck in Metallictinte, w\u00E4hrend ihr etwas anderes macht. Jeder Stift und jedes Blatt Papier in der Kiste ist Munition daf\u00FCr.",
+  easyRead:"Leichter lesen",
   title:"Den Plotter bauen",
   sub:"Ein SPIKE-Portal, das einen Stift h\u00E4lt und zeichnet, was man ihm sagt. Das Erste, was das Labor baut, und die Maschine, f\u00FCr die alles andere gedacht ist.",
-  jacobRole:"CHIEF ENGINEER \u00B7 JACOB",
+  jacobRole:"Chief Engineer \u00B7 Jacob",
   jacobBody:"Die Mechanik. Zwei Achsen, Riemenspannung, ein Rahmen, der nicht nachgibt, und der Stifthalter. Du entscheidest, was es braucht, damit eine Linie gerade wird.",
-  emmaRole:"CHIEF MISSION DESIGNER \u00B7 EMMA",
+  emmaRole:"Chief Mission Designer \u00B7 Emma",
   emmaBody:"Was gezeichnet wird und was gut genug ist. Du legst die Testzeichnung fest, du entscheidest, wann ein Ergebnis es wert ist, aufgehoben zu werden, und du gibst ihm einen Namen.",
   knowHead:"Das solltet ihr vorher wissen",
   know1:"Der Standardbau zeichnet etwa 64\u00D764\u202Fmm. Das ist eine Questkarte, keine Landkarte. Gr\u00F6\u00DFer kommt sp\u00E4ter \u2013 oder gar nicht.",
@@ -227,19 +255,19 @@ de: {
   know4:"Ein 3D-gedruckter Stifthalter liefert deutlich bessere Ergebnisse als einer aus LEGO. Das ist das erste Teil, das sich zu drucken lohnt.",
   stagesHead:"Etappen",
   stagesNote:"Kein Zeitplan. Der Reihe nach, so lange es dauert, und schreibt auf, was passiert ist.",
-  s1Tag:"ETAPPE 1", s1Title:"Bring es zum Fahren",
+  s1Tag:"Etappe 1", s1Title:"Bring es zum Fahren",
   s1Body:"Zwei Motoren, zwei Achsen, kein Stift. Der Schlitten soll sauber in X und Y fahren und jedes Mal in dieselbe Startecke zur\u00FCckkommen. Wenn das nicht reproduzierbar ist, funktioniert danach nichts.",
-  s2Tag:"ETAPPE 2", s2Title:"Bring es zum Zeichnen",
+  s2Tag:"Etappe 2", s2Title:"Bring es zum Zeichnen",
   s2Body:"Stifthalter dran und ein Quadrat zeichnen. Dann zehnmal dasselbe, ohne etwas anzufassen, und schauen, wie weit die zehn Quadrate auseinanderdriften. Fotografieren und die Zahl ins Logbuch.",
-  s3Tag:"ETAPPE 3", s3Title:"Bring es zum Heben",
+  s3Tag:"Etappe 3", s3Title:"Bring es zum Heben",
   s3Body:"Ein dritter Motor, der den Stift hebt und senkt. Das macht aus einem durchgehenden Gekritzel einzelne Formen \u2013 und das ist das Teil, das ihr entwerfen, drucken, testen und noch einmal drucken werdet.",
-  s4Tag:"ETAPPE 4", s4Title:"Bring es zum Wiederholen",
+  s4Tag:"Etappe 4", s4Title:"Bring es zum Wiederholen",
   s4Body:"Dieselbe Datei, einmal in Nairobi und einmal in Wien. Zwei Bl\u00E4tter nebeneinander. Sie werden nicht gleich sein. Genau dieser Unterschied ist das Erste, was auf beide Regale kommt.",
   resHead:"Ressourcen",
   res1:"72 Seiten Schritt-f\u00FCr-Schritt-Anleitung, komplett aus LEGO, ohne Stifthebung. Zeichnet etwa 64\u00D764\u202Fmm auf Karteikarten. Langer Bau, braucht Geduld. Der Autor merkt an: ein gedruckter Stifthalter ist besser als der aus LEGO.",
   res2:"Ein vollst\u00E4ndiger XY-Plotter mit funktionierender Stifthebung an Port C. Braucht einen Adapter, den wir nicht haben \u2013 also als Referenz f\u00FCr den Aufbau lesen, nicht zum Nachbauen.",
   res3:"Kostenlose offizielle LEGO-Lektion. Statt der Nadel einen Stifthalter einsetzen. Der sanfteste Einstieg, falls der gro\u00DFe Bau zu viel wirkt.",
-  res4Tag:"IN DER KISTE", res4Title:"Was ihr schon habt",
+  res4Tag:"In der Kiste", res4Title:"Was ihr schon habt",
   res4:"SPIKE Prime samt Erweiterung, den Bambu-Drucker, Fineliner und Gelstifte, Papierrolle und Karton, Messschieber zum Nachmessen.",
   logHead:"Baulogbuch",
   logEmpty:"Noch nichts eingetragen. Der erste Eintrag kommt hierher \u2013 ein Foto, ein Datum und was kaputtgegangen ist."
@@ -247,11 +275,12 @@ de: {
 it: {
   readAloud:"\u25B6 Leggi ad alta voce", readStop:"\u25A0 Stop", readSlow:"Pi\u00F9 lento",
   why:"Questa \u00E8 la macchina che rende reale il gioco di Emma. Progetti una carta missione, e il plotter disegna tutto il mazzo con inchiostro metallico mentre voi fate altro. Ogni penna e ogni foglio nella scatola sono munizioni per lei.",
+  easyRead:"Lettura facile",
   title:"Costruire il plotter",
   sub:"Un portale SPIKE che tiene una penna e disegna quello che gli dici. La prima cosa che il laboratorio costruisce, e la macchina a cui serve tutto il resto.",
-  jacobRole:"CHIEF ENGINEER \u00B7 JACOB",
+  jacobRole:"Chief Engineer \u00B7 Jacob",
   jacobBody:"Il meccanismo. Due assi, la tensione della cinghia, un telaio che non si piega e il portapenna. Decidi tu cosa serve perch\u00E9 una linea venga dritta.",
-  emmaRole:"CHIEF MISSION DESIGNER \u00B7 EMMA",
+  emmaRole:"Chief Mission Designer \u00B7 Emma",
   emmaBody:"Cosa disegna e cosa conta come buono. Scegli tu il disegno di prova, decidi quando un risultato vale la pena di essere tenuto e gli dai un nome.",
   knowHead:"Da sapere prima di iniziare",
   know1:"La versione standard disegna circa 64\u00D764\u202Fmm. \u00C8 una carta missione, non una mappa. Pi\u00F9 grande viene dopo, o mai.",
@@ -260,19 +289,19 @@ it: {
   know4:"Un portapenna stampato in 3D d\u00E0 risultati molto migliori di uno in LEGO. \u00C8 il primo pezzo che vale la pena stampare.",
   stagesHead:"Tappe",
   stagesNote:"Non \u00E8 un calendario. In ordine, con tutto il tempo che serve, e scrivete cosa \u00E8 successo.",
-  s1Tag:"TAPPA 1", s1Title:"Farlo muovere",
+  s1Tag:"Tappa 1", s1Title:"Farlo muovere",
   s1Body:"Due motori, due assi, niente penna. Il carrello deve scorrere bene in X e in Y e tornare ogni volta nello stesso angolo di partenza. Se non si ripete, niente di quello che viene dopo funziona.",
-  s2Tag:"TAPPA 2", s2Title:"Farlo disegnare",
+  s2Tag:"Tappa 2", s2Title:"Farlo disegnare",
   s2Body:"Montate il portapenna e disegnate un quadrato. Poi dieci volte lo stesso, senza toccare nulla, e guardate quanto i dieci quadrati si allontanano. Fotografate e scrivete il numero nel registro.",
-  s3Tag:"TAPPA 3", s3Title:"Farlo sollevare",
+  s3Tag:"Tappa 3", s3Title:"Farlo sollevare",
   s3Body:"Un terzo motore che alza e abbassa la penna. \u00C8 quello che trasforma uno scarabocchio continuo in forme separate, ed \u00E8 il pezzo che progetterete, stamperete, proverete e ristamperete.",
-  s4Tag:"TAPPA 4", s4Title:"Farlo ripetere",
+  s4Tag:"Tappa 4", s4Title:"Farlo ripetere",
   s4Body:"Stesso file, una volta a Nairobi e una a Vienna. Due fogli, uno accanto all'altro. Non saranno uguali. Proprio quella differenza \u00E8 la prima cosa che va su entrambi gli scaffali.",
   resHead:"Risorse",
   res1:"72 pagine di istruzioni passo passo, tutto in LEGO, senza sollevamento penna. Disegna circa 64\u00D764\u202Fmm su schede. Costruzione lunga, serve pazienza. L'autore nota che un portapenna stampato \u00E8 meglio di quello in LEGO.",
   res2:"Un plotter XY completo con sollevamento penna funzionante sulla porta C. Serve un adattatore che non abbiamo: leggetelo come riferimento su come sono disposti gli assi, non come progetto da copiare.",
   res3:"Lezione ufficiale LEGO, gratuita. Sostituite l'ago con un portapenna. Il modo pi\u00F9 dolce per iniziare se la costruzione grande sembra troppo.",
-  res4Tag:"NELLA SCATOLA", res4Title:"Quello che avete gi\u00E0",
+  res4Tag:"Nella scatola", res4Title:"Quello che avete gi\u00E0",
   res4:"SPIKE Prime con l'espansione, la stampante Bambu, fineliner e penne gel, rotolo di carta e cartoncino, calibro per misurare quello che stampate.",
   logHead:"Registro di costruzione",
   logEmpty:"Ancora niente. La prima voce va qui \u2014 una foto, una data e cosa si \u00E8 rotto."
@@ -280,8 +309,8 @@ it: {
 };
 
 (function () {
-  var ON = ["bg-slate-800","text-emerald-400","border-emerald-500/40"];
-  var OFF = ["text-slate-400","border-slate-700"];
+  var ON = ["bg-[#EDE6D6]","text-[#047857]","border-[#047857]"];
+  var OFF = ["text-[#46545F]","border-[#CFC4AC]"];
   function apply(lang) {
     var d = I18N[lang] || I18N.en;
     document.documentElement.lang = lang;
@@ -411,10 +440,10 @@ it: {
     document.documentElement.setAttribute("data-size", s);
     document.querySelectorAll(".size-btn").forEach(function (b) {
       var a = b.getAttribute("data-size") === s;
-      b.classList.toggle("border-emerald-500", a);
-      b.classList.toggle("text-emerald-400", a);
-      b.classList.toggle("border-slate-700", !a);
-      b.classList.toggle("text-slate-300", !a);
+      b.classList.toggle("border-[#047857]", a);
+      b.classList.toggle("text-[#047857]", a);
+      b.classList.toggle("border-[#CFC4AC]", !a);
+      b.classList.toggle("text-[#33414C]", !a);
     });
     try { localStorage.setItem("hl-size", s); } catch (e) {}
   }
@@ -423,6 +452,27 @@ it: {
   });
   var s = null; try { s = localStorage.getItem("hl-size"); } catch (e) {}
   set(s || "m");
+})();
+</script>
+
+<script>
+/* Easy-read toggle: Verdana plus wider letter and word spacing. */
+(function () {
+  var b = document.getElementById("easyRead");
+  if (!b) return;
+  function set(on) {
+    document.documentElement.setAttribute("data-read", on ? "easy" : "normal");
+    b.classList.toggle("border-[#047857]", on);
+    b.classList.toggle("text-[#047857]", on);
+    b.classList.toggle("border-[#CFC4AC]", !on);
+    b.classList.toggle("text-[#33414C]", !on);
+    try { localStorage.setItem("hl-read", on ? "easy" : "normal"); } catch (e) {}
+  }
+  b.addEventListener("click", function () {
+    set(document.documentElement.getAttribute("data-read") !== "easy");
+  });
+  var s = null; try { s = localStorage.getItem("hl-read"); } catch (e) {}
+  set(s === "easy");
 })();
 </script>
 </body>
