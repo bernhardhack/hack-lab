@@ -19,6 +19,34 @@
     .speak-btn:hover { color: #34d399; border-color: #34d399; }
     .speak-btn.playing { color: #34d399; border-color: #34d399; }
   </style>
+  <style id="a11y">
+    /* Root scale: everything in Tailwind is rem-based, so this lifts the whole
+       page at once. Children can override it with the A / A+ / A++ control. */
+    html { font-size: 18px; -webkit-text-size-adjust: 100%; }
+    html[data-size="l"]  { font-size: 20.5px; }
+    html[data-size="xl"] { font-size: 23px; }
+
+    /* Line height and measure: long lines are the main barrier to line-tracking */
+    p, li { line-height: 1.7 !important; }
+    p, li { max-width: 68ch; }
+    h1, h2, h3 { line-height: 1.3 !important; }
+
+    /* 44px minimum touch targets (Apple HIG) */
+    .lang-btn, #readAll, #readStop, .size-btn {
+      min-height: 44px; min-width: 44px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    label:has(#readSlow) { min-height: 44px; }
+    #readSlow { width: 22px; height: 22px; }
+    .speak-btn {
+      width: 44px !important; height: 44px !important;
+      top: 8px !important; right: 8px !important; font-size: 17px !important;
+    }
+    .readable { padding-top: 3.5rem !important; }
+
+    /* Links that are cards need a touch affordance, not a hover one */
+    a.readable:active, a.card-link:active { border-color: #34d399 !important; }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-6 md:p-12">
   <div class="max-w-5xl mx-auto space-y-8">
@@ -29,7 +57,7 @@
         <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-emerald-400">
           HACK-LAB<span class="text-slate-500">.SPACE</span>
         </h1>
-        <p class="text-slate-400 text-sm mt-1" data-i18n="tagline"></p>
+        <p class="text-slate-300 text-base mt-1" data-i18n="tagline"></p>
       </div>
 
       <div class="flex flex-col items-start md:items-end gap-3">
@@ -53,28 +81,33 @@
         <input id="readSlow" type="checkbox" class="accent-emerald-400">
         <span data-i18n="readSlow"></span>
       </label>
+      <div class="flex items-center gap-1 ml-auto" role="group" aria-label="Text size">
+        <button class="size-btn px-3 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="m">A</button>
+        <button class="size-btn px-3 rounded-lg text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="l">A+</button>
+        <button class="size-btn px-3 rounded-lg text-base font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="xl">A++</button>
+      </div>
     </div>
 
     <!-- Hardware matrix -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwRobotics"></div>
+        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwRobotics"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Prime + Exp</div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwFab"></div>
+        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwFab"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">Bambu 3D Lab</div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwAI"></div>
+        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwAI"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">iPad + Browser ML</div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwSoftware"></div>
+        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwSoftware"></div>
         <div class="text-lg font-bold text-slate-200 mt-1" data-i18n="hwSoftwareVal"></div>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-xs text-slate-500 uppercase font-semibold" data-i18n="hwDrawing"></div>
+        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwDrawing"></div>
         <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Pen Plotter</div>
       </div>
     </section>
@@ -91,8 +124,8 @@
             <span class="text-xs text-slate-500 text-right" data-i18n="m0Target"></span>
           </div>
           <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m0Title"></h3>
-          <p class="text-slate-400 text-sm mb-4" data-i18n="m0Body"></p>
-          <p class="text-slate-500 text-xs mb-4" data-i18n="m0Note"></p>
+          <p class="text-slate-300 text-base mb-4" data-i18n="m0Body"></p>
+          <p class="text-slate-300 text-base mb-4" data-i18n="m0Note"></p>
           <div class="flex gap-2 flex-wrap">
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">SPIKE</span>
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tag3d"></span>
@@ -109,7 +142,7 @@
             <span class="text-xs text-slate-500 text-right" data-i18n="m1Target"></span>
           </div>
           <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m1Title"></h3>
-          <p class="text-slate-400 text-sm mb-4" data-i18n="m1Body"></p>
+          <p class="text-slate-300 text-base mb-4" data-i18n="m1Body"></p>
           <div class="flex gap-2 flex-wrap">
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tag3d"></span>
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Scratch / Python</span>
@@ -123,7 +156,7 @@
             <span class="text-xs text-slate-500 text-right" data-i18n="m2Target"></span>
           </div>
           <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m2Title"></h3>
-          <p class="text-slate-400 text-sm mb-4" data-i18n="m2Body"></p>
+          <p class="text-slate-300 text-base mb-4" data-i18n="m2Body"></p>
           <div class="flex gap-2 flex-wrap">
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagIpad"></span>
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagAI"></span>
@@ -144,7 +177,7 @@
             <span class="text-xs text-slate-500 group-hover:text-violet-300 transition" data-i18n="courseOpen"></span>
           </div>
           <h3 class="text-lg font-bold text-slate-100 mb-2">KI-Camp</h3>
-          <p class="text-slate-400 text-sm mb-4" data-i18n="courseBody"></p>
+          <p class="text-slate-300 text-base mb-4" data-i18n="courseBody"></p>
           <div class="flex gap-2 flex-wrap">
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagTri"></span>
             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagInstall"></span>
@@ -414,6 +447,28 @@ const I18N = {
 
   /* Safari populates voices asynchronously */
   if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () { synth.getVoices(); };
+})();
+</script>
+
+<script>
+/* Text size control: children pick, choice persists. */
+(function () {
+  function set(s) {
+    document.documentElement.setAttribute("data-size", s);
+    document.querySelectorAll(".size-btn").forEach(function (b) {
+      var a = b.getAttribute("data-size") === s;
+      b.classList.toggle("border-emerald-500", a);
+      b.classList.toggle("text-emerald-400", a);
+      b.classList.toggle("border-slate-700", !a);
+      b.classList.toggle("text-slate-300", !a);
+    });
+    try { localStorage.setItem("hl-size", s); } catch (e) {}
+  }
+  document.querySelectorAll(".size-btn").forEach(function (b) {
+    b.addEventListener("click", function () { set(b.getAttribute("data-size")); });
+  });
+  var s = null; try { s = localStorage.getItem("hl-size"); } catch (e) {}
+  set(s || "m");
 })();
 </script>
 </body>
