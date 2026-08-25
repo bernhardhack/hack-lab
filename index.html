@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HACK-LAB.SPACE // Distributed Mission Control</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .tts-word { border-radius: 3px; }
+    .tts-word.on { background: #34d399; color: #05221a; }
+    .readable.tts-active { outline: 2px solid #34d399; outline-offset: 4px; }
+    .speak-btn {
+      position: absolute; top: 10px; right: 10px;
+      width: 30px; height: 30px; border-radius: 8px;
+      background: #0f172a; border: 1px solid #334155; color: #94a3b8;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; line-height: 1; cursor: pointer; z-index: 5;
+    }
+    .speak-btn:hover { color: #34d399; border-color: #34d399; }
+    .speak-btn.playing { color: #34d399; border-color: #34d399; }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-6 md:p-12">
   <div class="max-w-5xl mx-auto space-y-8">
@@ -30,6 +44,16 @@
         </div>
       </div>
     </header>
+
+    <!-- Read-aloud controls -->
+    <div class="flex flex-wrap items-center gap-2">
+      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/20 transition" data-i18n="readAloud"></button>
+      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-i18n="readStop"></button>
+      <label class="flex items-center gap-2 text-xs text-slate-400 ml-1 cursor-pointer">
+        <input id="readSlow" type="checkbox" class="accent-emerald-400">
+        <span data-i18n="readSlow"></span>
+      </label>
+    </div>
 
     <!-- Hardware matrix -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -61,7 +85,7 @@
 
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Mission 00 -->
-        <div class="bg-slate-900 border border-amber-800/40 rounded-2xl p-6 hover:border-amber-600/60 transition md:col-span-2">
+        <div class="readable relative bg-slate-900 border border-amber-800/40 rounded-2xl p-6 hover:border-amber-600/60 transition md:col-span-2">
           <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-amber-950 text-amber-400 px-2 py-1 rounded border border-amber-800/50" data-i18n="m0Badge"></span>
             <span class="text-xs text-slate-500 text-right" data-i18n="m0Target"></span>
@@ -78,7 +102,7 @@
         </div>
 
         <!-- Mission 01 -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+        <div class="readable relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
           <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800/50">MISSION 01</span>
             <span class="text-xs text-slate-500 text-right" data-i18n="m1Target"></span>
@@ -92,7 +116,7 @@
         </div>
 
         <!-- Mission 02 -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+        <div class="readable relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
           <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MISSION 02</span>
             <span class="text-xs text-slate-500 text-right" data-i18n="m2Target"></span>
@@ -113,7 +137,7 @@
 
       <div class="grid md:grid-cols-2 gap-6">
         <a href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener"
-           class="group block bg-slate-900 border border-violet-800/40 rounded-2xl p-6 hover:border-violet-600 transition">
+           class="readable relative group block bg-slate-900 border border-violet-800/40 rounded-2xl p-6 hover:border-violet-600 transition">
           <div class="flex justify-between items-start mb-4 gap-3">
             <span class="text-xs font-mono bg-violet-950 text-violet-300 px-2 py-1 rounded border border-violet-800/50" data-i18n="courseBadge"></span>
             <span class="text-xs text-slate-500 group-hover:text-violet-300 transition" data-i18n="courseOpen"></span>
@@ -135,6 +159,7 @@
 <script>
 const I18N = {
   en: {
+    "readAloud": "\u25B6 Read aloud", "readStop": "\u25A0 Stop", "readSlow": "Slower",
     tagline: "Async R&D Lab \u2022 Vienna Station \u2194 Nairobi Field Team",
     statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotics", hwFab: "Fabrication", hwAI: "AI / Vision",
@@ -155,6 +180,7 @@ const I18N = {
     footer: "HACK-LAB.SPACE \u2022 BUILT FOR CO-CREATION ACROSS DISTANCE"
   },
   de: {
+    "readAloud": "\u25B6 Vorlesen", "readStop": "\u25A0 Stopp", "readSlow": "Langsamer",
     tagline: "Asynchrones F&E-Labor \u2022 Station Wien \u2194 Feldteam Nairobi",
     statusVienna: "\u25CF Wien: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotik", hwFab: "Fertigung", hwAI: "KI / Vision",
@@ -175,6 +201,7 @@ const I18N = {
     footer: "HACK-LAB.SPACE \u2022 GEBAUT F\u00DCR GEMEINSAMES BAUEN \u00DCBER DISTANZ"
   },
   it: {
+    "readAloud": "\u25B6 Leggi ad alta voce", "readStop": "\u25A0 Stop", "readSlow": "Pi\u00F9 lento",
     tagline: "Laboratorio R&S asincrono \u2022 Stazione Vienna \u2194 Squadra sul campo Nairobi",
     statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotica", hwFab: "Fabbricazione", hwAI: "IA / Visione",
@@ -223,6 +250,166 @@ const I18N = {
   try { saved = localStorage.getItem("hl-lang"); } catch (e) {}
   var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
   apply(saved || (I18N[nav] ? nav : "en"));
+})();
+</script>
+
+<script>
+/* ---------------- Read-aloud (Web Speech API) ---------------------------
+   Word-level highlighting needs the SpeechSynthesis `boundary` event, which
+   iOS Safari does not fire. Where it is missing we highlight the whole block
+   instead, so the audio still works everywhere.                          */
+(function () {
+  var synth = window.speechSynthesis;
+  var bar = document.querySelector("#readAll") && document.querySelector("#readAll").parentElement;
+
+  if (!synth) {
+    if (bar) bar.style.display = "none";
+    return;
+  }
+
+  var LANGMAP = { en: "en-GB", de: "de-DE", it: "it-IT" };
+  var queue = [], qi = 0, current = null, wordSpans = [], sawBoundary = false;
+
+  function docLang() { return document.documentElement.lang || "en"; }
+
+  function pickVoice(tag) {
+    var vs = synth.getVoices() || [];
+    var two = tag.slice(0, 2);
+    return vs.filter(function (v) { return v.lang && v.lang.toLowerCase().indexOf(two) === 0; })[0] || null;
+  }
+
+  function clearHighlight() {
+    if (current) current.classList.remove("tts-active");
+    wordSpans.forEach(function (s) { s.classList.remove("on"); });
+    document.querySelectorAll(".speak-btn.playing").forEach(function (b) {
+      b.classList.remove("playing"); b.textContent = "\u25B6";
+    });
+  }
+
+  function unwrap(el) {
+    el.querySelectorAll("[data-tts-src]").forEach(function (n) {
+      n.textContent = n.getAttribute("data-tts-src");
+      n.removeAttribute("data-tts-src");
+    });
+  }
+
+  /* Wrap each word of every text-bearing child so it can be highlighted. */
+  function wrapWords(el) {
+    var spans = [], offset = 0;
+    el.querySelectorAll("h2,h3,p,span,div").forEach(function (n) {
+      if (n.children.length) return;
+      var t = n.textContent;
+      if (!t || !t.trim()) return;
+      n.setAttribute("data-tts-src", t);
+      var html = "", re = /\S+\s*/g, m;
+      while ((m = re.exec(t)) !== null) {
+        var w = m[0];
+        html += '<span class="tts-word" data-s="' + (offset + m.index) + '">' +
+                w.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</span>";
+      }
+      n.innerHTML = html;
+      offset += t.length + 1;
+      Array.prototype.push.apply(spans, n.querySelectorAll(".tts-word"));
+    });
+    return spans;
+  }
+
+  function textOf(el) {
+    var out = [];
+    el.querySelectorAll("h2,h3,p,span,div").forEach(function (n) {
+      if (n.children.length) return;
+      var t = n.textContent && n.textContent.trim();
+      if (t) out.push(t);
+    });
+    return out.join(". ");
+  }
+
+  function speakBlock(el, btn, onDone) {
+    var tag = LANGMAP[docLang()] || "en-GB";
+    var text = textOf(el);
+    if (!text) { onDone && onDone(); return; }
+
+    current = el;
+    el.classList.add("tts-active");
+    wordSpans = wrapWords(el);
+    sawBoundary = false;
+
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = tag;
+    var v = pickVoice(tag); if (v) u.voice = v;
+    u.rate = document.getElementById("readSlow").checked ? 0.72 : 0.95;
+
+    u.onboundary = function (e) {
+      if (e.name && e.name !== "word") return;
+      sawBoundary = true;
+      var i = e.charIndex || 0, best = null;
+      for (var k = 0; k < wordSpans.length; k++) {
+        if (+wordSpans[k].getAttribute("data-s") <= i) best = wordSpans[k]; else break;
+      }
+      wordSpans.forEach(function (s) { s.classList.remove("on"); });
+      if (best) best.classList.add("on");
+    };
+
+    u.onend = function () {
+      unwrap(el);
+      el.classList.remove("tts-active");
+      if (btn) { btn.classList.remove("playing"); btn.textContent = "\u25B6"; }
+      onDone && onDone();
+    };
+    u.onerror = u.onend;
+
+    if (btn) { btn.classList.add("playing"); btn.textContent = "\u25A0"; }
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    synth.speak(u);
+  }
+
+  function stopAll() {
+    queue = []; qi = 0;
+    synth.cancel();
+    if (current) unwrap(current);
+    clearHighlight();
+    current = null;
+  }
+
+  function runQueue() {
+    if (qi >= queue.length) { current = null; return; }
+    var el = queue[qi++];
+    speakBlock(el, null, runQueue);
+  }
+
+  /* Per-card buttons */
+  document.querySelectorAll(".readable").forEach(function (card) {
+    var b = document.createElement("button");
+    b.className = "speak-btn";
+    b.type = "button";
+    b.textContent = "\u25B6";
+    b.setAttribute("aria-label", "Read aloud");
+    b.addEventListener("click", function (ev) {
+      ev.preventDefault(); ev.stopPropagation();
+      var wasPlaying = b.classList.contains("playing");
+      stopAll();
+      if (!wasPlaying) speakBlock(card, b, null);
+    });
+    card.appendChild(b);
+  });
+
+  document.getElementById("readAll").addEventListener("click", function () {
+    stopAll();
+    queue = Array.prototype.slice.call(document.querySelectorAll(".readable"));
+    qi = 0;
+    runQueue();
+  });
+
+  document.getElementById("readStop").addEventListener("click", stopAll);
+
+  /* Language switch or navigation must not leave audio running */
+  document.querySelectorAll(".lang-btn").forEach(function (b) {
+    b.addEventListener("click", stopAll);
+  });
+  window.addEventListener("pagehide", stopAll);
+
+  /* Safari populates voices asynchronously */
+  if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () { synth.getVoices(); };
 })();
 </script>
 </body>
