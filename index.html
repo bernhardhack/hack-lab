@@ -18,6 +18,29 @@
     }
     .speak-btn:hover { color: #34d399; border-color: #34d399; }
     .speak-btn.playing { color: #34d399; border-color: #34d399; }
+
+    /* --- Cream theme + reading aids --------------------------------------
+       Background is cream, not white: the British Dyslexia Association
+       advises against white, which can appear too dazzling.               */
+    body { background: #F6F1E6; }
+    .tts-word.on { background: #FDE68A !important; color: #1F2933 !important; }
+    .readable.tts-active { outline-color: #047857 !important; }
+    .speak-btn { background:#FFFDF7 !important; border-color:#CFC4AC !important; color:#46545F !important; }
+    .speak-btn:hover, .speak-btn.playing { color:#047857 !important; border-color:#047857 !important; }
+
+    /* Easy-read: Verdana ships on iPadOS and tests well in the research.
+       Spacing values follow the BDA style guide.                          */
+    html[data-read="easy"] body,
+    html[data-read="easy"] body * { font-family: Verdana, Geneva, sans-serif !important; }
+    html[data-read="easy"] p,
+    html[data-read="easy"] li,
+    html[data-read="easy"] h1,
+    html[data-read="easy"] h2,
+    html[data-read="easy"] h3 { letter-spacing: .06em; word-spacing: .16em; }
+    html[data-read="easy"] p, html[data-read="easy"] li { line-height: 1.9 !important; }
+
+    p, li { text-align: left; }
+    .hero { width:100%; border-radius:14px; border:1px solid #DDD4C0; display:block; }
   </style>
   <style id="a11y">
     /* Root scale: everything in Tailwind is rem-based, so this lifts the whole
@@ -48,118 +71,120 @@
     a.readable:active, a.card-link:active { border-color: #34d399 !important; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen p-6 md:p-12">
+<body class="bg-[#F6F1E6] text-[#1F2933] font-sans min-h-screen p-6 md:p-12">
   <div class="max-w-5xl mx-auto space-y-8">
 
     <!-- Header -->
-    <header class="border-b border-slate-800 pb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <header class="border-b border-[#DDD4C0] pb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
-        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-emerald-400">
-          HACK-LAB<span class="text-slate-500">.SPACE</span>
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-[#047857]">
+          HACK-LAB<span class="text-[#5E6B75]">.SPACE</span>
         </h1>
-        <p class="text-slate-300 text-base mt-1" data-i18n="tagline"></p>
+        <p class="text-[#33414C] text-base mt-1" data-i18n="tagline"></p>
       </div>
 
       <div class="flex flex-col items-start md:items-end gap-3">
         <div class="flex gap-1" role="group" aria-label="Language">
-          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">EN</button>
-          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">DE</button>
-          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-slate-700 text-slate-400 hover:text-slate-100 transition">IT</button>
+          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">EN</button>
+          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">DE</button>
+          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">IT</button>
         </div>
         <div class="flex gap-3">
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" data-i18n="statusVienna"></span>
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" data-i18n="statusNairobi"></span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#047857]/12 text-[#047857] border border-[#047857]/40" data-i18n="statusVienna"></span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#0E7490]/12 text-[#0E7490] border border-[#0E7490]/40" data-i18n="statusNairobi"></span>
         </div>
       </div>
     </header>
 
     <!-- Read-aloud controls -->
     <div class="flex flex-wrap items-center gap-2">
-      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/20 transition" data-i18n="readAloud"></button>
-      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-i18n="readStop"></button>
-      <label class="flex items-center gap-2 text-xs text-slate-400 ml-1 cursor-pointer">
-        <input id="readSlow" type="checkbox" class="accent-emerald-400">
+      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#047857]/12 text-[#047857] border border-[#047857]/50 hover:bg-[#047857]/20 transition" data-i18n="readAloud"></button>
+      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC] hover:bg-[#E3DAC7] transition" data-i18n="readStop"></button>
+      <label class="flex items-center gap-2 text-xs text-[#46545F] ml-1 cursor-pointer">
+        <input id="readSlow" type="checkbox" class="accent-[#047857]">
         <span data-i18n="readSlow"></span>
       </label>
-      <div class="flex items-center gap-1 ml-auto" role="group" aria-label="Text size">
-        <button class="size-btn px-3 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="m">A</button>
-        <button class="size-btn px-3 rounded-lg text-sm font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="l">A+</button>
-        <button class="size-btn px-3 rounded-lg text-base font-bold bg-slate-800 text-slate-300 border border-slate-700" data-size="xl">A++</button>
+            <button id="easyRead" class="px-4 rounded-lg text-sm font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-i18n="easyRead"></button>
+<div class="flex items-center gap-1 ml-auto" role="group" aria-label="Text size">
+        <button class="size-btn px-3 rounded-lg text-xs font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="m">A</button>
+        <button class="size-btn px-3 rounded-lg text-sm font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="l">A+</button>
+        <button class="size-btn px-3 rounded-lg text-base font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="xl">A++</button>
       </div>
     </div>
 
     <!-- Hardware matrix -->
     <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwRobotics"></div>
-        <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Prime + Exp</div>
+      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
+        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwRobotics"></div>
+        <div class="text-lg font-bold text-[#1F2933] mt-1">SPIKE Prime + Exp</div>
       </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwFab"></div>
-        <div class="text-lg font-bold text-slate-200 mt-1">Bambu 3D Lab</div>
+      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
+        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwFab"></div>
+        <div class="text-lg font-bold text-[#1F2933] mt-1">Bambu 3D Lab</div>
       </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwAI"></div>
-        <div class="text-lg font-bold text-slate-200 mt-1">iPad + Browser ML</div>
+      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
+        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwAI"></div>
+        <div class="text-lg font-bold text-[#1F2933] mt-1">iPad + Browser ML</div>
       </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwSoftware"></div>
-        <div class="text-lg font-bold text-slate-200 mt-1" data-i18n="hwSoftwareVal"></div>
+      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
+        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwSoftware"></div>
+        <div class="text-lg font-bold text-[#1F2933] mt-1" data-i18n="hwSoftwareVal"></div>
       </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-center">
-        <div class="text-sm text-slate-400 uppercase font-semibold" data-i18n="hwDrawing"></div>
-        <div class="text-lg font-bold text-slate-200 mt-1">SPIKE Pen Plotter</div>
+      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
+        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwDrawing"></div>
+        <div class="text-lg font-bold text-[#1F2933] mt-1">SPIKE Pen Plotter</div>
       </div>
     </section>
 
     <!-- Missions -->
     <main class="space-y-6">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-emerald-400 pl-3" data-i18n="missionsHead"></h2>
+      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#047857] pl-3" data-i18n="missionsHead"></h2>
 
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Mission 00 -->
-        <a href="./plotter.html" class="readable relative block bg-slate-900 border border-amber-800/40 rounded-2xl p-6 hover:border-amber-600/60 transition md:col-span-2">
+        <a href="./plotter.html" class="readable relative block bg-[#FFFDF7] border border-[#B45309]/45 rounded-2xl p-6 hover:border-[#B45309] transition md:col-span-2">
           <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-amber-950 text-amber-400 px-2 py-1 rounded border border-amber-800/50" data-i18n="m0Badge"></span>
-            <span class="text-xs text-slate-500 text-right" data-i18n="m0Target"></span>
+            <span class="text-xs font-mono bg-[#B45309]/12 text-[#B45309] px-2 py-1 rounded border border-[#B45309]/40" data-i18n="m0Badge"></span>
+            <span class="text-xs text-[#5E6B75] text-right" data-i18n="m0Target"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m0Title"></h3>
-          <p class="text-slate-300 text-base mb-4" data-i18n="m0Body"></p>
-          <p class="text-slate-300 text-base mb-4" data-i18n="m0Note"></p>
+          <img src="./plotter-hero.svg" alt="" class="hero mb-4">
+          <h3 class="text-lg font-bold text-[#1F2933] mb-2" data-i18n="m0Title"></h3>
+          <p class="text-[#33414C] text-base mb-4" data-i18n="m0Body"></p>
+          <p class="text-[#33414C] text-base mb-4" data-i18n="m0Note"></p>
           <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">SPIKE</span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tag3d"></span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagPens"></span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagLoop"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded">SPIKE</span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tag3d"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagPens"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagLoop"></span>
           </div>
-          <div class="mt-4 text-xs font-mono text-amber-400" data-i18n="m0Open"></div>
+          <div class="mt-4 text-xs font-mono text-[#B45309]" data-i18n="m0Open"></div>
         </a>
 
         <!-- Mission 01 -->
-        <div class="readable relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6 hover:border-[#B9AC90] transition">
           <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-2 py-1 rounded border border-emerald-800/50">MISSION 01</span>
-            <span class="text-xs text-slate-500 text-right" data-i18n="m1Target"></span>
+            <span class="text-xs font-mono bg-[#047857]/12 text-[#047857] px-2 py-1 rounded border border-[#047857]/40">MISSION 01</span>
+            <span class="text-xs text-[#5E6B75] text-right" data-i18n="m1Target"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m1Title"></h3>
-          <p class="text-slate-300 text-base mb-4" data-i18n="m1Body"></p>
+          <h3 class="text-lg font-bold text-[#1F2933] mb-2" data-i18n="m1Title"></h3>
+          <p class="text-[#33414C] text-base mb-4" data-i18n="m1Body"></p>
           <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tag3d"></span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded">Scratch / Python</span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tag3d"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded">Scratch / Python</span>
           </div>
         </div>
 
         <!-- Mission 02 -->
-        <div class="readable relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition">
+        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6 hover:border-[#B9AC90] transition">
           <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-2 py-1 rounded border border-cyan-800/50">MISSION 02</span>
-            <span class="text-xs text-slate-500 text-right" data-i18n="m2Target"></span>
+            <span class="text-xs font-mono bg-[#0E7490]/12 text-[#0E7490] px-2 py-1 rounded border border-[#0E7490]/40">MISSION 02</span>
+            <span class="text-xs text-[#5E6B75] text-right" data-i18n="m2Target"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2" data-i18n="m2Title"></h3>
-          <p class="text-slate-300 text-base mb-4" data-i18n="m2Body"></p>
+          <h3 class="text-lg font-bold text-[#1F2933] mb-2" data-i18n="m2Title"></h3>
+          <p class="text-[#33414C] text-base mb-4" data-i18n="m2Body"></p>
           <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagIpad"></span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagAI"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagIpad"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagAI"></span>
           </div>
         </div>
       </div>
@@ -167,27 +192,27 @@
 
     <!-- Training -->
     <section class="space-y-6">
-      <h2 class="text-slate-300 tracking-wide uppercase text-sm font-bold border-l-2 border-violet-400 pl-3" data-i18n="trainingHead"></h2>
+      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#6D28D9] pl-3" data-i18n="trainingHead"></h2>
 
       <div class="grid md:grid-cols-2 gap-6">
         <a href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener"
-           class="readable relative group block bg-slate-900 border border-violet-800/40 rounded-2xl p-6 hover:border-violet-600 transition">
+           class="readable relative group block bg-[#FFFDF7] border border-[#6D28D9]/45 rounded-2xl p-6 hover:border-[#6D28D9] transition">
           <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-violet-950 text-violet-300 px-2 py-1 rounded border border-violet-800/50" data-i18n="courseBadge"></span>
-            <span class="text-xs text-slate-500 group-hover:text-violet-300 transition" data-i18n="courseOpen"></span>
+            <span class="text-xs font-mono bg-[#6D28D9]/12 text-[#6D28D9] px-2 py-1 rounded border border-[#6D28D9]/40" data-i18n="courseBadge"></span>
+            <span class="text-xs text-[#5E6B75] group-hover:text-[#6D28D9] transition" data-i18n="courseOpen"></span>
           </div>
-          <h3 class="text-lg font-bold text-slate-100 mb-2">KI-Camp</h3>
-          <p class="text-slate-300 text-base mb-4" data-i18n="courseBody"></p>
+          <h3 class="text-lg font-bold text-[#1F2933] mb-2">KI-Camp</h3>
+          <p class="text-[#33414C] text-base mb-4" data-i18n="courseBody"></p>
           <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagTri"></span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagInstall"></span>
-            <span class="text-xs bg-slate-800 text-slate-300 px-2 py-1 rounded" data-i18n="tagNoHw"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagTri"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagInstall"></span>
+            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagNoHw"></span>
           </div>
         </a>
       </div>
     </section>
 
-    <footer class="border-t border-slate-900 pt-6 text-center text-slate-600 text-xs font-mono" data-i18n="footer"></footer>
+    <footer class="border-t border-[#DDD4C0] pt-6 text-center text-[#5E6B75] text-xs font-mono" data-i18n="footer"></footer>
   </div>
 
 <script>
@@ -195,6 +220,7 @@ const I18N = {
   en: {
     "readAloud": "\u25B6 Read aloud", "readStop": "\u25A0 Stop", "readSlow": "Slower",
     "m0Open": "Open project \u2197",
+    "easyRead": "Easy read",
     tagline: "Async R&D Lab \u2022 Vienna Station \u2194 Nairobi Field Team",
     statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotics", hwFab: "Fabrication", hwAI: "AI / Vision",
@@ -217,6 +243,7 @@ const I18N = {
   de: {
     "readAloud": "\u25B6 Vorlesen", "readStop": "\u25A0 Stopp", "readSlow": "Langsamer",
     "m0Open": "Projekt \u00F6ffnen \u2197",
+    "easyRead": "Leichter lesen",
     tagline: "Asynchrones F&E-Labor \u2022 Station Wien \u2194 Feldteam Nairobi",
     statusVienna: "\u25CF Wien: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotik", hwFab: "Fertigung", hwAI: "KI / Vision",
@@ -239,6 +266,7 @@ const I18N = {
   it: {
     "readAloud": "\u25B6 Leggi ad alta voce", "readStop": "\u25A0 Stop", "readSlow": "Pi\u00F9 lento",
     "m0Open": "Apri il progetto \u2197",
+    "easyRead": "Lettura facile",
     tagline: "Laboratorio R&S asincrono \u2022 Stazione Vienna \u2194 Squadra sul campo Nairobi",
     statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
     hwRobotics: "Robotica", hwFab: "Fabbricazione", hwAI: "IA / Visione",
@@ -261,8 +289,8 @@ const I18N = {
 };
 
 (function () {
-  var ON  = ["bg-slate-800", "text-emerald-400", "border-emerald-500/40"];
-  var OFF = ["text-slate-400", "border-slate-700"];
+  var ON  = ["bg-[#EDE6D6]", "text-[#047857]", "border-[#047857]"];
+  var OFF = ["text-[#46545F]", "border-[#CFC4AC]"];
 
   function apply(lang) {
     var d = I18N[lang] || I18N.en;
@@ -457,10 +485,10 @@ const I18N = {
     document.documentElement.setAttribute("data-size", s);
     document.querySelectorAll(".size-btn").forEach(function (b) {
       var a = b.getAttribute("data-size") === s;
-      b.classList.toggle("border-emerald-500", a);
-      b.classList.toggle("text-emerald-400", a);
-      b.classList.toggle("border-slate-700", !a);
-      b.classList.toggle("text-slate-300", !a);
+      b.classList.toggle("border-[#047857]", a);
+      b.classList.toggle("text-[#047857]", a);
+      b.classList.toggle("border-[#CFC4AC]", !a);
+      b.classList.toggle("text-[#33414C]", !a);
     });
     try { localStorage.setItem("hl-size", s); } catch (e) {}
   }
@@ -469,6 +497,27 @@ const I18N = {
   });
   var s = null; try { s = localStorage.getItem("hl-size"); } catch (e) {}
   set(s || "m");
+})();
+</script>
+
+<script>
+/* Easy-read toggle: Verdana plus wider letter and word spacing. */
+(function () {
+  var b = document.getElementById("easyRead");
+  if (!b) return;
+  function set(on) {
+    document.documentElement.setAttribute("data-read", on ? "easy" : "normal");
+    b.classList.toggle("border-[#047857]", on);
+    b.classList.toggle("text-[#047857]", on);
+    b.classList.toggle("border-[#CFC4AC]", !on);
+    b.classList.toggle("text-[#33414C]", !on);
+    try { localStorage.setItem("hl-read", on ? "easy" : "normal"); } catch (e) {}
+  }
+  b.addEventListener("click", function () {
+    set(document.documentElement.getAttribute("data-read") !== "easy");
+  });
+  var s = null; try { s = localStorage.getItem("hl-read"); } catch (e) {}
+  set(s === "easy");
 })();
 </script>
 </body>
