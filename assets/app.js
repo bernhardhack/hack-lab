@@ -3,9 +3,9 @@
 
 var I18N = {
 en:{
-  langLabel:"Language", sizeLabel:"Text size", readAloud:"\u25B6 Read this page", readingOn:"\u25A0 Stop", prefs:"Language and reading", readingLabel:"Reading",
+  langLabel:"Language", sizeLabel:"Text size", readAloud:"\u25B6 Read this page", readingOn:"\u23F8 Pause", prefs:"\u2699 Text size", readingLabel:"Reading",
   readStop:"\u25A0 Stop", readSlow:"Slower", easyRead:"Easy read",
-  speakLabel:"Read this section aloud", stopLabel:"Stop reading",
+  speakLabel:"Read this section aloud", stopLabel:"Pause reading",
   tagline:"One lab. Two rooms. Same build.",
   taglineSub:"Everything we make gets made twice \u2014 once in Nairobi, once in Vienna \u2014 so the same thing ends up on both shelves.",
   stVienna:"Vienna \u00b7 ground support", stNairobi:"Nairobi \u00b7 base",
@@ -36,9 +36,9 @@ en:{
   footer:"hack-lab.space \u2014 one lab, two rooms"
 },
 de:{
-  langLabel:"Sprache", sizeLabel:"Textgr\u00f6\u00dfe", readAloud:"\u25B6 Diese Seite vorlesen", readingOn:"\u25A0 Stopp", prefs:"Sprache und Lesen", readingLabel:"Lesen",
+  langLabel:"Sprache", sizeLabel:"Textgr\u00f6\u00dfe", readAloud:"\u25B6 Diese Seite vorlesen", readingOn:"\u23F8 Pause", prefs:"\u2699 Textgr\u00f6\u00dfe", readingLabel:"Lesen",
   readStop:"\u25A0 Stopp", readSlow:"Langsamer", easyRead:"Leichter lesen",
-  speakLabel:"Diesen Abschnitt vorlesen", stopLabel:"Vorlesen stoppen",
+  speakLabel:"Diesen Abschnitt vorlesen", stopLabel:"Vorlesen pausieren",
   tagline:"Ein Labor. Zwei Zimmer. Derselbe Bau.",
   taglineSub:"Alles, was wir machen, wird zweimal gebaut \u2014 einmal in Nairobi, einmal in Wien \u2014 damit dasselbe Ding in beiden Regalen steht.",
   stVienna:"Wien \u00b7 Ground Support", stNairobi:"Nairobi \u00b7 Basis",
@@ -69,9 +69,9 @@ de:{
   footer:"hack-lab.space \u2014 ein Labor, zwei Zimmer"
 },
 it:{
-  langLabel:"Lingua", sizeLabel:"Dimensione del testo", readAloud:"\u25B6 Leggi questa pagina", readingOn:"\u25A0 Stop", prefs:"Lingua e lettura", readingLabel:"Lettura",
+  langLabel:"Lingua", sizeLabel:"Dimensione del testo", readAloud:"\u25B6 Leggi questa pagina", readingOn:"\u23F8 Pausa", prefs:"\u2699 Dimensione testo", readingLabel:"Lettura",
   readStop:"\u25A0 Stop", readSlow:"Pi\u00f9 lento", easyRead:"Lettura facile",
-  speakLabel:"Leggi questa sezione ad alta voce", stopLabel:"Ferma la lettura",
+  speakLabel:"Leggi questa sezione ad alta voce", stopLabel:"Metti in pausa la lettura",
   tagline:"Un laboratorio. Due stanze. La stessa costruzione.",
   taglineSub:"Tutto quello che facciamo viene costruito due volte \u2014 una a Nairobi e una a Vienna \u2014 cos\u00ec la stessa cosa finisce su tutti e due gli scaffali.",
   stVienna:"Vienna \u00b7 ground support", stNairobi:"Nairobi \u00b7 base",
@@ -217,8 +217,8 @@ window.HL = (function () {
         done && done();
       };
       u.onerror = u.onend;
-      if (btn) { btn.classList.add("playing"); btn.textContent = "\u25A0";
-                 btn.setAttribute("aria-label", dict().stopLabel || "Stop"); }
+      if (btn) { btn.classList.add("playing"); btn.textContent = "\u23F8";
+                 btn.setAttribute("aria-label", dict().stopLabel || "Pause"); }
       el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
       synth.speak(u);
     }
@@ -247,12 +247,11 @@ window.HL = (function () {
       main.removeAttribute("data-i18n");
     }
     main.addEventListener("click", function () {
-      var running = main.getAttribute("aria-pressed") === "true";
-      stop(); paint(false);
-      if (!running) {
-        queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable"));
-        qi = 0; paint(true); run();
-      }
+      if (synth.speaking && !synth.paused) { synth.pause(); paint(false); return; }
+      if (synth.paused) { synth.resume(); paint(true); return; }
+      stop();
+      queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable"));
+      qi = 0; paint(true); run();
     });
     var stopBtn = document.getElementById("readStopBtn");
     if (stopBtn) stopBtn.addEventListener("click", function () { stop(); paint(false); });
