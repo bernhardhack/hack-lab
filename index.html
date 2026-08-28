@@ -1,524 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-size="m" data-read="normal">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HACK-LAB.SPACE // Distributed Mission Control</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .tts-word { border-radius: 3px; }
-    .tts-word.on { background: #34d399; color: #05221a; }
-    .readable.tts-active { outline: 2px solid #34d399; outline-offset: 4px; }
-    .speak-btn {
-      position: absolute; top: 10px; right: 10px;
-      width: 30px; height: 30px; border-radius: 8px;
-      background: #0f172a; border: 1px solid #334155; color: #94a3b8;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; line-height: 1; cursor: pointer; z-index: 5;
-    }
-    .speak-btn:hover { color: #34d399; border-color: #34d399; }
-    .speak-btn.playing { color: #34d399; border-color: #34d399; }
-
-    /* --- Cream theme + reading aids --------------------------------------
-       Background is cream, not white: the British Dyslexia Association
-       advises against white, which can appear too dazzling.               */
-    body { background: #F6F1E6; }
-    .tts-word.on { background: #FDE68A !important; color: #1F2933 !important; }
-    .readable.tts-active { outline-color: #047857 !important; }
-    .speak-btn { background:#FFFDF7 !important; border-color:#CFC4AC !important; color:#46545F !important; }
-    .speak-btn:hover, .speak-btn.playing { color:#047857 !important; border-color:#047857 !important; }
-
-    /* Easy-read: Verdana ships on iPadOS and tests well in the research.
-       Spacing values follow the BDA style guide.                          */
-    html[data-read="easy"] body,
-    html[data-read="easy"] body * { font-family: Verdana, Geneva, sans-serif !important; }
-    html[data-read="easy"] p,
-    html[data-read="easy"] li,
-    html[data-read="easy"] h1,
-    html[data-read="easy"] h2,
-    html[data-read="easy"] h3 { letter-spacing: .06em; word-spacing: .16em; }
-    html[data-read="easy"] p, html[data-read="easy"] li { line-height: 1.9 !important; }
-
-    p, li { text-align: left; }
-    .hero { width:100%; border-radius:14px; border:1px solid #DDD4C0; display:block; }
-  </style>
-  <style id="a11y">
-    /* Root scale: everything in Tailwind is rem-based, so this lifts the whole
-       page at once. Children can override it with the A / A+ / A++ control. */
-    html { font-size: 18px; -webkit-text-size-adjust: 100%; }
-    html[data-size="l"]  { font-size: 20.5px; }
-    html[data-size="xl"] { font-size: 23px; }
-
-    /* Line height and measure: long lines are the main barrier to line-tracking */
-    p, li { line-height: 1.7 !important; }
-    p, li { max-width: 68ch; }
-    h1, h2, h3 { line-height: 1.3 !important; }
-
-    /* 44px minimum touch targets (Apple HIG) */
-    .lang-btn, #readAll, #readStop, .size-btn {
-      min-height: 44px; min-width: 44px;
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    label:has(#readSlow) { min-height: 44px; }
-    #readSlow { width: 22px; height: 22px; }
-    .speak-btn {
-      width: 44px !important; height: 44px !important;
-      top: 8px !important; right: 8px !important; font-size: 17px !important;
-    }
-    .readable { padding-top: 3.5rem !important; }
-
-    /* Links that are cards need a touch affordance, not a hover one */
-    a.readable:active, a.card-link:active { border-color: #34d399 !important; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HACK-LAB.SPACE</title>
+<link rel="stylesheet" href="./assets/app.css">
 </head>
-<body class="bg-[#F6F1E6] text-[#1F2933] font-sans min-h-screen p-6 md:p-12">
-  <div class="max-w-5xl mx-auto space-y-8">
+<body>
+<div class="wrap stack">
 
-    <!-- Header -->
-    <header class="border-b border-[#DDD4C0] pb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-      <div>
-        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-[#047857]">
-          HACK-LAB<span class="text-[#5E6B75]">.SPACE</span>
-        </h1>
-        <p class="readable-part text-[#33414C] text-base mt-1" data-i18n="tagline"></p>
+  <header class="masthead">
+    <div class="row" style="justify-content:space-between;align-items:flex-start">
+      <div class="readable-part">
+        <div class="wordmark">HACK-LAB<span>.SPACE</span></div>
+        <h1 style="font-size:1.25rem;margin-top:.6rem" data-i18n="tagline"></h1>
+        <p class="lede" style="margin-top:.4rem" data-i18n="taglineSub"></p>
       </div>
-
-      <div class="flex flex-col items-start md:items-end gap-3">
-        <div class="flex gap-1" role="group" aria-label="Language">
-          <button data-lang="en" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">EN</button>
-          <button data-lang="de" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">DE</button>
-          <button data-lang="it" class="lang-btn px-2.5 py-1 rounded text-xs font-bold border border-[#CFC4AC] text-[#46545F] hover:text-[#1F2933] transition">IT</button>
-        </div>
-        <div class="flex gap-3">
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#047857]/12 text-[#047857] border border-[#047857]/40" data-i18n="statusVienna"></span>
-          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#0E7490]/12 text-[#0E7490] border border-[#0E7490]/40" data-i18n="statusNairobi"></span>
-        </div>
-      </div>
-    </header>
-
-    <!-- Read-aloud controls -->
-    <div class="flex flex-wrap items-center gap-2">
-      <button id="readAll" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#047857]/12 text-[#047857] border border-[#047857]/50 hover:bg-[#047857]/20 transition" data-i18n="readAloud"></button>
-      <button id="readStop" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC] hover:bg-[#E3DAC7] transition" data-i18n="readStop"></button>
-      <label class="flex items-center gap-2 text-xs text-[#46545F] ml-1 cursor-pointer">
-        <input id="readSlow" type="checkbox" class="accent-[#047857]">
-        <span data-i18n="readSlow"></span>
-      </label>
-            <button id="easyRead" class="px-4 rounded-lg text-sm font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-i18n="easyRead"></button>
-<div class="flex items-center gap-1 ml-auto" role="group" aria-label="Text size">
-        <button class="size-btn px-3 rounded-lg text-xs font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="m">A</button>
-        <button class="size-btn px-3 rounded-lg text-sm font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="l">A+</button>
-        <button class="size-btn px-3 rounded-lg text-base font-bold bg-[#EDE6D6] text-[#33414C] border border-[#CFC4AC]" data-size="xl">A++</button>
+      <div class="row" style="gap:.4rem">
+        <span class="station" data-i18n="stVienna"></span>
+        <span class="station" data-i18n="stNairobi"></span>
       </div>
     </div>
+  </header>
 
-    <!-- Hardware matrix -->
-    <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
-        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwRobotics"></div>
-        <div class="text-lg font-bold text-[#1F2933] mt-1">SPIKE Prime + Exp</div>
-      </div>
-      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
-        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwFab"></div>
-        <div class="text-lg font-bold text-[#1F2933] mt-1">Bambu 3D Lab</div>
-      </div>
-      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
-        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwAI"></div>
-        <div class="text-lg font-bold text-[#1F2933] mt-1">iPad + Browser ML</div>
-      </div>
-      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
-        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwSoftware"></div>
-        <div class="text-lg font-bold text-[#1F2933] mt-1" data-i18n="hwSoftwareVal"></div>
-      </div>
-      <div class="bg-[#FFFDF7] border border-[#DDD4C0] rounded-xl p-4 text-center">
-        <div class="text-sm text-[#46545F] font-semibold" data-i18n="hwDrawing"></div>
-        <div class="text-lg font-bold text-[#1F2933] mt-1">SPIKE Pen Plotter</div>
-      </div>
-    </section>
-
-    <!-- Missions -->
-    <main class="space-y-6">
-      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#047857] pl-3" data-i18n="missionsHead"></h2>
-
-      <div class="grid md:grid-cols-2 gap-6">
-        <!-- Mission 00 -->
-        <a href="./plotter.html" class="readable relative block bg-[#FFFDF7] border border-[#B45309]/45 rounded-2xl p-6 hover:border-[#B45309] transition md:col-span-2">
-          <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-[#B45309]/12 text-[#B45309] px-2 py-1 rounded border border-[#B45309]/40" data-i18n="m0Badge"></span>
-            <span class="text-xs text-[#5E6B75] text-right" data-i18n="m0Target"></span>
-          </div>
-          <img src="./plotter-hero.svg" alt="" class="hero mb-4">
-          <h3 class="text-lg font-bold text-[#1F2933] mb-2" data-i18n="m0Title"></h3>
-          <p class="text-[#33414C] text-base mb-4" data-i18n="m0Body"></p>
-          <p class="text-[#33414C] text-base mb-4" data-i18n="m0Note"></p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded">SPIKE</span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tag3d"></span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagPens"></span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagLoop"></span>
-          </div>
-          <div class="mt-4 text-xs font-mono text-[#B45309]" data-i18n="m0Open"></div>
-        </a>
-
-        <!-- Mission 01 -->
-        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6 hover:border-[#B9AC90] transition">
-          <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-[#047857]/12 text-[#047857] px-2 py-1 rounded border border-[#047857]/40">MISSION 01</span>
-            <span class="text-xs text-[#5E6B75] text-right" data-i18n="m1Target"></span>
-          </div>
-          <h3 class="text-lg font-bold text-[#1F2933] mb-2" data-i18n="m1Title"></h3>
-          <p class="text-[#33414C] text-base mb-4" data-i18n="m1Body"></p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tag3d"></span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded">Scratch / Python</span>
-          </div>
-        </div>
-
-        <!-- Mission 02 -->
-        <div class="readable relative bg-[#FFFDF7] border border-[#DDD4C0] rounded-2xl p-6 hover:border-[#B9AC90] transition">
-          <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-[#0E7490]/12 text-[#0E7490] px-2 py-1 rounded border border-[#0E7490]/40">MISSION 02</span>
-            <span class="text-xs text-[#5E6B75] text-right" data-i18n="m2Target"></span>
-          </div>
-          <h3 class="text-lg font-bold text-[#1F2933] mb-2" data-i18n="m2Title"></h3>
-          <p class="text-[#33414C] text-base mb-4" data-i18n="m2Body"></p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagIpad"></span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagAI"></span>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    <!-- Training -->
-    <section class="space-y-6">
-      <h2 class="text-[#33414C] tracking-wide uppercase text-sm font-bold border-l-2 border-[#6D28D9] pl-3" data-i18n="trainingHead"></h2>
-
-      <div class="grid md:grid-cols-2 gap-6">
-        <a href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener"
-           class="readable relative group block bg-[#FFFDF7] border border-[#6D28D9]/45 rounded-2xl p-6 hover:border-[#6D28D9] transition">
-          <div class="flex justify-between items-start mb-4 gap-3">
-            <span class="text-xs font-mono bg-[#6D28D9]/12 text-[#6D28D9] px-2 py-1 rounded border border-[#6D28D9]/40" data-i18n="courseBadge"></span>
-            <span class="text-xs text-[#5E6B75] group-hover:text-[#6D28D9] transition" data-i18n="courseOpen"></span>
-          </div>
-          <h3 class="text-lg font-bold text-[#1F2933] mb-2">KI-Camp</h3>
-          <p class="text-[#33414C] text-base mb-4" data-i18n="courseBody"></p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagTri"></span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagInstall"></span>
-            <span class="text-xs bg-[#EDE6D6] text-[#33414C] px-2 py-1 rounded" data-i18n="tagNoHw"></span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <footer class="border-t border-[#DDD4C0] pt-6 text-center text-[#5E6B75] text-xs font-mono" data-i18n="footer"></footer>
+  <div class="row" id="ttsBar">
+    <div class="row" role="group" data-i18n-label="langLabel" style="gap:.3rem">
+      <button class="ctl lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      <button class="ctl lang-btn" data-lang="de" aria-pressed="false">DE</button>
+      <button class="ctl lang-btn" data-lang="it" aria-pressed="false">IT</button>
+    </div>
+    <button class="ctl ctl-go" id="readAll" data-i18n="readAloud"></button>
+    <button class="ctl" id="readStopBtn" data-i18n="readStop"></button>
+    <label class="ctl" style="font-weight:600;cursor:pointer">
+      <input id="readSlow" type="checkbox" style="width:22px;height:22px">
+      <span data-i18n="readSlow"></span>
+    </label>
+    <button class="ctl" id="easyRead" aria-pressed="false" data-i18n="easyRead"></button>
+    <div class="row" role="group" data-i18n-label="sizeLabel" style="gap:.3rem">
+      <button class="ctl size-btn" data-size="m" aria-pressed="false">A</button>
+      <button class="ctl size-btn" data-size="l" aria-pressed="false">A+</button>
+      <button class="ctl size-btn" data-size="xl" aria-pressed="false">A++</button>
+    </div>
   </div>
 
-<script>
-const I18N = {
-  en: {
-    "readAloud": "\u25B6 Read aloud", "readStop": "\u25A0 Stop", "readSlow": "Slower",
-    "m0Open": "Open project \u2197",
-    "easyRead": "Easy read",
-    tagline: "Async R&D Lab \u2022 Vienna Station \u2194 Nairobi Field Team",
-    statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
-    hwRobotics: "Robotics", hwFab: "Fabrication", hwAI: "AI / Vision",
-    hwSoftware: "Software", hwSoftwareVal: "Python & Games", hwDrawing: "Drawing",
-    missionsHead: "Active Sprints & Missions",
-    m0Badge: "MISSION 00 \u00B7 FIRST BUILD", m0Target: "Both crew required",
-    m0Title: "Build the Plotter",
-    m0Body: "A SPIKE gantry that holds a pen and draws what it is told. Two axes, a belt, and a pen-lift that has to be designed, printed, tested and almost certainly reprinted. Chief Engineer owns the mechanism. Chief Mission Designer owns what it draws and what counts as good output. Neither of you can finish this one alone.",
-    m0Note: "Expect 1\u20132 mm of wobble. That is what a LEGO gantry does, and it is fine for maps, quest cards and zines. Log the drift instead of fighting it.",
-    m1Target: "Target: Emma's Birthday", m1Title: "Hybrid Physical Game Controller",
-    m1Body: "Design a custom 3D-printed housing holding SPIKE sensors to operate as a steering controller for Emma's software game engine.",
-    m2Target: "Target: End of September", m2Title: "Teach the Machine, Then Break It",
-    m2Body: "Train an image classifier in the browser on something from the game. Then collect a second set of photos in different light and watch it fall apart. Every successful way of fooling it goes in the log.",
-    trainingHead: "Training", courseBadge: "AI COURSE", courseOpen: "Open \u2197",
-    courseBody: "The AI literacy course. Runs in the browser on any iPad, installs to the home screen, and comes in three languages.",
-    tag3d: "3D Print", tagPens: "Pens", tagLoop: "Full loop", tagIpad: "iPad only",
-    tagAI: "AI Literacy", tagTri: "Trilingual", tagInstall: "Installable", tagNoHw: "No hardware needed",
-    footer: "HACK-LAB.SPACE \u2022 BUILT FOR CO-CREATION ACROSS DISTANCE"
-  },
-  de: {
-    "readAloud": "\u25B6 Vorlesen", "readStop": "\u25A0 Stopp", "readSlow": "Langsamer",
-    "m0Open": "Projekt \u00F6ffnen \u2197",
-    "easyRead": "Leichter lesen",
-    tagline: "Asynchrones F&E-Labor \u2022 Station Wien \u2194 Feldteam Nairobi",
-    statusVienna: "\u25CF Wien: Online", statusNairobi: "\u25CF Nairobi: Online",
-    hwRobotics: "Robotik", hwFab: "Fertigung", hwAI: "KI / Vision",
-    hwSoftware: "Software", hwSoftwareVal: "Python & Spiele", hwDrawing: "Zeichnen",
-    missionsHead: "Aktive Sprints & Missionen",
-    m0Badge: "MISSION 00 \u00B7 ERSTER BAU", m0Target: "Beide Crew-Mitglieder n\u00F6tig",
-    m0Title: "Den Plotter bauen",
-    m0Body: "Ein SPIKE-Portal, das einen Stift h\u00E4lt und zeichnet, was man ihm sagt. Zwei Achsen, ein Riemen und eine Stifthebung, die entworfen, gedruckt, getestet und ziemlich sicher noch einmal gedruckt werden muss. Der Chief Engineer verantwortet die Mechanik. Die Chief Mission Designer entscheidet, was gezeichnet wird und was als gutes Ergebnis z\u00E4hlt. Alleine schafft das keiner von euch beiden.",
-    m0Note: "Rechnet mit 1\u20132 mm Ungenauigkeit. So ist ein LEGO-Portal nun mal, und f\u00FCr Karten, Questkarten und Zines reicht das v\u00F6llig. Protokolliert die Abweichung, statt sie zu bek\u00E4mpfen.",
-    m1Target: "Ziel: Emmas Geburtstag", m1Title: "Hybrider physischer Game-Controller",
-    m1Body: "Ein eigenes 3D-gedrucktes Geh\u00E4use mit SPIKE-Sensoren entwerfen, das als Lenk-Controller f\u00FCr Emmas Spiel-Engine dient.",
-    m2Target: "Ziel: Ende September", m2Title: "Bring der Maschine etwas bei \u2013 und brich es",
-    m2Body: "Trainiert im Browser einen Bildklassifikator auf etwas aus dem Spiel. Sammelt dann einen zweiten Satz Fotos bei anderem Licht und schaut zu, wie er auseinanderf\u00E4llt. Jede erfolgreiche T\u00E4uschung kommt ins Logbuch.",
-    trainingHead: "Training", courseBadge: "KI-KURS", courseOpen: "\u00D6ffnen \u2197",
-    courseBody: "Der KI-Kurs. L\u00E4uft im Browser auf jedem iPad, l\u00E4sst sich auf den Homescreen legen und gibt es in drei Sprachen.",
-    tag3d: "3D-Druck", tagPens: "Stifte", tagLoop: "Ganze Schleife", tagIpad: "Nur iPad",
-    tagAI: "KI-Kompetenz", tagTri: "Dreisprachig", tagInstall: "Installierbar", tagNoHw: "Keine Hardware n\u00F6tig",
-    footer: "HACK-LAB.SPACE \u2022 GEBAUT F\u00DCR GEMEINSAMES BAUEN \u00DCBER DISTANZ"
-  },
-  it: {
-    "readAloud": "\u25B6 Leggi ad alta voce", "readStop": "\u25A0 Stop", "readSlow": "Pi\u00F9 lento",
-    "m0Open": "Apri il progetto \u2197",
-    "easyRead": "Lettura facile",
-    tagline: "Laboratorio R&S asincrono \u2022 Stazione Vienna \u2194 Squadra sul campo Nairobi",
-    statusVienna: "\u25CF Vienna: Online", statusNairobi: "\u25CF Nairobi: Online",
-    hwRobotics: "Robotica", hwFab: "Fabbricazione", hwAI: "IA / Visione",
-    hwSoftware: "Software", hwSoftwareVal: "Python e giochi", hwDrawing: "Disegno",
-    missionsHead: "Sprint e missioni attive",
-    m0Badge: "MISSIONE 00 \u00B7 PRIMA COSTRUZIONE", m0Target: "Servono entrambi",
-    m0Title: "Costruire il plotter",
-    m0Body: "Un portale SPIKE che tiene una penna e disegna quello che gli dici. Due assi, una cinghia e un sollevamento penna da progettare, stampare, provare e quasi sicuramente ristampare. Il Chief Engineer si occupa del meccanismo. La Chief Mission Designer decide cosa disegna e cosa conta come buon risultato. Da soli non lo finite.",
-    m0Note: "Aspettatevi 1\u20132 mm di imprecisione. Un portale LEGO fa cos\u00EC, e per mappe, carte missione e fanzine va benissimo. Registrate lo scarto invece di combatterlo.",
-    m1Target: "Obiettivo: compleanno di Emma", m1Title: "Controller di gioco fisico ibrido",
-    m1Body: "Progettare una scocca stampata in 3D con sensori SPIKE che funzioni da controller di guida per il motore di gioco di Emma.",
-    m2Target: "Obiettivo: fine settembre", m2Title: "Insegna alla macchina, poi rompila",
-    m2Body: "Allenate nel browser un classificatore di immagini su qualcosa del gioco. Poi raccogliete un secondo set di foto con luce diversa e guardatelo crollare. Ogni inganno riuscito va nel registro.",
-    trainingHead: "Formazione", courseBadge: "CORSO IA", courseOpen: "Apri \u2197",
-    courseBody: "Il corso di alfabetizzazione IA. Gira nel browser su qualsiasi iPad, si installa nella schermata home ed \u00E8 disponibile in tre lingue.",
-    tag3d: "Stampa 3D", tagPens: "Penne", tagLoop: "Ciclo completo", tagIpad: "Solo iPad",
-    tagAI: "Alfabetizzazione IA", tagTri: "Trilingue", tagInstall: "Installabile", tagNoHw: "Nessun hardware",
-    footer: "HACK-LAB.SPACE \u2022 FATTO PER CREARE INSIEME A DISTANZA"
-  }
-};
+  <!-- NOW -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="nowHead"></h2>
+    <div class="card card--now readable">
+      <div class="eyebrow eyebrow--amber" data-i18n="m0Eyebrow"></div>
+      <h3 data-i18n="m0Title"></h3>
+      <figure style="margin:1rem 0">
+        <img src="./plotter-hero.svg" class="hero"
+             alt="A LEGO gantry holding a pen above a card, drawing a spiral. An arrow marks the pen moving up and down.">
+      </figure>
+      <p data-i18n="m0Why"></p>
+      <p style="margin-top:1rem"><a href="./plotter.html" class="mono" style="color:var(--amber);font-weight:700" data-i18n="m0Open"></a></p>
+    </div>
+  </section>
 
-(function () {
-  var ON  = ["bg-[#EDE6D6]", "text-[#047857]", "border-[#047857]"];
-  var OFF = ["text-[#46545F]", "border-[#CFC4AC]"];
+  <!-- NEXT MOVE -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="nextHead"></h2>
+    <p class="muted" data-i18n="nextNote"></p>
+    <div class="grid grid-3">
+      <div class="card card-tight card--jacob readable">
+        <div class="eyebrow eyebrow--orange" data-i18n="nJacobRole"></div>
+        <h3 style="font-size:1rem" data-i18n="nJacobTitle"></h3>
+        <p class="small" style="margin-top:.5rem" data-i18n="nJacobBody"></p>
+      </div>
+      <div class="card card-tight card--emma readable">
+        <div class="eyebrow eyebrow--violet" data-i18n="nEmmaRole"></div>
+        <h3 style="font-size:1rem" data-i18n="nEmmaTitle"></h3>
+        <p class="small" style="margin-top:.5rem" data-i18n="nEmmaBody"></p>
+      </div>
+      <div class="card card-tight card--ben readable">
+        <div class="eyebrow eyebrow--green" data-i18n="nBenRole"></div>
+        <h3 style="font-size:1rem" data-i18n="nBenTitle"></h3>
+        <p class="small" style="margin-top:.5rem" data-i18n="nBenBody"></p>
+      </div>
+    </div>
+  </section>
 
-  function apply(lang) {
-    var d = I18N[lang] || I18N.en;
-    document.documentElement.lang = lang;
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var v = d[el.getAttribute("data-i18n")];
-      if (v) el.textContent = v;
-    });
-    document.querySelectorAll(".lang-btn").forEach(function (b) {
-      var active = b.getAttribute("data-lang") === lang;
-      ON.forEach(function (c) { b.classList.toggle(c, active); });
-      OFF.forEach(function (c) { b.classList.toggle(c, !active); });
-    });
-    try { localStorage.setItem("hl-lang", lang); } catch (e) {}
-  }
+  <!-- TRAINING -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--violet" data-i18n="trainingHead"></h2>
+    <a class="card card-tight readable-part" href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener">
+      <div class="row" style="justify-content:space-between">
+        <span class="eyebrow eyebrow--violet" data-i18n="courseBadge"></span>
+        <span class="muted" data-i18n="courseOpen"></span>
+      </div>
+      <h3 style="font-size:1rem">KI-Camp</h3>
+      <p class="small" style="margin-top:.4rem" data-i18n="courseBody"></p>
+    </a>
+  </section>
 
-  document.querySelectorAll(".lang-btn").forEach(function (b) {
-    b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
-  });
+  <!-- BACKLOG -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--quiet" data-i18n="laterHead"></h2>
+    <p class="muted" data-i18n="laterNote"></p>
+    <div class="grid grid-2">
+      <div class="card card-tight readable-part">
+        <div class="eyebrow" style="color:var(--ink-4)">Mission 01</div>
+        <h3 style="font-size:1rem" data-i18n="m1Title"></h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="m1Body"></p>
+      </div>
+      <div class="card card-tight readable-part">
+        <div class="eyebrow" style="color:var(--ink-4)">Mission 02</div>
+        <h3 style="font-size:1rem" data-i18n="m2Title"></h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="m2Body"></p>
+      </div>
+    </div>
+  </section>
 
-  var saved = null;
-  try { saved = localStorage.getItem("hl-lang"); } catch (e) {}
-  var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
-  apply(saved || (I18N[nav] ? nav : "en"));
-})();
-</script>
+  <!-- KIT -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--quiet" data-i18n="kitHead"></h2>
+    <ul class="row readable-part" style="list-style:none;gap:.5rem">
+      <li class="tag"><span data-i18n="kitRobotics"></span>: SPIKE Prime + Expansion</li>
+      <li class="tag"><span data-i18n="kitFab"></span>: Bambu Lab</li>
+      <li class="tag"><span data-i18n="kitDrawing"></span>: SPIKE pen plotter</li>
+      <li class="tag"><span data-i18n="kitAI"></span>: iPad + browser ML</li>
+      <li class="tag"><span data-i18n="kitSoftware"></span>: <span data-i18n="kitSoftwareVal"></span></li>
+    </ul>
+  </section>
 
-<script>
-/* ---------------- Read-aloud (Web Speech API) ---------------------------
-   Word-level highlighting needs the SpeechSynthesis `boundary` event, which
-   iOS Safari does not fire. Where it is missing we highlight the whole block
-   instead, so the audio still works everywhere.                          */
-(function () {
-  var synth = window.speechSynthesis;
-  var bar = document.querySelector("#readAll") && document.querySelector("#readAll").parentElement;
+  <footer><span data-i18n="footer"></span></footer>
+</div>
 
-  if (!synth) {
-    if (bar) bar.style.display = "none";
-    return;
-  }
-
-  var LANGMAP = { en: "en-GB", de: "de-DE", it: "it-IT" };
-  var queue = [], qi = 0, current = null, wordSpans = [], sawBoundary = false;
-
-  function docLang() { return document.documentElement.lang || "en"; }
-
-  function pickVoice(tag) {
-    var vs = synth.getVoices() || [];
-    var two = tag.slice(0, 2);
-    return vs.filter(function (v) { return v.lang && v.lang.toLowerCase().indexOf(two) === 0; })[0] || null;
-  }
-
-  function clearHighlight() {
-    if (current) current.classList.remove("tts-active");
-    wordSpans.forEach(function (s) { s.classList.remove("on"); });
-    document.querySelectorAll(".speak-btn.playing").forEach(function (b) {
-      b.classList.remove("playing"); b.textContent = "\u25B6";
-    });
-  }
-
-  function unwrap(el) {
-    el.querySelectorAll("[data-tts-src]").forEach(function (n) {
-      n.textContent = n.getAttribute("data-tts-src");
-      n.removeAttribute("data-tts-src");
-    });
-  }
-
-  /* Wrap each word of every text-bearing child so it can be highlighted. */
-  function wrapWords(el) {
-    var spans = [], offset = 0;
-    el.querySelectorAll("h2,h3,p,span,div").forEach(function (n) {
-      if (n.children.length) return;
-      var t = n.textContent;
-      if (!t || !t.trim()) return;
-      n.setAttribute("data-tts-src", t);
-      var html = "", re = /\S+\s*/g, m;
-      while ((m = re.exec(t)) !== null) {
-        var w = m[0];
-        html += '<span class="tts-word" data-s="' + (offset + m.index) + '">' +
-                w.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</span>";
-      }
-      n.innerHTML = html;
-      offset += t.length + 1;
-      Array.prototype.push.apply(spans, n.querySelectorAll(".tts-word"));
-    });
-    return spans;
-  }
-
-  function textOf(el) {
-    var out = [];
-    el.querySelectorAll("h2,h3,p,span,div").forEach(function (n) {
-      if (n.children.length) return;
-      var t = n.textContent && n.textContent.trim();
-      if (t) out.push(t);
-    });
-    return out.join(". ");
-  }
-
-  function speakBlock(el, btn, onDone) {
-    var tag = LANGMAP[docLang()] || "en-GB";
-    var text = textOf(el);
-    if (!text) { onDone && onDone(); return; }
-
-    current = el;
-    el.classList.add("tts-active");
-    wordSpans = wrapWords(el);
-    sawBoundary = false;
-
-    var u = new SpeechSynthesisUtterance(text);
-    u.lang = tag;
-    var v = pickVoice(tag); if (v) u.voice = v;
-    u.rate = document.getElementById("readSlow").checked ? 0.72 : 0.95;
-
-    u.onboundary = function (e) {
-      if (e.name && e.name !== "word") return;
-      sawBoundary = true;
-      var i = e.charIndex || 0, best = null;
-      for (var k = 0; k < wordSpans.length; k++) {
-        if (+wordSpans[k].getAttribute("data-s") <= i) best = wordSpans[k]; else break;
-      }
-      wordSpans.forEach(function (s) { s.classList.remove("on"); });
-      if (best) best.classList.add("on");
-    };
-
-    u.onend = function () {
-      unwrap(el);
-      el.classList.remove("tts-active");
-      if (btn) { btn.classList.remove("playing"); btn.textContent = "\u25B6"; }
-      onDone && onDone();
-    };
-    u.onerror = u.onend;
-
-    if (btn) { btn.classList.add("playing"); btn.textContent = "\u25A0"; }
-    el.scrollIntoView({ behavior: "smooth", block: "center" });
-    synth.speak(u);
-  }
-
-  function stopAll() {
-    queue = []; qi = 0;
-    synth.cancel();
-    if (current) unwrap(current);
-    clearHighlight();
-    current = null;
-  }
-
-  function runQueue() {
-    if (qi >= queue.length) { current = null; return; }
-    var el = queue[qi++];
-    speakBlock(el, null, runQueue);
-  }
-
-  /* Per-card buttons */
-  document.querySelectorAll(".readable").forEach(function (card) {
-    var b = document.createElement("button");
-    b.className = "speak-btn";
-    b.type = "button";
-    b.textContent = "\u25B6";
-    b.setAttribute("aria-label", "Read aloud");
-    b.addEventListener("click", function (ev) {
-      ev.preventDefault(); ev.stopPropagation();
-      var wasPlaying = b.classList.contains("playing");
-      stopAll();
-      if (!wasPlaying) speakBlock(card, b, null);
-    });
-    card.appendChild(b);
-  });
-
-  document.getElementById("readAll").addEventListener("click", function () {
-    stopAll();
-    queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable"));
-    qi = 0;
-    runQueue();
-  });
-
-  document.getElementById("readStop").addEventListener("click", stopAll);
-
-  /* Language switch or navigation must not leave audio running */
-  document.querySelectorAll(".lang-btn").forEach(function (b) {
-    b.addEventListener("click", stopAll);
-  });
-  window.addEventListener("pagehide", stopAll);
-
-  /* Safari populates voices asynchronously */
-  if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () { synth.getVoices(); };
-})();
-</script>
-
-<script>
-/* Text size control: children pick, choice persists. */
-(function () {
-  function set(s) {
-    document.documentElement.setAttribute("data-size", s);
-    document.querySelectorAll(".size-btn").forEach(function (b) {
-      var a = b.getAttribute("data-size") === s;
-      b.classList.toggle("border-[#047857]", a);
-      b.classList.toggle("text-[#047857]", a);
-      b.classList.toggle("border-[#CFC4AC]", !a);
-      b.classList.toggle("text-[#33414C]", !a);
-    });
-    try { localStorage.setItem("hl-size", s); } catch (e) {}
-  }
-  document.querySelectorAll(".size-btn").forEach(function (b) {
-    b.addEventListener("click", function () { set(b.getAttribute("data-size")); });
-  });
-  var s = null; try { s = localStorage.getItem("hl-size"); } catch (e) {}
-  set(s || "m");
-})();
-</script>
-
-<script>
-/* Easy-read toggle: Verdana plus wider letter and word spacing. */
-(function () {
-  var b = document.getElementById("easyRead");
-  if (!b) return;
-  function set(on) {
-    document.documentElement.setAttribute("data-read", on ? "easy" : "normal");
-    b.classList.toggle("border-[#047857]", on);
-    b.classList.toggle("text-[#047857]", on);
-    b.classList.toggle("border-[#CFC4AC]", !on);
-    b.classList.toggle("text-[#33414C]", !on);
-    try { localStorage.setItem("hl-read", on ? "easy" : "normal"); } catch (e) {}
-  }
-  b.addEventListener("click", function () {
-    set(document.documentElement.getAttribute("data-read") !== "easy");
-  });
-  var s = null; try { s = localStorage.getItem("hl-read"); } catch (e) {}
-  set(s === "easy");
-})();
-</script>
+<script src="./assets/app.js"></script>
+<script>HL.init();</script>
 </body>
 </html>
