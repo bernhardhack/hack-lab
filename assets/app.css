@@ -174,3 +174,14 @@ footer a{color:inherit}
   letter-spacing:.04em}
 .prefs-group>.row{gap:.3rem}
 
+
+
+/* language: set-once control, small, top right of the masthead */
+.lang-set{display:flex;gap:.25rem}
+.lang-set .ctl{min-height:40px;min-width:40px;padding:0 .55rem;font-size:.78rem}
+
+/* AI course tile: image beside the text */
+.course-row{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:flex-start}
+.course-text{flex:1 1 16rem;min-width:0}
+.course-thumb{flex:0 0 8.5rem;width:8.5rem;border-radius:10px;border:1px solid var(--line);
+  display:block;height:auto}
