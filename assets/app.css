@@ -176,9 +176,15 @@ footer a{color:inherit}
 
 
 
-/* language: set-once control, small, top right of the masthead */
-.lang-set{display:flex;gap:.25rem}
-.lang-set .ctl{min-height:40px;min-width:40px;padding:0 .55rem;font-size:.78rem}
+/* language: plain letters beside the wordmark. Padding keeps the tap area
+   at 44px even though the visible mark is small. */
+.lang-set{display:flex;align-items:center}
+.lang-set button{background:none;border:0;font-family:inherit;cursor:pointer;
+  min-height:44px;padding:0 .4rem;font-size:.72rem;font-weight:700;
+  letter-spacing:.08em;color:var(--ink-4)}
+.lang-set button:hover{color:var(--ink-2)}
+.lang-set button[aria-pressed="true"]{color:var(--green)}
+.lang-set button+button{border-left:1px solid var(--line-2)}
 
 /* AI course tile: image beside the text */
 .course-row{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:flex-start}
