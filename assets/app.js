@@ -165,7 +165,8 @@ window.HL = (function () {
     function leaves(el) {
       return Array.prototype.filter.call(
         el.querySelectorAll("h1,h2,h3,p,li,figcaption,time,span,div"),
-        function (n) { return !n.children.length && n.textContent && n.textContent.trim(); });
+        function (n) { return !n.children.length && n.textContent && n.textContent.trim() &&
+                              !n.closest("[data-noread]"); });
     }
     function unwrap(el) {
       el.querySelectorAll("[data-src]").forEach(function (n) {
