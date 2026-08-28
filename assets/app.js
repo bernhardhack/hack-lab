@@ -3,7 +3,7 @@
 
 var I18N = {
 en:{
-  langLabel:"Language", sizeLabel:"Text size", readAloud:"\u25B6 Read aloud",
+  langLabel:"Language", sizeLabel:"Text size", readAloud:"\u25B6 Read this page", readingOn:"\u25A0 Stop", prefs:"Language and reading", readingLabel:"Reading",
   readStop:"\u25A0 Stop", readSlow:"Slower", easyRead:"Easy read",
   speakLabel:"Read this section aloud", stopLabel:"Stop reading",
   tagline:"One lab. Two rooms. Same build.",
@@ -36,7 +36,7 @@ en:{
   footer:"hack-lab.space \u2014 one lab, two rooms"
 },
 de:{
-  langLabel:"Sprache", sizeLabel:"Textgr\u00f6\u00dfe", readAloud:"\u25B6 Vorlesen",
+  langLabel:"Sprache", sizeLabel:"Textgr\u00f6\u00dfe", readAloud:"\u25B6 Diese Seite vorlesen", readingOn:"\u25A0 Stopp", prefs:"Sprache und Lesen", readingLabel:"Lesen",
   readStop:"\u25A0 Stopp", readSlow:"Langsamer", easyRead:"Leichter lesen",
   speakLabel:"Diesen Abschnitt vorlesen", stopLabel:"Vorlesen stoppen",
   tagline:"Ein Labor. Zwei Zimmer. Derselbe Bau.",
@@ -69,7 +69,7 @@ de:{
   footer:"hack-lab.space \u2014 ein Labor, zwei Zimmer"
 },
 it:{
-  langLabel:"Lingua", sizeLabel:"Dimensione del testo", readAloud:"\u25B6 Leggi ad alta voce",
+  langLabel:"Lingua", sizeLabel:"Dimensione del testo", readAloud:"\u25B6 Leggi questa pagina", readingOn:"\u25A0 Stop", prefs:"Lingua e lettura", readingLabel:"Lettura",
   readStop:"\u25A0 Stop", readSlow:"Pi\u00f9 lento", easyRead:"Lettura facile",
   speakLabel:"Leggi questa sezione ad alta voce", stopLabel:"Ferma la lettura",
   tagline:"Un laboratorio. Due stanze. La stessa costruzione.",
@@ -227,7 +227,7 @@ window.HL = (function () {
       if (active) { unwrap(active); active.classList.remove("tts-active"); }
       reset(); active = null;
     }
-    function run() { if (qi >= queue.length) { active = null; return; } speak(queue[qi++], null, run); }
+    function run() { if (qi >= queue.length) { active = null; if (window.HL_paint) window.HL_paint(false); return; } speak(queue[qi++], null, run); }
 
     document.querySelectorAll(".readable").forEach(function (card) {
       var b = document.createElement("button");
@@ -240,13 +240,24 @@ window.HL = (function () {
       });
       card.appendChild(b);
     });
-    document.getElementById("readAll").addEventListener("click", function () {
-      stop();
-      queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable"));
-      qi = 0; run();
+    var main = document.getElementById("readAll");
+    function paint(on) {
+      main.textContent = on ? (dict().readingOn || "Stop") : (dict().readAloud || "Read");
+      main.setAttribute("aria-pressed", on ? "true" : "false");
+      main.removeAttribute("data-i18n");
+    }
+    main.addEventListener("click", function () {
+      var running = main.getAttribute("aria-pressed") === "true";
+      stop(); paint(false);
+      if (!running) {
+        queue = Array.prototype.slice.call(document.querySelectorAll(".readable-part, .readable"));
+        qi = 0; paint(true); run();
+      }
     });
-    document.getElementById("readStopBtn").addEventListener("click", stop);
-    document.querySelectorAll(".lang-btn").forEach(function (b) { b.addEventListener("click", stop); });
+    var stopBtn = document.getElementById("readStopBtn");
+    if (stopBtn) stopBtn.addEventListener("click", function () { stop(); paint(false); });
+    window.HL_paint = paint;
+    document.querySelectorAll(".lang-btn").forEach(function (b) { b.addEventListener("click", function(){ stop(); if (window.HL_paint) window.HL_paint(false); }); });
     window.addEventListener("pagehide", stop);
     if (synth.onvoiceschanged !== undefined) synth.onvoiceschanged = function () { synth.getVoices(); };
   }
