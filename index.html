@@ -23,24 +23,39 @@
     </div>
   </header>
 
-  <div class="row" id="ttsBar">
-    <div class="row" role="group" data-i18n-label="langLabel" style="gap:.3rem">
-      <button class="ctl lang-btn" data-lang="en" aria-pressed="false">EN</button>
-      <button class="ctl lang-btn" data-lang="de" aria-pressed="false">DE</button>
-      <button class="ctl lang-btn" data-lang="it" aria-pressed="false">IT</button>
-    </div>
-    <button class="ctl ctl-go" id="readAll" data-i18n="readAloud"></button>
-    <button class="ctl" id="readStopBtn" data-i18n="readStop"></button>
-    <label class="ctl" style="font-weight:600;cursor:pointer">
-      <input id="readSlow" type="checkbox" style="width:22px;height:22px">
-      <span data-i18n="readSlow"></span>
-    </label>
-    <button class="ctl" id="easyRead" aria-pressed="false" data-i18n="easyRead"></button>
-    <div class="row" role="group" data-i18n-label="sizeLabel" style="gap:.3rem">
-      <button class="ctl size-btn" data-size="m" aria-pressed="false">A</button>
-      <button class="ctl size-btn" data-size="l" aria-pressed="false">A+</button>
-      <button class="ctl size-btn" data-size="xl" aria-pressed="false">A++</button>
-    </div>
+  <div class="bar" id="ttsBar">
+    <button class="ctl ctl-go" id="readAll" aria-pressed="false" data-i18n="readAloud"></button>
+    <details class="prefs">
+      <summary data-i18n="prefs"></summary>
+      <div class="prefs-body">
+        <div class="prefs-group">
+          <span data-i18n="langLabel"></span>
+          <div class="row" role="group" data-i18n-label="langLabel">
+            <button class="ctl lang-btn" data-lang="en" aria-pressed="false">EN</button>
+            <button class="ctl lang-btn" data-lang="de" aria-pressed="false">DE</button>
+            <button class="ctl lang-btn" data-lang="it" aria-pressed="false">IT</button>
+          </div>
+        </div>
+        <div class="prefs-group">
+          <span data-i18n="sizeLabel"></span>
+          <div class="row" role="group" data-i18n-label="sizeLabel">
+            <button class="ctl size-btn" data-size="m" aria-pressed="false">A</button>
+            <button class="ctl size-btn" data-size="l" aria-pressed="false">A+</button>
+            <button class="ctl size-btn" data-size="xl" aria-pressed="false">A++</button>
+          </div>
+        </div>
+        <div class="prefs-group">
+          <span data-i18n="readingLabel"></span>
+          <div class="row">
+            <button class="ctl" id="easyRead" aria-pressed="false" data-i18n="easyRead"></button>
+            <label class="ctl" style="font-weight:600;cursor:pointer">
+              <input id="readSlow" type="checkbox" style="width:22px;height:22px">
+              <span data-i18n="readSlow"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </details>
   </div>
 
   <!-- NOW -->
@@ -53,11 +68,11 @@
           <div class="m0-text">
             <h3 data-i18n="m0Title"></h3>
             <p style="margin-top:.6rem" data-i18n="m0Why"></p>
-            <p style="margin-top:1.2rem"><span class="cta" data-i18n="m0Open"></span></p>
           </div>
           <img src="./plotter-hero.svg" class="hero m0-thumb"
                alt="A LEGO gantry holding a pen above a card, drawing a spiral.">
         </div>
+        <div class="cta-row"><span class="cta" data-i18n="m0Open"></span></div>
       </a>
     </div>
   </section>
