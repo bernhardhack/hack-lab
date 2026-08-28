@@ -96,9 +96,11 @@ a.card:hover{border-color:var(--ink-4)}
 .linkcard>a.card:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .linkcard>.speak-btn{z-index:5}
 
-.cta{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;
-  padding:0 1.2rem;border-radius:10px;background:var(--amber);color:#fff;
-  font-weight:700;font-size:.95rem;text-decoration:none}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:48px;padding:0 1.4rem;border-radius:10px;
+  background:var(--amber);color:#FFFDF7;font-weight:700;font-size:1rem;
+  text-decoration:none;border:2px solid var(--amber)}
+.cta-row{margin-top:1.2rem}
 .linkcard>a.card:hover .cta{background:#96450A}
 a.card:hover .cta{background:#96450A}
 
@@ -150,3 +152,23 @@ footer{border-top:1px solid var(--line);padding-top:1.5rem;text-align:center;
 footer a{color:inherit}
 .backlink{font-size:.85rem;color:var(--ink-4);text-decoration:none}
 .backlink:hover{color:var(--green)}
+
+
+/* ---- controls -------------------------------------------------------
+   One primary action stays visible. Language, size and reading options
+   live behind a native <details> so they stop eating the first screen. */
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.prefs{border:1px solid var(--line-2);border-radius:12px;background:var(--card)}
+.prefs>summary{list-style:none;min-height:44px;display:flex;align-items:center;
+  gap:.5rem;padding:0 1rem;cursor:pointer;font-weight:700;font-size:.85rem;
+  color:var(--ink-2)}
+.prefs>summary::-webkit-details-marker{display:none}
+.prefs>summary::after{content:"\25BE";font-size:.7rem;color:var(--ink-4)}
+.prefs[open]>summary::after{content:"\25B4"}
+.prefs[open]{padding-bottom:.9rem}
+.prefs-body{display:flex;flex-wrap:wrap;gap:1.2rem;padding:.2rem 1rem 0}
+.prefs-group{display:flex;flex-direction:column;gap:.35rem}
+.prefs-group>span{font-size:.75rem;font-weight:700;color:var(--ink-4);
+  letter-spacing:.04em}
+.prefs-group>.row{gap:.3rem}
+@media(min-width:768px){.prefs{min-width:22rem}}
