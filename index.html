@@ -46,15 +46,15 @@
   <!-- NOW -->
   <section class="stack-s">
     <h2 class="sec-title" data-i18n="nowHead"></h2>
-    <div class="card card--now readable">
+    <div class="card card--now card--link readable">
       <div class="eyebrow eyebrow--amber" data-i18n="m0Eyebrow"></div>
-      <h3 data-i18n="m0Title"></h3>
+      <h3><a class="stretch" href="./plotter.html" style="color:inherit;text-decoration:none" data-i18n="m0Title"></a></h3>
       <figure style="margin:1rem 0">
         <img src="./plotter-hero.svg" class="hero"
              alt="A LEGO gantry holding a pen above a card, drawing a spiral. An arrow marks the pen moving up and down.">
       </figure>
       <p data-i18n="m0Why"></p>
-      <p style="margin-top:1rem"><a href="./plotter.html" class="mono" style="color:var(--amber);font-weight:700" data-i18n="m0Open"></a></p>
+      <p style="margin-top:1.2rem"><span class="cta" aria-hidden="true" data-i18n="m0Open"></span></p>
     </div>
   </section>
 
@@ -84,13 +84,14 @@
   <!-- TRAINING -->
   <section class="stack-s">
     <h2 class="sec-title sec-title--violet" data-i18n="trainingHead"></h2>
-    <a class="card card-tight readable-part" href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener">
+    <a class="card card-tight card--link readable-part" href="https://bernhardhack.github.io/ki-camp/" target="_blank" rel="noopener">
       <div class="row" style="justify-content:space-between">
         <span class="eyebrow eyebrow--violet" data-i18n="courseBadge"></span>
         <span class="muted" data-i18n="courseOpen"></span>
       </div>
       <h3 style="font-size:1rem">KI-Camp</h3>
       <p class="small" style="margin-top:.4rem" data-i18n="courseBody"></p>
+      <p style="margin-top:.9rem"><span class="cta cta--violet" aria-hidden="true" data-i18n="courseOpen"></span></p>
     </a>
   </section>
 
@@ -99,13 +100,19 @@
     <h2 class="sec-title sec-title--quiet" data-i18n="laterHead"></h2>
     <p class="muted" data-i18n="laterNote"></p>
     <div class="grid grid-2">
-      <div class="card card-tight readable-part">
-        <div class="eyebrow" style="color:var(--ink-4)">Mission 01</div>
+      <div class="card card-tight card--soon readable-part">
+        <div class="row" style="justify-content:space-between;margin-bottom:.4rem">
+          <span class="eyebrow" style="color:var(--ink-4);margin:0">Mission 01</span>
+          <span class="badge-soon" data-i18n="soon"></span>
+        </div>
         <h3 style="font-size:1rem" data-i18n="m1Title"></h3>
         <p class="small" style="margin-top:.4rem" data-i18n="m1Body"></p>
       </div>
-      <div class="card card-tight readable-part">
-        <div class="eyebrow" style="color:var(--ink-4)">Mission 02</div>
+      <div class="card card-tight card--soon readable-part">
+        <div class="row" style="justify-content:space-between;margin-bottom:.4rem">
+          <span class="eyebrow" style="color:var(--ink-4);margin:0">Mission 02</span>
+          <span class="badge-soon" data-i18n="soon"></span>
+        </div>
         <h3 style="font-size:1rem" data-i18n="m2Title"></h3>
         <p class="small" style="margin-top:.4rem" data-i18n="m2Body"></p>
       </div>
