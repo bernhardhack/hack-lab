@@ -91,7 +91,7 @@ a.card:hover{border-color:var(--ink-4)}
 /* Link cards: the card IS the anchor. The read-aloud button lives outside
    it, in the shell, so there is never a control inside a link. */
 .linkcard{position:relative}
-.linkcard>a.card{display:block;text-decoration:none;color:inherit;padding-top:3.5rem}
+.linkcard>a.card{display:block;text-decoration:none;color:inherit}
 .linkcard>a.card:hover{border-color:var(--amber)}
 .linkcard>a.card:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .linkcard>.speak-btn{z-index:5}
@@ -100,7 +100,7 @@ a.card:hover{border-color:var(--ink-4)}
   min-height:48px;padding:0 1.4rem;border-radius:10px;
   background:var(--amber);color:#FFFDF7;font-weight:700;font-size:1rem;
   text-decoration:none;border:2px solid var(--amber)}
-.cta-row{margin-top:1.2rem}
+.cta-row{margin-top:1.5rem;clear:both}
 .linkcard>a.card:hover .cta{background:#96450A}
 a.card:hover .cta{background:#96450A}
 
@@ -124,7 +124,7 @@ a.card:hover .cta{background:#96450A}
 .flow li .n{display:block;font-size:.72rem;color:var(--ink-4);font-weight:700}
 
 /* ---- images ---- */
-.hero{width:100%;border-radius:var(--radius);border:1px solid var(--line);display:block}
+.hero{width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--line);display:block}
 figure{margin:0}
 figcaption{font-size:.85rem;color:var(--ink-4);margin-top:.5rem;max-width:68ch}
 
@@ -133,7 +133,9 @@ figcaption{font-size:.85rem;color:var(--ink-4);margin-top:.5rem;max-width:68ch}
   background:var(--card);border:1px solid var(--line-2);color:var(--ink-3);
   display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;z-index:5}
 .speak-btn:hover,.speak-btn.playing{color:var(--green);border-color:var(--green)}
-.readable:not(.linkcard){padding-top:3.5rem}
+.readable:not(.linkcard),.linkcard>a.card{position:relative}
+.readable:not(.linkcard)>*:first-child,
+.linkcard>a.card>*:first-child{padding-right:3.4rem}
 .readable.tts-active{outline:2px solid var(--green);outline-offset:4px}
 .tts-word{border-radius:3px}
 .tts-word.on{background:#FDE68A;color:var(--ink)}
@@ -160,8 +162,8 @@ footer a{color:inherit}
 .bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 .prefs{border:1px solid var(--line-2);border-radius:12px;background:var(--card)}
 .prefs>summary{list-style:none;min-height:44px;display:flex;align-items:center;
-  gap:.5rem;padding:0 1rem;cursor:pointer;font-weight:700;font-size:.85rem;
-  color:var(--ink-2)}
+  gap:.5rem;padding:0 1.1rem;cursor:pointer;font-weight:700;font-size:.85rem;
+  color:var(--ink-2);white-space:nowrap}
 .prefs>summary::-webkit-details-marker{display:none}
 .prefs>summary::after{content:"\25BE";font-size:.7rem;color:var(--ink-4)}
 .prefs[open]>summary::after{content:"\25B4"}
@@ -171,4 +173,4 @@ footer a{color:inherit}
 .prefs-group>span{font-size:.75rem;font-weight:700;color:var(--ink-4);
   letter-spacing:.04em}
 .prefs-group>.row{gap:.3rem}
-@media(min-width:768px){.prefs{min-width:22rem}}
+
