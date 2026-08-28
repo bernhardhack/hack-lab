@@ -88,17 +88,24 @@ a.card:hover{border-color:var(--ink-4)}
 /* ---- clickable cards -------------------------------------------------
    Whole card is a hit area via one stretched link. Only one interactive
    element, so no nested controls and the keyboard order stays sane.   */
-.card--link{cursor:pointer}
-.card--link .stretch::after{content:"";position:absolute;inset:0;z-index:1;
-  border-radius:var(--radius)}
-.card--link:hover{border-color:var(--amber)}
-.card--link:focus-within{outline:3px solid var(--green);outline-offset:3px}
-.card--link .speak-btn{z-index:5}
+/* Link cards: the card IS the anchor. The read-aloud button lives outside
+   it, in the shell, so there is never a control inside a link. */
+.linkcard{position:relative}
+.linkcard>a.card{display:block;text-decoration:none;color:inherit;padding-top:3.5rem}
+.linkcard>a.card:hover{border-color:var(--amber)}
+.linkcard>a.card:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.linkcard>.speak-btn{z-index:5}
 
 .cta{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;
   padding:0 1.2rem;border-radius:10px;background:var(--amber);color:#fff;
-  font-weight:700;font-size:.95rem;text-decoration:none;position:relative;z-index:2}
-.card--link:hover .cta{background:#96450A}
+  font-weight:700;font-size:.95rem;text-decoration:none}
+.linkcard>a.card:hover .cta{background:#96450A}
+a.card:hover .cta{background:#96450A}
+
+/* front-page thumbnail: the hero at full width dominated the page */
+.m0-row{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:flex-start}
+.m0-text{flex:1 1 18rem;min-width:0}
+.m0-thumb{flex:0 1 17rem;max-width:17rem;width:100%}
 .cta--violet{background:var(--violet)}
 .card--link:hover .cta--violet{background:#5B21B6}
 
@@ -124,7 +131,7 @@ figcaption{font-size:.85rem;color:var(--ink-4);margin-top:.5rem;max-width:68ch}
   background:var(--card);border:1px solid var(--line-2);color:var(--ink-3);
   display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;z-index:5}
 .speak-btn:hover,.speak-btn.playing{color:var(--green);border-color:var(--green)}
-.readable{padding-top:3.5rem}
+.readable:not(.linkcard){padding-top:3.5rem}
 .readable.tts-active{outline:2px solid var(--green);outline-offset:4px}
 .tts-word{border-radius:3px}
 .tts-word.on{background:#FDE68A;color:var(--ink)}
