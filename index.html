@@ -12,20 +12,20 @@
   <header class="masthead">
     <div class="row" style="justify-content:space-between;align-items:flex-start">
       <div class="readable-part">
-        <div class="wordmark">HACK-LAB<span>.SPACE</span></div>
+        <div class="row" style="gap:.8rem;align-items:center">
+          <div class="wordmark" data-noread>HACK-LAB<span>.SPACE</span></div>
+          <div class="lang-set" role="group" data-i18n-label="langLabel" data-noread>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+          <button class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+        </div>
+        </div>
         <h1 style="font-size:1.25rem;margin-top:.6rem" data-i18n="tagline"></h1>
         <p class="lede" style="margin-top:.4rem" data-i18n="taglineSub"></p>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.6rem">
-      <div class="lang-set" role="group" data-i18n-label="langLabel">
-        <button class="ctl lang-btn" data-lang="en" aria-pressed="false">EN</button>
-        <button class="ctl lang-btn" data-lang="de" aria-pressed="false">DE</button>
-        <button class="ctl lang-btn" data-lang="it" aria-pressed="false">IT</button>
-      </div>
-        <div class="row" style="gap:.4rem;justify-content:flex-end">
-          <span class="station" data-i18n="stVienna"></span>
-          <span class="station" data-i18n="stNairobi"></span>
-        </div>
+      <div class="row" style="gap:.4rem;justify-content:flex-end">
+        <span class="station" data-i18n="stVienna"></span>
+        <span class="station" data-i18n="stNairobi"></span>
       </div>
     </div>
   </header>
