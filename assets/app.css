@@ -84,6 +84,29 @@ a.card:hover{border-color:var(--ink-4)}
 .tag{display:inline-block;font-size:.78rem;padding:.25rem .6rem;border-radius:7px;
   background:#EDE6D6;color:var(--ink-2)}
 
+
+/* ---- clickable cards -------------------------------------------------
+   Whole card is a hit area via one stretched link. Only one interactive
+   element, so no nested controls and the keyboard order stays sane.   */
+.card--link{cursor:pointer}
+.card--link .stretch::after{content:"";position:absolute;inset:0;z-index:1;
+  border-radius:var(--radius)}
+.card--link:hover{border-color:var(--amber)}
+.card--link:focus-within{outline:3px solid var(--green);outline-offset:3px}
+.card--link .speak-btn{z-index:5}
+
+.cta{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;
+  padding:0 1.2rem;border-radius:10px;background:var(--amber);color:#fff;
+  font-weight:700;font-size:.95rem;text-decoration:none;position:relative;z-index:2}
+.card--link:hover .cta{background:#96450A}
+.cta--violet{background:var(--violet)}
+.card--link:hover .cta--violet{background:#5B21B6}
+
+/* inert cards must not look like the tappable ones */
+.card--soon{background:transparent;border-style:dashed}
+.badge-soon{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;
+  padding:.15rem .5rem;border-radius:6px;border:1px solid var(--line-2);color:var(--ink-4)}
+
 /* ---- flow ---- */
 .flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:stretch;list-style:none}
 .flow li{flex:1 1 8rem;background:var(--card);border:1px solid var(--line);
