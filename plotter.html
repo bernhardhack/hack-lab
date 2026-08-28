@@ -25,17 +25,14 @@
 
   <div class="bar" id="ttsBar">
     <button class="ctl ctl-go" id="readAll" aria-pressed="false" data-i18n="readAloud"></button>
+    <div class="row" role="group" data-i18n-label="langLabel" style="gap:.3rem">
+      <button class="ctl lang-btn" data-lang="en" aria-pressed="false">EN</button>
+      <button class="ctl lang-btn" data-lang="de" aria-pressed="false">DE</button>
+      <button class="ctl lang-btn" data-lang="it" aria-pressed="false">IT</button>
+    </div>
     <details class="prefs">
       <summary data-i18n="prefs"></summary>
       <div class="prefs-body">
-        <div class="prefs-group">
-          <span data-i18n="langLabel"></span>
-          <div class="row" role="group" data-i18n-label="langLabel">
-            <button class="ctl lang-btn" data-lang="en" aria-pressed="false">EN</button>
-            <button class="ctl lang-btn" data-lang="de" aria-pressed="false">DE</button>
-            <button class="ctl lang-btn" data-lang="it" aria-pressed="false">IT</button>
-          </div>
-        </div>
         <div class="prefs-group">
           <span data-i18n="sizeLabel"></span>
           <div class="row" role="group" data-i18n-label="sizeLabel">
