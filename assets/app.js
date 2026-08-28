@@ -3,7 +3,7 @@
 
 var I18N = {
 en:{
-  langLabel:"Language", sizeLabel:"Text size", readAloud:"\u25B6 Read this page", readingOn:"\u23F8 Pause", prefs:"\u2699 Text size", readingLabel:"Reading",
+  langLabel:"Language", sizeLabel:"Text size", easyLabel:"Letters", readAloud:"\u25B6 Listen", readingOn:"\u23F8 Pause", prefs:"\u2699 Reading help", readingLabel:"Voice",
   readStop:"\u25A0 Stop", readSlow:"Slower", easyRead:"Easy read",
   speakLabel:"Read this section aloud", stopLabel:"Pause reading",
   tagline:"One lab. Two rooms. Same build.",
@@ -36,7 +36,7 @@ en:{
   footer:"hack-lab.space \u2014 one lab, two rooms"
 },
 de:{
-  langLabel:"Sprache", sizeLabel:"Textgr\u00f6\u00dfe", readAloud:"\u25B6 Diese Seite vorlesen", readingOn:"\u23F8 Pause", prefs:"\u2699 Textgr\u00f6\u00dfe", readingLabel:"Lesen",
+  langLabel:"Sprache", sizeLabel:"Textgr\u00f6\u00dfe", easyLabel:"Schrift", readAloud:"\u25B6 Anh\u00f6ren", readingOn:"\u23F8 Pause", prefs:"\u2699 Lesehilfe", readingLabel:"Stimme",
   readStop:"\u25A0 Stopp", readSlow:"Langsamer", easyRead:"Leichter lesen",
   speakLabel:"Diesen Abschnitt vorlesen", stopLabel:"Vorlesen pausieren",
   tagline:"Ein Labor. Zwei Zimmer. Derselbe Bau.",
@@ -69,7 +69,7 @@ de:{
   footer:"hack-lab.space \u2014 ein Labor, zwei Zimmer"
 },
 it:{
-  langLabel:"Lingua", sizeLabel:"Dimensione del testo", readAloud:"\u25B6 Leggi questa pagina", readingOn:"\u23F8 Pausa", prefs:"\u2699 Dimensione testo", readingLabel:"Lettura",
+  langLabel:"Lingua", sizeLabel:"Dimensione del testo", easyLabel:"Caratteri", readAloud:"\u25B6 Ascolta", readingOn:"\u23F8 Pausa", prefs:"\u2699 Aiuto lettura", readingLabel:"Voce",
   readStop:"\u25A0 Stop", readSlow:"Pi\u00f9 lento", easyRead:"Lettura facile",
   speakLabel:"Leggi questa sezione ad alta voce", stopLabel:"Metti in pausa la lettura",
   tagline:"Un laboratorio. Due stanze. La stessa costruzione.",
