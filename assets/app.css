@@ -193,8 +193,5 @@ footer a{color:inherit}
   display:block;height:auto}
 
 
-/* backlog thumbnails: deliberately quiet, line art in the muted ink */
-.soon-row{display:flex;gap:1rem;align-items:flex-start}
-.soon-art{flex:0 0 5.5rem;width:5.5rem;color:var(--ink-4);opacity:.75}
-.soon-art svg{width:100%;height:auto;display:block}
-.soon-text{flex:1 1 auto;min-width:0}
+/* backlog cards keep their illustration but stay visually quiet */
+.card--soon .hero{opacity:.82;border-color:var(--line-2)}
