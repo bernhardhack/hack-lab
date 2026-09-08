@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-labelledby="t2 d2">
+<title id="t2">Teaching a machine to recognise a card, and fooling it</title>
+<desc id="d2">A tablet with a camera lens looks at two cards. It recognises the first one, marked with a tick, and gets the second one wrong, marked with a cross.</desc>
+<rect width="640" height="300" fill="#F6F1E6"/>
+
+<line x1="50" y1="256" x2="590" y2="256" stroke="#DDD4C0" stroke-width="2"/>
+
+<!-- tablet -->
+<rect x="60" y="66" width="196" height="172" rx="18" fill="#1F2933"/>
+<rect x="74" y="80" width="168" height="144" rx="9" fill="#FFFDF7"/>
+<rect x="60" y="66" width="196" height="18" rx="9" fill="#FFFFFF" opacity="0.12"/>
+
+<!-- lens on screen -->
+<circle cx="158" cy="152" r="42" fill="none" stroke="#0E7490" stroke-width="9"/>
+<circle cx="158" cy="152" r="15" fill="#0E7490"/>
+
+<!-- sight lines -->
+<path d="M268 138 H352" stroke="#0E7490" stroke-width="5" stroke-linecap="round" stroke-dasharray="3 13"/>
+<path d="M268 172 C310 172 316 206 352 206" fill="none" stroke="#C2410C" stroke-width="5"
+      stroke-linecap="round" stroke-dasharray="3 13"/>
+
+<!-- card it gets right -->
+<rect x="360" y="78" width="118" height="96" rx="10" fill="#FFFDF7" stroke="#DDD4C0" stroke-width="3"/>
+<path d="M383 152 L419 100 L455 152 Z" fill="#0E7490"/>
+<circle cx="486" cy="86" r="20" fill="#0E7490"/>
+<path d="M477 86 l7 8 l13 -15" fill="none" stroke="#FFFDF7" stroke-width="5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- same card, tilted and shadowed: now it fails -->
+<g transform="rotate(-13 452 208)">
+  <rect x="392" y="162" width="118" height="96" rx="10" fill="#FFFDF7" stroke="#DDD4C0" stroke-width="3"/>
+  <path d="M415 236 L451 184 L487 236 Z" fill="#0E7490" opacity="0.45"/>
+  <rect x="392" y="162" width="118" height="96" rx="10" fill="#1F2933" opacity="0.14"/>
+</g>
+<circle cx="536" cy="182" r="20" fill="#C2410C"/>
+<path d="M528 174 l16 16 M544 174 l-16 16" stroke="#FFFDF7" stroke-width="5" stroke-linecap="round"/>
+</svg>
