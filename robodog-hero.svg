@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-labelledby="t d">
+<title id="t">A LEGO robot dog</title>
+<desc id="d">A boxy LEGO body on four jointed legs. A small head with one round eye-sensor faces right. Dashed arcs beneath the front feet show a stepping motion.</desc>
+<rect width="640" height="300" fill="#F6F1E6"/>
+
+<!-- ground line -->
+<line x1="60" y1="248" x2="580" y2="248" stroke="#DDD4C0" stroke-width="2"/>
+
+<!-- back legs -->
+<g stroke="#1F2933" stroke-width="10" stroke-linecap="round" fill="none">
+  <path d="M230,175 L215,215 L222,246"/>
+  <path d="M300,175 L290,215 L297,246"/>
+</g>
+<!-- front legs -->
+<g stroke="#1F2933" stroke-width="10" stroke-linecap="round" fill="none">
+  <path d="M370,175 L392,213 L378,246"/>
+  <path d="M430,175 L458,208 L432,246"/>
+</g>
+<!-- feet -->
+<g fill="#C2410C">
+  <circle cx="222" cy="246" r="9"/>
+  <circle cx="297" cy="246" r="9"/>
+  <circle cx="378" cy="246" r="9"/>
+  <circle cx="432" cy="246" r="9"/>
+</g>
+
+<!-- body -->
+<rect x="205" y="110" width="255" height="72" rx="12" fill="#C2410C"/>
+<rect x="205" y="110" width="255" height="16" rx="8" fill="#FFFFFF" opacity="0.28"/>
+<g fill="#1F2933" opacity="0.18">
+  <circle cx="240" cy="122" r="7"/>
+  <circle cx="275" cy="122" r="7"/>
+  <circle cx="390" cy="122" r="7"/>
+  <circle cx="425" cy="122" r="7"/>
+</g>
+
+<!-- tail -->
+<rect x="170" y="118" width="38" height="12" rx="6" fill="#1F2933"/>
+
+<!-- head -->
+<rect x="452" y="88" width="72" height="60" rx="10" fill="#1F2933"/>
+<rect x="466" y="72" width="16" height="20" rx="4" fill="#1F2933"/>
+<circle cx="500" cy="118" r="10" fill="#0E7490"/>
+<circle cx="500" cy="118" r="4" fill="#F6F1E6"/>
+
+<!-- motion arcs under front feet -->
+<g stroke="#B45309" stroke-width="3" fill="none" stroke-dasharray="3 6" stroke-linecap="round">
+  <path d="M355,252 A25,10 0 0 1 405,252"/>
+  <path d="M405,254 A30,11 0 0 1 462,254"/>
+</g>
+
+<!-- sensor beam -->
+<g stroke="#0E7490" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round">
+  <line x1="512" y1="118" x2="560" y2="118"/>
+</g>
+</svg>
