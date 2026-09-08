@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-labelledby="t1 d1">
+<title id="t1">A printed game controller</title>
+<desc id="d1">A chunky controller with a joystick, two round buttons and a sensor block, joined by a cable to a small screen showing a shape.</desc>
+<rect width="640" height="300" fill="#F6F1E6"/>
+
+<line x1="50" y1="256" x2="590" y2="256" stroke="#DDD4C0" stroke-width="2"/>
+
+<!-- grips -->
+<rect x="88" y="150" width="78" height="106" rx="30" fill="#C2410C"/>
+<rect x="330" y="150" width="78" height="106" rx="30" fill="#C2410C"/>
+
+<!-- body -->
+<rect x="110" y="112" width="276" height="106" rx="26" fill="#C2410C"/>
+<rect x="110" y="112" width="276" height="20" rx="10" fill="#FFFFFF" opacity="0.28"/>
+<g fill="#1F2933" opacity="0.18">
+  <circle cx="146" cy="126" r="7"/><circle cx="180" cy="126" r="7"/>
+  <circle cx="316" cy="126" r="7"/><circle cx="350" cy="126" r="7"/>
+</g>
+
+<!-- joystick -->
+<circle cx="178" cy="176" r="30" fill="#1F2933"/>
+<circle cx="178" cy="176" r="12" fill="#F6F1E6"/>
+
+<!-- buttons -->
+<circle cx="306" cy="162" r="17" fill="#0E7490"/>
+<circle cx="336" cy="192" r="17" fill="#0E7490"/>
+
+<!-- SPIKE sensor block -->
+<rect x="212" y="206" width="72" height="42" rx="10" fill="#1F2933"/>
+<circle cx="248" cy="227" r="12" fill="#0E7490"/>
+<circle cx="248" cy="227" r="5" fill="#F6F1E6"/>
+
+<!-- cable to the screen -->
+<path d="M408 168 C452 168 452 118 496 118" fill="none" stroke="#0E7490"
+      stroke-width="7" stroke-linecap="round" stroke-dasharray="2 16"/>
+
+<!-- screen -->
+<rect x="492" y="76" width="112" height="86" rx="12" fill="#1F2933"/>
+<rect x="503" y="87" width="90" height="64" rx="6" fill="#FFFDF7"/>
+<path d="M518 138 L548 104 L578 138 Z" fill="#0E7490"/>
+<rect x="536" y="162" width="24" height="16" rx="4" fill="#1F2933"/>
+<rect x="516" y="178" width="64" height="10" rx="5" fill="#1F2933"/>
+</svg>
