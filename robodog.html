@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-size="m" data-read="normal">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission 03 · Build the Robo Dog — HACK-LAB.SPACE</title>
+<link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+<div class="wrap stack">
+
+  <header class="masthead">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <a class="backlink mono" href="./" data-noread>&larr; hack-lab.space</a>
+      <div class="lang-set" role="group" data-i18n-label="langLabel" data-noread>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+          <button class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+        </div>
+    </div>
+    <div class="row" style="justify-content:space-between;align-items:flex-start;margin-top:.8rem">
+      <div class="readable-part">
+        <div class="eyebrow" style="color:var(--ink-4)" data-i18n="pEyebrow"></div>
+        <h1 data-i18n="pTitle"></h1>
+        <p class="lede" style="margin-top:.5rem" data-i18n="pWhy"></p>
+      </div>
+    </div>
+  </header>
+
+  <div class="bar" id="ttsBar">
+    <button class="ctl ctl-go" id="readAll" aria-pressed="false" data-i18n="readAloud"></button>
+    <details class="prefs">
+      <summary data-i18n="prefs"></summary>
+      <div class="prefs-body">
+        <div class="prefs-group">
+          <span data-i18n="sizeLabel"></span>
+          <div class="row" role="group" data-i18n-label="sizeLabel">
+            <button class="ctl size-btn" data-size="m" aria-pressed="false">A</button>
+            <button class="ctl size-btn" data-size="l" aria-pressed="false">A+</button>
+            <button class="ctl size-btn" data-size="xl" aria-pressed="false">A++</button>
+          </div>
+        </div>
+        <div class="prefs-group">
+          <span data-i18n="easyLabel"></span>
+          <div class="row">
+            <button class="ctl" id="easyRead" aria-pressed="false" data-i18n="easyRead"></button>
+          </div>
+        </div>
+        <div class="prefs-group">
+          <span data-i18n="readingLabel"></span>
+          <div class="row">
+            <label class="ctl" style="font-weight:600;cursor:pointer">
+              <input id="readSlow" type="checkbox" style="width:22px;height:22px">
+              <span data-i18n="readSlow"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <figure class="readable-part">
+    <img src="./robodog-hero.svg" class="hero"
+         alt="A boxy LEGO body on four jointed legs, a small head with one round sensor facing right, and dashed arcs under the front feet showing a stepping motion.">
+    <figcaption data-i18n="heroCap"></figcaption>
+  </figure>
+
+  <!-- STATUS -->
+  <section class="grid grid-2">
+    <div class="card card-tight readable">
+      <div class="eyebrow eyebrow--green" data-i18n="goalLabel"></div>
+      <p class="small" data-i18n="goalBody"></p>
+    </div>
+    <div class="card card-tight readable">
+      <div class="eyebrow" style="color:var(--ink-4)" data-i18n="stateLabel"></div>
+      <p class="small" data-i18n="stateBody"></p>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="grid grid-2">
+    <div class="card card-tight card--jacob readable">
+      <div class="eyebrow eyebrow--orange" data-i18n="jacobRole"></div>
+      <p class="small" data-i18n="jacobBody"></p>
+    </div>
+    <div class="card card-tight card--emma readable">
+      <div class="eyebrow eyebrow--violet" data-i18n="emmaRole"></div>
+      <p class="small" data-i18n="emmaBody"></p>
+    </div>
+  </section>
+
+  <!-- OPEN DECISION -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="openHead"></h2>
+    <div class="card card--jacob readable">
+      <div class="eyebrow eyebrow--orange" data-i18n="archLabel"></div>
+      <h3 style="font-size:1.05rem" data-i18n="archTitle"></h3>
+      <p class="small" style="margin-top:.5rem" data-i18n="archBody"></p>
+      <p class="small" style="margin-top:.6rem" data-i18n="archWho"></p>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="flowHead"></h2>
+    <ol class="flow readable-part">
+      <li><span class="n">1</span><span data-i18n="f1"></span></li>
+      <li><span class="n">2</span><span data-i18n="f2"></span></li>
+      <li><span class="n">3</span><span data-i18n="f3"></span></li>
+      <li><span class="n">4</span><span data-i18n="f4"></span></li>
+      <li><span class="n">5</span><span data-i18n="f5"></span></li>
+    </ol>
+    <p class="muted" data-i18n="flowNote"></p>
+  </section>
+
+  <!-- KNOW -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="knowHead"></h2>
+    <div class="card readable">
+      <ul style="padding-left:1.2rem">
+        <li data-i18n="know1"></li>
+        <li data-i18n="know2"></li>
+        <li data-i18n="know3"></li>
+        <li data-i18n="know4"></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LOG -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--quiet" data-i18n="logHead"></h2>
+    <p class="muted" data-i18n="logNote"></p>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--cyan" data-i18n="resHead"></h2>
+    <p class="muted" data-i18n="resNote"></p>
+    <div class="grid grid-2">
+      <a class="card card-tight readable-part" href="https://roboinstruction.com/downloads/spot-lego-spike-prime/" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">roboinstruction.com &nearr;</div>
+        <h3 style="font-size:.95rem">Spot — LEGO SPIKE Prime robot dog</h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res1"></p>
+      </a>
+      <a class="card card-tight readable-part" href="https://boosty.to/robowiki/posts/3336edb8-9b2c-409b-980c-a9a35229af1c" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">robo-wiki &nearr;</div>
+        <h3 style="font-size:.95rem">Robot Dog — LEGO SPIKE Prime</h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res2"></p>
+      </a>
+      <a class="card card-tight readable-part" href="https://www.youtube.com/watch?v=CFh9Gr8itOM" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">youtube.com &nearr;</div>
+        <h3 style="font-size:.95rem" data-i18n="res3Title"></h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res3"></p>
+      </a>
+      <a class="card card-tight readable-part" href="https://robotics.benedettelli.com/spike-prime-bug-hexapod/" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">robotics.benedettelli.com &nearr;</div>
+        <h3 style="font-size:.95rem">SPIKE Prime Walking Bug</h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res4"></p>
+      </a>
+      <div class="card card-tight readable-part">
+        <div class="eyebrow" style="color:var(--ink-4)" data-i18n="res5Tag"></div>
+        <h3 style="font-size:.95rem" data-i18n="res5Title"></h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res5"></p>
+      </div>
+    </div>
+  </section>
+
+  <footer><a href="./"><span data-i18n="footer"></span></a></footer>
+</div>
+
+<script src="./assets/app.js"></script>
+<script>
+Object.assign(I18N.en, {
+  pEyebrow:"Mission 03 · not started", pTitle:"Build the Robo Dog",
+  pWhy:"Four SPIKE motors, four legs, and a body that has to hold together while it walks. Nothing here has started — this page exists so the mission isn't forgotten before its turn comes.",
+  heroCap:"A four-legged SPIKE build. Motors drive the legs, a sensor sits in the head — everything else, including how it actually walks, is still open.",
+  goalLabel:"The goal", goalBody:"A robot dog that walks on its own four legs and reacts to something in the room — built twice, once in Nairobi, once in Vienna, the same way every mission here gets built.",
+  stateLabel:"Where we are", stateBody:"Not started. No legs built, no motors wired, nothing decided yet.",
+  jacobRole:"Jacob · Chief Engineer",
+  jacobBody:"The leg mechanism, and how four of them move together without the body tipping over. Crank-driven legs or independently motorised ones — that call, and every technical one after it, is yours.",
+  emmaRole:"Emma · Chief Mission Designer",
+  emmaBody:"What the dog actually does once it can walk — the trick it reacts with, what counts as “it worked,” and its name. The machine can walk before it has a personality; you decide when it's earned one.",
+  openHead:"Open decision",
+  archLabel:"Not decided yet", archTitle:"How should the legs move?",
+  archBody:"A simple crank-and-linkage leg needs fewer motors and is easier to build, but the gait is fixed once it's built. Independently driven legs need more motors and more programming, but can walk, turn, and maybe even sit. Both exist as real builds — look at the references below before choosing.",
+  archWho:"This one is Jacob's call. Ground support orders parts and prints feet once the leg design is picked, not before.",
+  flowHead:"How a mission runs",
+  f1:"Decide", f2:"Measure", f3:"Build a prototype", f4:"Test", f5:"Make it twice",
+  flowNote:"The last step is the point. A thing only counts as finished when it exists in both rooms.",
+  knowHead:"Worth knowing before you start",
+  know1:"The Expansion Set is what makes four legs realistic — the core SPIKE Prime set alone is short on beams and gears once you're building four of anything.",
+  know2:"SPIKE motors are strong but not fast. A four-legged gait needs timing between legs, not just raw power — that's the real engineering problem here, the same way the pen lift was for the plotter.",
+  know3:"A printed foot from the Bambu printer grips a table far better than a bare LEGO stud, and doesn't scratch the floor.",
+  know4:"The color-sensor trick — step back when it sees a certain color — is a nice first behaviour, but it's an add-on. The walk comes first.",
+  logHead:"Build log",
+  logNote:"Nothing logged yet — this fills in once a first session actually happens.",
+  resHead:"Ground support resources", resNote:"Other people's builds, for reference. None of these is the plan.",
+  res1:"Full building instructions plus a ready SPIKE program: the legs walk, and a color sensor makes the dog step back when it spots a certain color — probably the closest match to what's described above.",
+  res2:"A second robot dog build, with its own leg mechanism and gait — useful for comparing against Spot before Jacob picks a direction.",
+  res3Title:"Quad Walker — video build guide",
+  res3:"Watch the gait in motion before committing to a leg design — seeing four legs actually move is worth more than a diagram.",
+  res4:"A six-legged cousin of this build. Six legs balance more easily than four — worth a look if four legs turn out to wobble too much.",
+  res5Tag:"In the box", res5Title:"What you already have",
+  res5:"SPIKE Prime and Expansion, the Bambu printer, calipers."
+});
+Object.assign(I18N.de, {
+  pEyebrow:"Mission 03 · noch nicht begonnen", pTitle:"Den Robo-Hund bauen",
+  pWhy:"Vier SPIKE-Motoren, vier Beine und ein Körper, der beim Laufen zusammenhalten muss. Hier hat noch nichts begonnen — diese Seite gibt es, damit die Mission nicht vergessen wird, bevor sie an der Reihe ist.",
+  heroCap:"Ein vierbeiniger SPIKE-Bau. Motoren treiben die Beine an, ein Sensor sitzt im Kopf — alles andere, auch wie er wirklich läuft, ist noch offen.",
+  goalLabel:"Das Ziel", goalBody:"Ein Roboterhund, der auf eigenen vier Beinen läuft und auf etwas im Raum reagiert — zweimal gebaut, einmal in Nairobi, einmal in Wien, so wie jede Mission hier gebaut wird.",
+  stateLabel:"Wo wir stehen", stateBody:"Noch nicht begonnen. Keine Beine gebaut, keine Motoren verkabelt, noch nichts entschieden.",
+  jacobRole:"Jacob · Chief Engineer",
+  jacobBody:"Der Beinmechanismus und wie vier davon zusammen laufen, ohne dass der Körper kippt. Kurbelbeine oder unabhängig motorisierte Beine — diese Entscheidung, und jede technische danach, gehört dir.",
+  emmaRole:"Emma · Chief Mission Designer",
+  emmaBody:"Was der Hund tut, sobald er laufen kann — der Trick, mit dem er reagiert, was als “es hat funktioniert“ zählt, und sein Name. Die Maschine kann laufen, bevor sie eine Persönlichkeit hat; du entscheidest, wann sie sich eine verdient hat.",
+  openHead:"Offene Entscheidung",
+  archLabel:"Noch nicht entschieden", archTitle:"Wie sollen sich die Beine bewegen?",
+  archBody:"Ein einfaches Kurbel-Gestänge-Bein braucht weniger Motoren und ist einfacher zu bauen, aber der Gang liegt fest, sobald es gebaut ist. Unabhängig angetriebene Beine brauchen mehr Motoren und mehr Programmierung, können aber laufen, drehen und vielleicht sogar sitzen. Beides existiert als echter Bau — schau dir die Referenzen unten an, bevor du dich entscheidest.",
+  archWho:"Das ist Jacobs Entscheidung. Ground Support bestellt Teile und druckt Füße, sobald das Beindesign feststeht — nicht vorher.",
+  flowHead:"Wie eine Mission abläuft",
+  f1:"Entscheiden", f2:"Messen", f3:"Prototyp bauen", f4:"Testen", f5:"Zweimal herstellen",
+  flowNote:"Der letzte Schritt ist der Punkt. Fertig ist etwas erst, wenn es in beiden Zimmern existiert.",
+  knowHead:"Gut zu wissen, bevor ihr anfangt",
+  know1:"Das Expansion Set macht vier Beine erst realistisch — das SPIKE-Prime-Basisset allein hat zu wenig Streben und Zahnräder, sobald man vier von irgendetwas baut.",
+  know2:"SPIKE-Motoren sind stark, aber nicht schnell. Ein vierbeiniger Gang braucht Timing zwischen den Beinen, nicht nur rohe Kraft — das ist hier die eigentliche Ingenieursaufgabe, genau wie die Stifthebung beim Plotter.",
+  know3:"Ein gedruckter Fuß vom Bambu-Drucker greift auf dem Tisch viel besser als ein nackter LEGO-Stein und zerkratzt den Boden nicht.",
+  know4:"Der Farbsensor-Trick — zurückweichen, wenn er eine bestimmte Farbe sieht — ist ein netter erster Effekt, aber ein Zusatz. Der Gang kommt zuerst.",
+  logHead:"Baulogbuch",
+  logNote:"Noch nichts eingetragen — das füllt sich, sobald die erste Session wirklich stattfindet.",
+  resHead:"Ground-Support-Ressourcen", resNote:"Bauten von anderen, zum Nachschauen. Keiner davon ist der Plan.",
+  res1:"Komplette Bauanleitung plus fertiges SPIKE-Programm: Die Beine laufen, und ein Farbsensor lässt den Hund zurückweichen, wenn er eine bestimmte Farbe erkennt — wahrscheinlich am nächsten an dem, was oben beschrieben ist.",
+  res2:"Ein zweiter Roboterhund-Bau mit eigenem Beinmechanismus und Gang — nützlich zum Vergleich mit Spot, bevor Jacob sich entscheidet.",
+  res3Title:"Quad Walker — Video-Bauanleitung",
+  res3:"Sieh dir den Gang in Aktion an, bevor du dich für ein Beindesign entscheidest — vier Beine in Bewegung zu sehen ist mehr wert als ein Diagramm.",
+  res4:"Ein sechsbeiniger Verwandter dieses Baus. Sechs Beine balancieren leichter als vier — einen Blick wert, falls vier Beine zu sehr wackeln.",
+  res5Tag:"In der Kiste", res5Title:"Was ihr schon habt",
+  res5:"SPIKE Prime und Erweiterung, den Bambu-Drucker, Messschieber."
+});
+Object.assign(I18N.it, {
+  pEyebrow:"Missione 03 · non iniziata", pTitle:"Costruire il Robo-Cane",
+  pWhy:"Quattro motori SPIKE, quattro zampe e un corpo che deve reggere mentre cammina. Qui non è ancora iniziato niente — questa pagina esiste perché la missione non venga dimenticata prima del suo turno.",
+  heroCap:"Una costruzione SPIKE a quattro zampe. I motori muovono le zampe, un sensore sta nella testa — tutto il resto, compreso come cammina davvero, è ancora da decidere.",
+  goalLabel:"L'obiettivo", goalBody:"Un robot cane che cammina sulle sue quattro zampe e reagisce a qualcosa nella stanza — costruito due volte, una a Nairobi e una a Vienna, come ogni missione qui.",
+  stateLabel:"A che punto siamo", stateBody:"Non iniziata. Nessuna zampa costruita, nessun motore collegato, niente ancora deciso.",
+  jacobRole:"Jacob · Chief Engineer",
+  jacobBody:"Il meccanismo delle zampe, e come farne muovere quattro insieme senza far ribaltare il corpo. Zampe a manovella o motorizzate indipendentemente — questa scelta, e ogni scelta tecnica successiva, è tua.",
+  emmaRole:"Emma · Chief Mission Designer",
+  emmaBody:"Cosa fa il cane una volta che sa camminare — il trucco con cui reagisce, cosa conta come “ha funzionato” e il suo nome. La macchina può camminare prima di avere una personalità; decidi tu quando se l'è guadagnata.",
+  openHead:"Decisione aperta",
+  archLabel:"Non ancora deciso", archTitle:"Come devono muoversi le zampe?",
+  archBody:"Una semplice zampa a manovella e biella richiede meno motori ed è più facile da costruire, ma l'andatura resta fissa una volta costruita. Zampe motorizzate indipendentemente richiedono più motori e più programmazione, ma possono camminare, girare e forse anche sedersi. Esistono entrambe come costruzioni reali — guarda i riferimenti qui sotto prima di scegliere.",
+  archWho:"Questa è una scelta di Jacob. Il ground support ordina i pezzi e stampa le zampe quando il design è deciso, non prima.",
+  flowHead:"Come funziona una missione",
+  f1:"Decidere", f2:"Misurare", f3:"Costruire un prototipo", f4:"Provare", f5:"Farlo due volte",
+  flowNote:"L'ultimo passo è il punto. Una cosa è finita solo quando esiste in tutte e due le stanze.",
+  knowHead:"Da sapere prima di iniziare",
+  know1:"L'Expansion Set è ciò che rende realistiche quattro zampe — il set base SPIKE Prime da solo scarseggia di travi e ingranaggi quando se ne costruiscono quattro di qualcosa.",
+  know2:"I motori SPIKE sono forti ma non veloci. Un'andatura a quattro zampe richiede sincronia tra le zampe, non solo potenza — è questo il vero problema di ingegneria qui, come lo era il sollevamento penna per il plotter.",
+  know3:"Una zampa stampata con la Bambu fa più presa su un tavolo di un semplice tassello LEGO e non graffia il pavimento.",
+  know4:"Il trucco del sensore di colore — fare un passo indietro quando vede un certo colore — è un bel primo comportamento, ma è un'aggiunta. La camminata viene prima.",
+  logHead:"Registro di costruzione",
+  logNote:"Ancora niente registrato — si riempirà quando ci sarà davvero una prima sessione.",
+  resHead:"Risorse ground support", resNote:"Costruzioni di altri, per riferimento. Nessuna di queste è il piano.",
+  res1:"Istruzioni di costruzione complete più un programma SPIKE già pronto: le zampe camminano, e un sensore di colore fa fare un passo indietro al cane quando rileva un certo colore — probabilmente il più vicino a quanto descritto sopra.",
+  res2:"Una seconda costruzione di robot cane, con un proprio meccanismo delle zampe e andatura — utile per confrontare con Spot prima che Jacob scelga una direzione.",
+  res3Title:"Quad Walker — guida video",
+  res3:"Guarda l'andatura in movimento prima di scegliere il design delle zampe — vedere quattro zampe muoversi davvero vale più di uno schema.",
+  res4:"Un cugino a sei zampe di questa costruzione. Sei zampe si bilanciano più facilmente di quattro — da considerare se quattro zampe risultano troppo instabili.",
+  res5Tag:"Nella scatola", res5Title:"Quello che avete già",
+  res5:"SPIKE Prime e l'espansione, la stampante Bambu, il calibro."
+});
+HL.init();
+</script>
+</body>
+</html>
