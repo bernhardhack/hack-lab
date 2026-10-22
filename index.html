@@ -109,7 +109,7 @@
   <section class="stack-s">
     <h2 class="sec-title sec-title--quiet" data-i18n="laterHead"></h2>
     <p class="muted" data-i18n="laterNote"></p>
-    <div class="grid grid-3">
+    <div class="grid grid-2">
       <div class="card card-tight card--soon readable-part">
         <div class="row" style="justify-content:space-between;margin-bottom:.4rem">
           <span class="eyebrow" style="color:var(--ink-4);margin:0">Mission 01</span>
@@ -139,6 +139,17 @@
           <p class="small" style="margin-top:.4rem" data-i18n="m3Body"></p>
         </a>
       </div>
+      <div class="linkcard readable-part">
+        <a class="card card-tight card--soon" href="./roboduck.html">
+          <div class="row" style="justify-content:space-between;margin-bottom:.4rem">
+            <span class="eyebrow" style="color:var(--ink-4);margin:0">Mission 04</span>
+            <span class="badge-soon" data-i18n="tbd"></span>
+          </div>
+          <img src="./roboduck-hero.svg" class="hero" style="margin-bottom:.9rem" alt="A boxy LEGO duck on two legs with wide orange feet, leaning to one side while one foot lifts.">
+          <h3 style="font-size:1rem" data-i18n="m4Title"></h3>
+          <p class="small" style="margin-top:.4rem" data-i18n="m4Body"></p>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -161,15 +172,21 @@
 <script>
 Object.assign(I18N.en, {
   m3Title:"Build the robo dog",
-  m3Body:"Four SPIKE motors, four legs, a body that has to hold together while it walks."
+  m3Body:"Four SPIKE motors, four legs, a body that has to hold together while it walks.",
+  m4Title:"Roboduck", tbd:"To be developed",
+  m4Body:"A two-legged LEGO duck inspired by Microduck. Researched and tested on the computer — built after the robo dog."
 });
 Object.assign(I18N.de, {
   m3Title:"Den Robo-Hund bauen",
-  m3Body:"Vier SPIKE-Motoren, vier Beine, ein Körper, der beim Laufen zusammenhalten muss."
+  m3Body:"Vier SPIKE-Motoren, vier Beine, ein Körper, der beim Laufen zusammenhalten muss.",
+  m4Title:"Roboduck", tbd:"Noch zu entwickeln",
+  m4Body:"Eine zweibeinige LEGO-Ente nach dem Vorbild von Microduck. Recherchiert und am Computer getestet — gebaut wird nach dem Robo-Hund."
 });
 Object.assign(I18N.it, {
   m3Title:"Costruire il robo-cane",
-  m3Body:"Quattro motori SPIKE, quattro zampe, un corpo che deve reggere mentre cammina."
+  m3Body:"Quattro motori SPIKE, quattro zampe, un corpo che deve reggere mentre cammina.",
+  m4Title:"Roboduck", tbd:"Da sviluppare",
+  m4Body:"Un'anatra LEGO a due zampe ispirata a Microduck. Studiata e provata al computer — si costruisce dopo il robo-cane."
 });
 HL.init();
 </script>

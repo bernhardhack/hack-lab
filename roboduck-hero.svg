@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-labelledby="t d">
+<title id="t">A LEGO robot duck</title>
+<desc id="d">A boxy LEGO duck standing on two straight legs with wide orange feet. The body leans slightly to one side, and dashed arcs show it rocking from foot to foot. A square head with a round eye-sensor and an orange beak faces right.</desc>
+<rect width="640" height="300" fill="#F6F1E6"/>
+
+<!-- ground line -->
+<line x1="60" y1="248" x2="580" y2="248" stroke="#DDD4C0" stroke-width="2"/>
+
+<!-- sway arcs above the body -->
+<g stroke="#B45309" stroke-width="3" fill="none" stroke-dasharray="3 6" stroke-linecap="round">
+  <path d="M250,62 A70,22 0 0 1 390,62"/>
+  <path d="M262,60 l-10,4 l8,8"/>
+  <path d="M378,60 l10,4 l-8,8"/>
+</g>
+
+<!-- legs (leaning a little: the sway) -->
+<g stroke="#1F2933" stroke-width="10" stroke-linecap="round" fill="none">
+  <path d="M292,180 L284,240"/>
+  <path d="M348,180 L340,240"/>
+</g>
+<!-- feet -->
+<rect x="250" y="238" width="72" height="12" rx="5" fill="#C2410C"/>
+<rect x="316" y="230" width="72" height="12" rx="5" fill="#C2410C" opacity="0.9"/>
+<!-- step arc under the lifted foot -->
+<g stroke="#B45309" stroke-width="3" fill="none" stroke-dasharray="3 6" stroke-linecap="round">
+  <path d="M318,256 A40,10 0 0 1 398,256"/>
+</g>
+
+<!-- body: the hub -->
+<rect x="262" y="98" width="116" height="86" rx="14" fill="#F2B705"/>
+<rect x="262" y="98" width="116" height="18" rx="9" fill="#FFFFFF" opacity="0.3"/>
+<rect x="296" y="124" width="48" height="40" rx="5" fill="#1F2933" opacity="0.85"/>
+<g fill="#F6F1E6" opacity="0.8">
+  <rect x="304" y="132" width="6" height="6" rx="1"/><rect x="317" y="132" width="6" height="6" rx="1"/><rect x="330" y="132" width="6" height="6" rx="1"/>
+  <rect x="304" y="146" width="6" height="6" rx="1"/><rect x="330" y="146" width="6" height="6" rx="1"/>
+</g>
+<!-- tail -->
+<path d="M262,112 L232,96 L242,124 Z" fill="#F2B705"/>
+
+<!-- neck + head -->
+<rect x="372" y="76" width="14" height="40" rx="5" fill="#1F2933"/>
+<rect x="378" y="46" width="70" height="52" rx="10" fill="#F2B705"/>
+<circle cx="420" cy="66" r="10" fill="#0E7490"/>
+<circle cx="420" cy="66" r="4" fill="#F6F1E6"/>
+<!-- beak -->
+<path d="M446,74 L492,82 L446,92 Z" fill="#C2410C"/>
+
+<!-- sensor beam -->
+<g stroke="#0E7490" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round">
+  <line x1="432" y1="66" x2="540" y2="66"/>
+</g>
+</svg>

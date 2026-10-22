@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" data-size="m" data-read="normal">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission 04 · Roboduck — HACK-LAB.SPACE</title>
+<link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+<div class="wrap stack">
+
+  <header class="masthead">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <a class="backlink mono" href="./" data-noread>&larr; hack-lab.space</a>
+      <div class="lang-set" role="group" data-i18n-label="langLabel" data-noread>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="de" aria-pressed="false">DE</button>
+          <button class="lang-btn" data-lang="it" aria-pressed="false">IT</button>
+        </div>
+    </div>
+    <div class="row" style="justify-content:space-between;align-items:flex-start;margin-top:.8rem">
+      <div class="readable-part">
+        <div class="eyebrow" style="color:var(--ink-4)" data-i18n="pEyebrow"></div>
+        <h1 data-i18n="pTitle"></h1>
+        <p class="lede" style="margin-top:.5rem" data-i18n="pWhy"></p>
+      </div>
+    </div>
+  </header>
+
+  <div class="bar" id="ttsBar">
+    <button class="ctl ctl-go" id="readAll" aria-pressed="false" data-i18n="readAloud"></button>
+    <details class="prefs">
+      <summary data-i18n="prefs"></summary>
+      <div class="prefs-body">
+        <div class="prefs-group">
+          <span data-i18n="sizeLabel"></span>
+          <div class="row" role="group" data-i18n-label="sizeLabel">
+            <button class="ctl size-btn" data-size="m" aria-pressed="false">A</button>
+            <button class="ctl size-btn" data-size="l" aria-pressed="false">A+</button>
+            <button class="ctl size-btn" data-size="xl" aria-pressed="false">A++</button>
+          </div>
+        </div>
+        <div class="prefs-group">
+          <span data-i18n="easyLabel"></span>
+          <div class="row">
+            <button class="ctl" id="easyRead" aria-pressed="false" data-i18n="easyRead"></button>
+          </div>
+        </div>
+        <div class="prefs-group">
+          <span data-i18n="readingLabel"></span>
+          <div class="row">
+            <label class="ctl" style="font-weight:600;cursor:pointer">
+              <input id="readSlow" type="checkbox" style="width:22px;height:22px">
+              <span data-i18n="readSlow"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <figure class="readable-part">
+    <img src="./roboduck-hero.svg" class="hero"
+         alt="A boxy LEGO duck on two straight legs with wide orange feet, leaning a little to one side while one foot lifts. A square head with a round eye-sensor and an orange beak faces right.">
+    <figcaption data-i18n="heroCap"></figcaption>
+  </figure>
+
+  <!-- STATUS -->
+  <section class="grid grid-2">
+    <div class="card card-tight readable">
+      <div class="eyebrow eyebrow--green" data-i18n="goalLabel"></div>
+      <p class="small" data-i18n="goalBody"></p>
+    </div>
+    <div class="card card-tight readable">
+      <div class="eyebrow" style="color:var(--ink-4)" data-i18n="stateLabel"></div>
+      <p class="small" data-i18n="stateBody"></p>
+    </div>
+  </section>
+
+  <!-- WHAT WE HAVE SO FAR -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="soFarHead"></h2>
+    <div class="card readable">
+      <div class="eyebrow eyebrow--amber" data-i18n="tdLabel"></div>
+      <h3 style="font-size:1.05rem" data-i18n="tdTitle"></h3>
+      <p class="small" style="margin-top:.5rem" data-i18n="tdBody"></p>
+    </div>
+    <div class="card readable">
+      <div class="eyebrow eyebrow--amber" data-i18n="simLabel"></div>
+      <h3 style="font-size:1.05rem" data-i18n="simTitle"></h3>
+      <p class="small" style="margin-top:.5rem" data-i18n="simBody"></p>
+      <video class="hero" style="margin-top:.9rem" src="./roboduck-sim.mp4" poster="./roboduck-sim-poster.jpg"
+             controls muted playsinline preload="none"
+             aria-label="Simulation: a blocky yellow and white duck walks forward with a side-to-side waddle, then turns on the spot."></video>
+      <p class="small" style="margin-top:.8rem" data-i18n="simFail"></p>
+      <p class="small" style="margin-top:.6rem" data-i18n="simWork"></p>
+    </div>
+  </section>
+
+  <!-- MOTOR PLAN -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="planHead"></h2>
+    <div class="card readable">
+      <ul style="padding-left:1.2rem">
+        <li data-i18n="plan1"></li>
+        <li data-i18n="plan2"></li>
+        <li data-i18n="plan3"></li>
+        <li data-i18n="plan4"></li>
+        <li data-i18n="plan5"></li>
+      </ul>
+      <p class="small" style="margin-top:.8rem" data-i18n="planSize"></p>
+    </div>
+  </section>
+
+  <!-- ROLES / OPEN -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="openHead"></h2>
+    <div class="grid grid-2">
+      <div class="card card-tight card--jacob readable">
+        <div class="eyebrow eyebrow--orange" data-i18n="jacobRole"></div>
+        <p class="small" data-i18n="jacobBody"></p>
+      </div>
+      <div class="card card-tight card--emma readable">
+        <div class="eyebrow eyebrow--violet" data-i18n="emmaRole"></div>
+        <p class="small" data-i18n="emmaBody"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KNOW -->
+  <section class="stack-s">
+    <h2 class="sec-title" data-i18n="knowHead"></h2>
+    <div class="card readable">
+      <ul style="padding-left:1.2rem">
+        <li data-i18n="know1"></li>
+        <li data-i18n="know2"></li>
+        <li data-i18n="know3"></li>
+        <li data-i18n="know4"></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LOG -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--quiet" data-i18n="logHead"></h2>
+    <p class="muted" data-i18n="logNote"></p>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="stack-s">
+    <h2 class="sec-title sec-title--cyan" data-i18n="resHead"></h2>
+    <p class="muted" data-i18n="resNote"></p>
+    <div class="grid grid-2">
+      <a class="card card-tight readable-part" href="https://pollen-robotics.com/microduck/" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">pollen-robotics.com &nearr;</div>
+        <h3 style="font-size:.95rem">Microduck</h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res1"></p>
+      </a>
+      <a class="card card-tight readable-part" href="https://github.com/pollen-robotics/microduck_rl" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">github.com &nearr;</div>
+        <h3 style="font-size:.95rem">microduck_rl</h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res2"></p>
+      </a>
+      <a class="card card-tight readable-part" href="https://www.philohome.com/motors/motorcomp.htm" target="_blank" rel="noopener">
+        <div class="eyebrow eyebrow--cyan mono">philohome.com &nearr;</div>
+        <h3 style="font-size:.95rem" data-i18n="res3Title"></h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res3"></p>
+      </a>
+      <div class="card card-tight readable-part">
+        <div class="eyebrow" style="color:var(--ink-4)" data-i18n="res4Tag"></div>
+        <h3 style="font-size:.95rem" data-i18n="res4Title"></h3>
+        <p class="small" style="margin-top:.4rem" data-i18n="res4"></p>
+      </div>
+    </div>
+  </section>
+
+  <footer><a href="./"><span data-i18n="footer"></span></a></footer>
+</div>
+
+<script src="./assets/app.js"></script>
+<script>
+Object.assign(I18N.en, {
+  pEyebrow:"Mission 04 · to be developed", pTitle:"Roboduck",
+  pWhy:"A two-legged LEGO duck that waddles, nods and pecks — inspired by Microduck, a small walking robot duck from Pollen Robotics. Parked until the robo dog walks. This page holds what we found out so far, so nothing is lost.",
+  heroCap:"Two legs, wide feet, a body that leans over one foot before the other one lifts. That lean is the whole trick.",
+  goalLabel:"The goal", goalBody:"A duck that walks on two legs without falling over and reacts to something in the room — built twice, once in Nairobi, once in Vienna.",
+  stateLabel:"Where we are", stateBody:"Not built. Research and a computer simulation are done. Mission 03, the robo dog, comes first.",
+  soFarHead:"What we have so far",
+  tdLabel:"Step 1 · Look inside the real one", tdTitle:"How Microduck is built",
+  tdBody:"Pollen publishes the full computer model of Microduck. It has 15 motors: five in each leg, four in the neck and head, one in the beak. It is 25 cm tall and weighs 740 g, and over a third of that is the head, which it swings around to keep its balance. A small brain trained by trial and error moves all the motors 50 times a second. We have four LEGO motors, so copying it is out. Borrowing its ideas is not.",
+  simLabel:"Step 2 · Test it on the computer", simTitle:"A simulated LEGO duck",
+  simBody:"Before building anything, we built the duck in MuJoCo, the same physics simulator Pollen uses: hub as the body, real LEGO motor strengths, a little wobble in the gears. Then we tried 361 different ducks on slippery floors, grippy floors and heavier bodies.",
+  simFail:"Two leg ideas failed on the computer. In both, the duck rolled both feet onto their edges instead of lifting one foot, because that costs less energy. Good to find out before building them.",
+  simWork:"One idea works: first lean the whole body sideways over one foot while both feet are still down, then lift the other foot with a crank. About 1 metre per minute, it never fell in six hard tests, and it can turn on the spot.",
+  planHead:"The plan that worked on the computer",
+  plan1:"A · large motor: left leg on a crank. The foot pushes flat along the floor, then lifts and swings forward.",
+  plan2:"B · large motor: right leg, half a turn behind the left.",
+  plan3:"C · medium motor, geared down 1:5: the sideways lean. Both legs tilt together and the feet stay flat.",
+  plan4:"D · medium motor: the neck nods with each step, and could open the beak.",
+  plan5:"Distance sensor as eyes, colour sensor in the beak, and the hub's tilt sensor to keep it walking straight.",
+  planSize:"Sizes the computer liked: legs 4 studs either side of the middle, 72 mm from hip to ankle, feet 10 × 6 studs. Each crank should push the foot 56 mm along the floor and lift it 14 mm.",
+  openHead:"Open decisions",
+  jacobRole:"Jacob · Chief Engineer",
+  jacobBody:"The computer only says which path the foot should draw. Which LEGO linkage draws it, and how to make the lean stiff enough, is your call — and so is throwing the plan out if the real bricks say otherwise.",
+  emmaRole:"Emma · Chief Mission Designer",
+  emmaBody:"What the duck does once it walks — pecking at a colour, following someone, a dance — what counts as “it worked”, and its name.",
+  knowHead:"Worth knowing before you start",
+  know1:"Two legs are much harder than four. The robo dog teaches the crank-leg tricks this duck needs, so it really is the right order.",
+  know2:"The swinging foot only clears the floor by about 3 mm. Smooth floors are fine, carpet is a problem.",
+  know3:"The lean motor works hardest. Stiff gears and no wobble in that part matter more than anything else.",
+  know4:"The weights in the simulation are guesses. Weighing the real parts on a kitchen scale makes the computer's answers more trustworthy.",
+  logHead:"Build log",
+  logNote:"Nothing built yet. 22 Oct 2026: Microduck research and the first simulation done.",
+  resHead:"Ground support resources", resNote:"For reference. None of these is the plan.",
+  res1:"The real Microduck: 15 motors, a camera, and it learns its moves in a simulator before trying them for real.",
+  res2:"Pollen's open training code and computer model. Where our measurements of Microduck come from.",
+  res3Title:"LEGO motor measurements",
+  res3:"How strong and how fast each LEGO motor really is. The simulation uses these numbers.",
+  res4Tag:"In the project folder", res4Title:"The simulator",
+  res4:"Python files that build the duck, walk it and try different sizes (roboduck/sim). Change a number, run it again, see if it still walks."
+});
+Object.assign(I18N.de, {
+  pEyebrow:"Mission 04 · noch zu entwickeln", pTitle:"Roboduck",
+  pWhy:"Eine zweibeinige LEGO-Ente, die watschelt, nickt und pickt — inspiriert von Microduck, einer kleinen laufenden Roboter-Ente von Pollen Robotics. Geparkt, bis der Robo-Hund läuft. Diese Seite hält fest, was wir bisher herausgefunden haben, damit nichts verloren geht.",
+  heroCap:"Zwei Beine, breite Füße, ein Körper, der sich über einen Fuß lehnt, bevor der andere abhebt. Dieses Lehnen ist der ganze Trick.",
+  goalLabel:"Das Ziel", goalBody:"Eine Ente, die auf zwei Beinen läuft, ohne umzufallen, und auf etwas im Raum reagiert — zweimal gebaut, einmal in Nairobi, einmal in Wien.",
+  stateLabel:"Wo wir stehen", stateBody:"Nicht gebaut. Recherche und eine Computersimulation sind fertig. Mission 03, der Robo-Hund, kommt zuerst.",
+  soFarHead:"Was wir bisher haben",
+  tdLabel:"Schritt 1 · In das Original hineinschauen", tdTitle:"Wie Microduck gebaut ist",
+  tdBody:"Pollen veröffentlicht das komplette Computermodell von Microduck. Es hat 15 Motoren: fünf in jedem Bein, vier in Hals und Kopf, einen im Schnabel. Es ist 25 cm groß und wiegt 740 g, und über ein Drittel davon ist der Kopf, den es zum Balancieren herumschwingt. Ein kleines Gehirn, trainiert durch Ausprobieren, bewegt alle Motoren 50-mal pro Sekunde. Wir haben vier LEGO-Motoren, also ist Nachbauen ausgeschlossen. Seine Ideen ausleihen nicht.",
+  simLabel:"Schritt 2 · Am Computer testen", simTitle:"Eine simulierte LEGO-Ente",
+  simBody:"Bevor wir etwas bauen, haben wir die Ente in MuJoCo gebaut, demselben Physiksimulator, den Pollen verwendet: der Hub als Körper, echte LEGO-Motorstärken, ein bisschen Spiel in den Zahnrädern. Dann haben wir 361 verschiedene Enten auf rutschigen Böden, griffigen Böden und mit schwereren Körpern ausprobiert.",
+  simFail:"Zwei Bein-Ideen sind am Computer gescheitert. Bei beiden hat die Ente beide Füße auf die Kante gerollt, statt einen Fuß zu heben, weil das weniger Energie kostet. Gut, das vor dem Bauen herauszufinden.",
+  simWork:"Eine Idee funktioniert: zuerst den ganzen Körper seitlich über einen Fuß lehnen, solange beide Füße noch am Boden sind, dann den anderen Fuß mit einer Kurbel heben. Etwa 1 Meter pro Minute, in sechs harten Tests nie umgefallen, und sie kann sich auf der Stelle drehen.",
+  planHead:"Der Plan, der am Computer funktioniert hat",
+  plan1:"A · großer Motor: linkes Bein an einer Kurbel. Der Fuß schiebt flach am Boden entlang, dann hebt er ab und schwingt nach vorne.",
+  plan2:"B · großer Motor: rechtes Bein, eine halbe Umdrehung hinter dem linken.",
+  plan3:"C · mittlerer Motor, 1:5 untersetzt: das seitliche Lehnen. Beide Beine kippen gemeinsam, die Füße bleiben flach.",
+  plan4:"D · mittlerer Motor: der Hals nickt bei jedem Schritt und könnte den Schnabel öffnen.",
+  plan5:"Abstandssensor als Augen, Farbsensor im Schnabel, und der Neigungssensor im Hub, damit sie geradeaus läuft.",
+  planSize:"Größen, die der Computer mochte: Beine je 4 Noppen links und rechts der Mitte, 72 mm von Hüfte bis Knöchel, Füße 10 × 6 Noppen. Jede Kurbel soll den Fuß 56 mm am Boden entlangschieben und 14 mm heben.",
+  openHead:"Offene Entscheidungen",
+  jacobRole:"Jacob · Chief Engineer",
+  jacobBody:"Der Computer sagt nur, welche Bahn der Fuß zeichnen soll. Welches LEGO-Gestänge sie zeichnet und wie das Lehnen steif genug wird, entscheidest du — und auch, den Plan wegzuwerfen, wenn die echten Steine etwas anderes sagen.",
+  emmaRole:"Emma · Chief Mission Designer",
+  emmaBody:"Was die Ente tut, sobald sie läuft — nach einer Farbe picken, jemandem folgen, ein Tanz — was als „es hat funktioniert“ zählt, und ihr Name.",
+  knowHead:"Gut zu wissen, bevor ihr anfangt",
+  know1:"Zwei Beine sind viel schwerer als vier. Der Robo-Hund bringt die Kurbelbein-Tricks bei, die diese Ente braucht — die Reihenfolge stimmt also wirklich.",
+  know2:"Der schwingende Fuß kommt nur etwa 3 mm über den Boden. Glatte Böden sind kein Problem, Teppich schon.",
+  know3:"Der Lehn-Motor arbeitet am härtesten. Steife Zahnräder und kein Spiel in diesem Teil sind wichtiger als alles andere.",
+  know4:"Die Gewichte in der Simulation sind geschätzt. Die echten Teile auf der Küchenwaage zu wiegen macht die Antworten des Computers verlässlicher.",
+  logHead:"Baulogbuch",
+  logNote:"Noch nichts gebaut. 22. Okt. 2026: Microduck-Recherche und erste Simulation erledigt.",
+  resHead:"Ground-Support-Ressourcen", resNote:"Zum Nachschauen. Keine davon ist der Plan.",
+  res1:"Die echte Microduck: 15 Motoren, eine Kamera, und sie lernt ihre Bewegungen in einem Simulator, bevor sie sie echt ausprobiert.",
+  res2:"Pollens offener Trainingscode und das Computermodell. Daher kommen unsere Messungen von Microduck.",
+  res3Title:"LEGO-Motor-Messungen",
+  res3:"Wie stark und wie schnell jeder LEGO-Motor wirklich ist. Die Simulation verwendet diese Zahlen.",
+  res4Tag:"Im Projektordner", res4Title:"Der Simulator",
+  res4:"Python-Dateien, die die Ente bauen, laufen lassen und verschiedene Größen ausprobieren (roboduck/sim). Eine Zahl ändern, nochmal laufen lassen, schauen, ob sie noch läuft."
+});
+Object.assign(I18N.it, {
+  pEyebrow:"Missione 04 · da sviluppare", pTitle:"Roboduck",
+  pWhy:"Un'anatra LEGO a due zampe che ondeggia, annuisce e becca — ispirata a Microduck, una piccola anatra robot che cammina, di Pollen Robotics. In attesa finché il robo-cane non cammina. Questa pagina raccoglie quello che abbiamo scoperto finora, perché niente vada perso.",
+  heroCap:"Due zampe, piedi larghi, un corpo che si sposta sopra un piede prima che l'altro si sollevi. Quello spostamento è tutto il trucco.",
+  goalLabel:"L'obiettivo", goalBody:"Un'anatra che cammina su due zampe senza cadere e reagisce a qualcosa nella stanza — costruita due volte, una a Nairobi e una a Vienna.",
+  stateLabel:"A che punto siamo", stateBody:"Non costruita. Ricerca e una simulazione al computer sono fatte. Prima viene la Missione 03, il robo-cane.",
+  soFarHead:"Quello che abbiamo finora",
+  tdLabel:"Passo 1 · Guardare dentro l'originale", tdTitle:"Com'è fatta Microduck",
+  tdBody:"Pollen pubblica il modello completo di Microduck. Ha 15 motori: cinque in ogni zampa, quattro nel collo e nella testa, uno nel becco. È alta 25 cm e pesa 740 g, e più di un terzo è la testa, che muove per restare in equilibrio. Un piccolo cervello addestrato per tentativi muove tutti i motori 50 volte al secondo. Noi abbiamo quattro motori LEGO, quindi copiarla è escluso. Prenderne in prestito le idee no.",
+  simLabel:"Passo 2 · Provarla al computer", simTitle:"Un'anatra LEGO simulata",
+  simBody:"Prima di costruire qualcosa, abbiamo costruito l'anatra in MuJoCo, lo stesso simulatore fisico che usa Pollen: l'hub come corpo, la vera forza dei motori LEGO, un po' di gioco negli ingranaggi. Poi abbiamo provato 361 anatre diverse su pavimenti scivolosi, pavimenti che fanno presa e con corpi più pesanti.",
+  simFail:"Due idee di zampe sono fallite al computer. In entrambe l'anatra rotolava tutti e due i piedi sul bordo invece di sollevarne uno, perché costa meno energia. Meglio scoprirlo prima di costruirle.",
+  simWork:"Un'idea funziona: prima spostare tutto il corpo di lato sopra un piede, mentre tutti e due i piedi sono ancora a terra, poi sollevare l'altro piede con una manovella. Circa 1 metro al minuto, non è mai caduta in sei prove difficili, e sa girarsi sul posto.",
+  planHead:"Il piano che ha funzionato al computer",
+  plan1:"A · motore grande: zampa sinistra su una manovella. Il piede spinge piatto lungo il pavimento, poi si alza e torna avanti.",
+  plan2:"B · motore grande: zampa destra, mezzo giro dietro la sinistra.",
+  plan3:"C · motore medio, ridotto 1:5: lo spostamento laterale. Le due zampe si inclinano insieme e i piedi restano piatti.",
+  plan4:"D · motore medio: il collo annuisce a ogni passo e potrebbe aprire il becco.",
+  plan5:"Sensore di distanza come occhi, sensore di colore nel becco, e il sensore di inclinazione dell'hub per farla andare dritta.",
+  planSize:"Misure che piacevano al computer: zampe a 4 bottoncini da ogni lato del centro, 72 mm dall'anca alla caviglia, piedi 10 × 6 bottoncini. Ogni manovella deve spingere il piede 56 mm lungo il pavimento e alzarlo di 14 mm.",
+  openHead:"Decisioni aperte",
+  jacobRole:"Jacob · Chief Engineer",
+  jacobBody:"Il computer dice solo quale percorso deve fare il piede. Quale leveraggio LEGO lo disegna, e come rendere lo spostamento abbastanza rigido, lo decidi tu — anche buttare via il piano, se i mattoncini veri dicono altro.",
+  emmaRole:"Emma · Chief Mission Designer",
+  emmaBody:"Cosa fa l'anatra una volta che cammina — beccare un colore, seguire qualcuno, un balletto — cosa conta come “ha funzionato” e il suo nome.",
+  knowHead:"Da sapere prima di iniziare",
+  know1:"Due zampe sono molto più difficili di quattro. Il robo-cane insegna i trucchi delle zampe a manovella che servono a quest'anatra, quindi l'ordine è proprio quello giusto.",
+  know2:"Il piede che si muove passa solo circa 3 mm sopra il pavimento. I pavimenti lisci vanno bene, il tappeto è un problema.",
+  know3:"Il motore dello spostamento lavora più di tutti. Ingranaggi rigidi e niente gioco in quella parte contano più di ogni altra cosa.",
+  know4:"I pesi nella simulazione sono stime. Pesare i pezzi veri con la bilancia da cucina rende più affidabili le risposte del computer.",
+  logHead:"Registro di costruzione",
+  logNote:"Ancora niente costruito. 22 ott 2026: ricerca su Microduck e prima simulazione fatte.",
+  resHead:"Risorse ground support", resNote:"Per riferimento. Nessuna di queste è il piano.",
+  res1:"La vera Microduck: 15 motori, una telecamera, e impara i suoi movimenti in un simulatore prima di provarli davvero.",
+  res2:"Il codice di addestramento aperto di Pollen e il modello al computer. Da qui vengono le nostre misure di Microduck.",
+  res3Title:"Misure dei motori LEGO",
+  res3:"Quanto è forte e quanto è veloce davvero ogni motore LEGO. La simulazione usa questi numeri.",
+  res4Tag:"Nella cartella del progetto", res4Title:"Il simulatore",
+  res4:"File Python che costruiscono l'anatra, la fanno camminare e provano misure diverse (roboduck/sim). Cambia un numero, rilancialo, guarda se cammina ancora."
+});
+HL.init();
+</script>
+</body>
+</html>
